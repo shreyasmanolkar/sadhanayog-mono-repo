@@ -1,0 +1,11 @@
+# Protected paths require a human reviewer.
+* @shreyas
+
+/apps/api/src/auth/ @shreyas
+/apps/api/src/middleware/ @shreyas
+/packages/contracts/ @shreyas
+/packages/db/migrations/ @shreyas
+/docs/security/ @shreyas
+/.agents/notes/ @shreyas
+/.github/ @shreyas
+/apps/api/wrangler.jsonc @shreyas

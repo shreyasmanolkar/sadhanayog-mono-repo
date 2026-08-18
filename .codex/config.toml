@@ -1,0 +1,14 @@
+# Project MCP declarations. Credentials stay in environment variables.
+# Default posture: approval / allowlist. Do not add a generic production
+# D1/R2 MCP, browser profile, or secrets manager.
+
+[mcp_servers.context7]
+url = "https://mcp.context7.com/mcp"
+
+[mcp_servers.cloudflare_docs]
+url = "https://docs.mcp.cloudflare.com/mcp"
+
+# Playwright MCP is specialized. Pin the official package when enabling.
+# [mcp_servers.playwright]
+# command = "npx"
+# args = ["-y", "@playwright/mcp@latest"]
