@@ -1,0 +1,52 @@
+workspace:
+  name: Sadhana Yog Command Center
+  key: SY
+
+states:
+  - triage
+  - backlog
+  - ready
+  - in_progress
+  - blocked
+  - in_review
+  - done
+  - canceled
+  - duplicate
+
+types:
+  - Epic
+  - Feature
+  - Task
+  - Bug
+  - Technical Debt
+  - Spike
+
+priorities:
+  - P0
+  - P1
+  - P2
+  - P3
+
+security_impact:
+  - none
+  - low
+  - medium
+  - high
+
+required_headings:
+  - Objective
+  - Context/Architectural References
+  - In Scope
+  - Out of Scope
+  - Implementation Requirements
+  - Acceptance Criteria
+  - Testing Requirements
+  - Security/Privacy Requirements
+  - Documentation Requirements
+  - Rollback/Recovery
+  - Implementation Notes
+  - Review Evidence
+  - Completion Checklist
+
+ready_requires_empty_blocked_by: true
+done_requires_checked_acceptance: true
