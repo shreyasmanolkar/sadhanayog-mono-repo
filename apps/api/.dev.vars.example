@@ -1,0 +1,3 @@
+# Local-only Worker secrets. Copy to .dev.vars (gitignored).
+# SADHANAYOG_ENV=development
+# OIDC_CLIENT_SECRET=

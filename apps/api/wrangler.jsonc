@@ -1,0 +1,25 @@
+{
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "name": "sadhanayog-api-dev",
+  "main": "src/index.ts",
+  "compatibility_date": "2026-08-18",
+  "compatibility_flags": ["nodejs_compat"],
+  "workers_dev": true,
+  "vars": {
+    "SADHANAYOG_ENV": "development",
+    "RELEASE": "local",
+  },
+  "assets": {
+    "directory": "../web/dist",
+    "binding": "ASSETS",
+    "not_found_handling": "single-page-application",
+    "run_worker_first": ["/api/*", "/health/*", "/auth/*"],
+  },
+  "d1_databases": [
+    {
+      "binding": "DB",
+      "database_name": "sadhanayog-dev",
+      "database_id": "local-dev-placeholder",
+    },
+  ],
+}
