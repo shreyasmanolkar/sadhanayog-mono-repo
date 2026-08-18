@@ -1,0 +1,12 @@
+{
+  "name": "@sadhanayog/config",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "exports": {
+    "./typescript/base.json": "./typescript/base.json",
+    "./typescript/node.json": "./typescript/node.json",
+    "./typescript/worker.json": "./typescript/worker.json",
+    "./typescript/web.json": "./typescript/web.json"
+  }
+}
