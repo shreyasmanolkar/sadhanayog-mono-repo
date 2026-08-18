@@ -1009,22 +1009,43 @@ function renderIssue(row, blocks, typeOverride) {
     : /schema|api|worker|ci|secret/i.test(title)
       ? "medium"
       : "low";
+  const kind = {
+    Epic: "epic",
+    Feature: "feature",
+    Task: "task",
+    Bug: "bug",
+    "Technical Debt": "technical-debt",
+    Spike: "spike",
+  }[typeOverride || type];
+  if (!kind) throw new Error(`unknown type ${typeOverride || type} on ${id}`);
+  const tags = security === "high" || security === "medium" ? `${kind}, security` : kind;
+  const cycle = `stage-${stage}`;
   return `---
+type: Issue
 id: ${id}
 title: ${JSON.stringify(title)}
-type: ${typeOverride || type}
+description: ${JSON.stringify(`${stageMeta.objective} This issue is limited to: ${title}.`)}
 status: ${status}
 priority: ${priority}
-stage: ${stage}
+estimate: null
+assignee: unassigned
+project: ${cycle}
+milestone: ${JSON.stringify(`Stage ${stage}`)}
+cycle: ${cycle}
+rank: null
+tags: [${tags}]
 parent: ${parent || "null"}
 blocked_by: ${emitList(blockedBy)}
 blocks: ${emitList(blocks)}
 relates: []
-owner: unassigned
 resource: docs/roadmap/implementation-roadmap.md
-security_impact: ${security}
+linear_id: null
+branch: null
+pr: null
 created: 2026-08-19
-updated: 2026-08-19
+timestamp: 2026-08-19T00:00:00Z
+stage: ${stage}
+security_impact: ${security}
 ---
 
 ## Objective
