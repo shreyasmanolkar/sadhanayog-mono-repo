@@ -18,6 +18,10 @@
     "test": "pnpm --filter @sadhanayog/contracts test && pnpm --filter @sadhanayog/db test && pnpm --filter @sadhanayog/api test && pnpm --filter @sadhanayog/web test",
     "tracker": "node tools/tracker/track.mjs",
     "tracker:lint": "node tools/tracker/track.mjs lint",
+    "tracker:next": "node tools/tracker/track.mjs next",
+    "tracker:show": "node tools/tracker/track.mjs show",
+    "tracker:move": "node tools/tracker/track.mjs move",
+    "tracker:test": "node tools/tracker/track.test.mjs",
     "docs:lint": "node tools/ci/lint-docs.mjs && node tools/ci/lint-decisions.mjs",
     "boundaries": "node tools/ci/check-boundaries.mjs",
     "secrets:scan": "node tools/ci/check-secrets.mjs",
@@ -25,8 +29,7 @@
     "verify": "pnpm tracker:lint && pnpm tracker:test && pnpm docs:lint && pnpm secrets:scan && pnpm boundaries && pnpm lint && pnpm typecheck && pnpm test && pnpm build && pnpm generated:check",
     "db:generate": "pnpm --filter @sadhanayog/db generate",
     "db:migrate:local": "pnpm --filter @sadhanayog/api db:migrate:local",
-    "db:verify": "pnpm --filter @sadhanayog/db test",
-    "tracker:test": "node tools/tracker/track.test.mjs"
+    "db:verify": "pnpm --filter @sadhanayog/db test"
   },
   "devDependencies": {
     "@eslint/js": "9.34.0",

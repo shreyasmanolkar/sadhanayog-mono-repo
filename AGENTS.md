@@ -50,14 +50,14 @@ The backend is authoritative. Client checks are not authorization.
 ready → in_progress → implement + test → in_review → (human gate) → done
 ```
 
-Use `node tools/tracker/track.mjs next` to pick work. Never start a blocked
+Use `pnpm tracker:next` to pick work. Never start a blocked
 issue. Update the issue in the same commit as the code.
 
 ## Validation
 
 ```bash
 pnpm verify
-node tools/tracker/track.mjs lint
+pnpm tracker:lint
 ```
 
 On a machine with Flutter:

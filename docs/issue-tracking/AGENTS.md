@@ -3,10 +3,10 @@
 Prefer the CLI over hand-editing frontmatter.
 
 ```bash
-node tools/tracker/track.mjs next
-node tools/tracker/track.mjs show SY-0009
-node tools/tracker/track.mjs move SY-0009 in_progress
-node tools/tracker/track.mjs lint
+pnpm tracker:next
+pnpm tracker:show SY-0009
+pnpm tracker:move SY-0009 in_progress
+pnpm tracker:lint
 ```
 
 ## Always

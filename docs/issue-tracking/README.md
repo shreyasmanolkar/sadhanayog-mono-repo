@@ -9,10 +9,10 @@ zero-padded, monotonic, never reused. Close with `canceled` or `duplicate`;
 never delete a file.
 
 ```bash
-node tools/tracker/track.mjs lint
-node tools/tracker/track.mjs next
-node tools/tracker/track.mjs show SY-0002
-node tools/tracker/track.mjs move SY-0002 in_progress
+pnpm tracker:lint
+pnpm tracker:next
+pnpm tracker:show SY-0002
+pnpm tracker:move SY-0002 in_progress
 ```
 
 See [AGENTS.md](AGENTS.md) for conduct and [templates](templates/task.md).
