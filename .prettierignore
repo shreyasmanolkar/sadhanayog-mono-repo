@@ -1,0 +1,12 @@
+pnpm-lock.yaml
+dist
+build
+coverage
+.wrangler
+.dart_tool
+apps/mobile
+apps/web/src/routeTree.gen.ts
+packages/contracts/openapi/openapi.json
+docs/issue-tracking/issues
+docs/issue-tracking/index.md
+*.md

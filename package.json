@@ -1,0 +1,48 @@
+{
+  "name": "sadhanayog",
+  "private": true,
+  "type": "module",
+  "version": "0.1.0",
+  "packageManager": "pnpm@10.33.0",
+  "engines": {
+    "node": ">=24.11.1 <25",
+    "pnpm": ">=10.33.0"
+  },
+  "scripts": {
+    "bootstrap": "bash tools/ci/bootstrap.sh",
+    "dev": "pnpm --filter @sadhanayog/api --filter @sadhanayog/web --parallel dev",
+    "build": "pnpm --filter @sadhanayog/contracts build && pnpm --filter @sadhanayog/db build && pnpm --filter @sadhanayog/web build && pnpm --filter @sadhanayog/api build",
+    "lint": "eslint . && prettier --check .",
+    "format": "prettier --write .",
+    "typecheck": "pnpm --filter @sadhanayog/contracts build && pnpm --filter @sadhanayog/db build && pnpm --filter @sadhanayog/contracts typecheck && pnpm --filter @sadhanayog/db typecheck && pnpm --filter @sadhanayog/api typecheck && pnpm --filter @sadhanayog/web typecheck",
+    "test": "pnpm --filter @sadhanayog/contracts test && pnpm --filter @sadhanayog/db test && pnpm --filter @sadhanayog/api test && pnpm --filter @sadhanayog/web test",
+    "tracker": "node tools/tracker/track.mjs",
+    "tracker:lint": "node tools/tracker/track.mjs lint",
+    "docs:lint": "node tools/ci/lint-docs.mjs && node tools/ci/lint-decisions.mjs",
+    "boundaries": "node tools/ci/check-boundaries.mjs",
+    "secrets:scan": "node tools/ci/check-secrets.mjs",
+    "generated:check": "node tools/ci/check-generated.mjs",
+    "verify": "pnpm tracker:lint && pnpm tracker:test && pnpm docs:lint && pnpm secrets:scan && pnpm boundaries && pnpm lint && pnpm typecheck && pnpm test && pnpm build && pnpm generated:check",
+    "db:generate": "pnpm --filter @sadhanayog/db generate",
+    "db:migrate:local": "pnpm --filter @sadhanayog/api db:migrate:local",
+    "db:verify": "pnpm --filter @sadhanayog/db test",
+    "tracker:test": "node tools/tracker/track.test.mjs"
+  },
+  "devDependencies": {
+    "@eslint/js": "9.34.0",
+    "eslint": "9.34.0",
+    "eslint-plugin-react-hooks": "5.2.0",
+    "eslint-plugin-react-refresh": "0.4.20",
+    "globals": "16.3.0",
+    "prettier": "3.6.2",
+    "typescript": "5.9.2",
+    "typescript-eslint": "8.42.0"
+  },
+  "pnpm": {
+    "onlyBuiltDependencies": [
+      "esbuild",
+      "workerd",
+      "sharp"
+    ]
+  }
+}
