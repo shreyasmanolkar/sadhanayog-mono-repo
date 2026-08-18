@@ -1,52 +1,306 @@
+# Sadhana Yog Track — workspace configuration
+#
+# This file is the schema. `track.mjs` reads it; the board renders from it; agents
+# validate against it. Every enum an issue may reference is declared here — `track lint`
+# fails on any value that is not.
+#
+# Format profile: sadhanayog-track@0.1 (an OKF 0.1 profile — see SPEC.md §2)
+
+okf_version: "0.1"
+profile: sadhanayog-track@0.1
+
 workspace:
-  name: Sadhana Yog Command Center
+  name: Sadhana Yog
   key: SY
+  id_width: 4
+  # IDs are allocated as max(existing) + 1, zero-padded to 4 digits (SY-0001).
+  # There is no counter to drift or conflict. Issues are NEVER deleted — close
+  # them as `canceled`. See SPEC.md §4.
 
+# ── Workflow ────────────────────────────────────────────────────────────────────
+# `category` drives board behavior: backlog states collapse, `started` states show a
+# half-filled ring, `completed`/`canceled` are struck through and auto-archived from
+# the default view. This mirrors Linear's state-category model.
 states:
-  - triage
-  - backlog
-  - ready
-  - in_progress
-  - blocked
-  - in_review
-  - done
-  - canceled
-  - duplicate
+  - id: triage
+    name: Triage
+    category: triage
+    color: "#e0b341"
+    description: Filed but not yet accepted. Nothing is scheduled from here.
+  - id: backlog
+    name: Backlog
+    category: backlog
+    color: "#6b6f76"
+    description: Accepted, unscheduled.
+  - id: todo
+    name: Todo
+    category: unstarted
+    color: "#8a8f98"
+    description: Scheduled into a cycle, not started.
+  - id: ready
+    name: Ready
+    category: unstarted
+    color: "#4cb782"
+    description: Dependency-free and specified. Eligible for `track next`.
+  - id: in_progress
+    name: In Progress
+    category: started
+    color: "#f2c94c"
+    description: Actively being worked. One agent owns it.
+  - id: in_review
+    name: In Review
+    category: started
+    color: "#8b5cf6"
+    description: Implementation landed, awaiting human sign-off.
+  - id: blocked
+    name: Blocked
+    category: started
+    color: "#eb5757"
+    description: Cannot proceed. Must name what blocks it in `blocked_by`.
+  - id: done
+    name: Done
+    category: completed
+    color: "#5e6ad2"
+    description: Merged and verified — acceptance criteria passed with evidence.
+  - id: canceled
+    name: Canceled
+    category: canceled
+    color: "#6b6f76"
+    description: Will not do. Requires a reason in the body.
+  - id: duplicate
+    name: Duplicate
+    category: canceled
+    color: "#6b6f76"
+    description: Superseded by another issue. Must set `relates`.
 
-types:
-  - Epic
-  - Feature
-  - Task
-  - Bug
-  - Technical Debt
-  - Spike
-
+# ── Priority ────────────────────────────────────────────────────────────────────
+# Ordered. `sort` is what the board sorts by (lower = more urgent).
+# Product/human-owned. Agents may propose changes, not silently reprioritize.
 priorities:
-  - P0
-  - P1
-  - P2
-  - P3
+  - id: P0
+    name: P0 incident
+    sort: 1
+    color: "#eb5757"
+    icon: urgent
+  - id: P1
+    name: P1 release blocker
+    sort: 2
+    color: "#f2994a"
+    icon: high
+  - id: P2
+    name: P2 planned
+    sort: 3
+    color: "#d4d4d8"
+    icon: medium
+  - id: P3
+    name: P3 opportunistic
+    sort: 4
+    color: "#71717a"
+    icon: low
+  - id: none
+    name: No priority
+    sort: 5
+    color: "#4b5058"
+    icon: none
 
-security_impact:
-  - none
-  - low
-  - medium
-  - high
+# ── Estimates ───────────────────────────────────────────────────────────────────
+estimate_scale: [1, 2, 3, 5, 8, 13]
 
-required_headings:
-  - Objective
-  - Context/Architectural References
-  - In Scope
-  - Out of Scope
-  - Implementation Requirements
-  - Acceptance Criteria
-  - Testing Requirements
-  - Security/Privacy Requirements
-  - Documentation Requirements
-  - Rollback/Recovery
-  - Implementation Notes
-  - Review Evidence
-  - Completion Checklist
+# ── Labels ──────────────────────────────────────────────────────────────────────
+# Stored in each issue's OKF-native `tags` field. Groups are exclusive: an issue may
+# carry at most one label from a group (`track lint` enforces it).
+label_groups:
+  - id: kind
+    name: Kind
+    exclusive: true
+  - id: surface
+    name: Surface
+    exclusive: true
 
-ready_requires_empty_blocked_by: true
-done_requires_checked_acceptance: true
+labels:
+  - id: epic
+    name: Epic
+    group: kind
+    color: "#5e6ad2"
+  - id: feature
+    name: Feature
+    group: kind
+    color: "#bb87fc"
+  - id: task
+    name: Task
+    group: kind
+    color: "#4ea7fc"
+  - id: bug
+    name: Bug
+    group: kind
+    color: "#eb5757"
+  - id: technical-debt
+    name: Technical Debt
+    group: kind
+    color: "#95a2b3"
+  - id: spike
+    name: Spike
+    group: kind
+    color: "#e0b341"
+  - id: web
+    name: Web
+    group: surface
+    color: "#f2c94c"
+    description: TanStack web app — `apps/web`.
+  - id: mobile
+    name: Mobile
+    group: surface
+    color: "#26b5ce"
+    description: Flutter iOS/Android — `apps/mobile`.
+  - id: api
+    name: API
+    group: surface
+    color: "#4cb782"
+    description: Cloudflare Worker — `apps/api`.
+  - id: db
+    name: Database
+    group: surface
+    color: "#8b5cf6"
+    description: Drizzle/D1 — `packages/db`.
+  - id: docs
+    name: Docs
+    group: surface
+    color: "#95a2b3"
+    description: Architecture, product, operations, tracker.
+  - id: ci
+    name: CI
+    group: surface
+    color: "#4ea7fc"
+    description: Workflows, bootstrap, verify gates.
+  - id: security
+    name: Security
+    color: "#eb5757"
+    description: Auth, authorization, secrets, or privacy. Human review mandatory.
+  - id: privacy
+    name: Privacy
+    color: "#d0342c"
+    description: Student contact, health notes, finance, or teaching reflections.
+  - id: migration
+    name: Migration
+    color: "#e0b341"
+    description: Schema or data change. Human sign-off required.
+  - id: decision
+    name: Decision Needed
+    color: "#e0b341"
+    description: Blocked on a human decision, not on code.
+  - id: agent-ok
+    name: Agent OK
+    color: "#4cb782"
+    description: Low blast radius. An agent may take this end-to-end (AGENTS.md).
+  - id: needs-human
+    name: Needs Human
+    color: "#f2994a"
+    description: Auth, schema, secrets, deploys, or a product decision.
+
+# ── Cycles ──────────────────────────────────────────────────────────────────────
+# One cycle per implementation-roadmap stage. Columns on the board come from this
+# list, not from the data — an empty stage still renders.
+cycles:
+  - id: stage-0
+    name: Stage 0 · Discovery and baseline
+    goal: Evidence-backed behavioral baseline from the two legacy applications without modifying them.
+  - id: stage-1
+    name: Stage 1 · Repository and engineering foundation
+    goal: Runnable monorepo skeleton, governance, agent system and CI without product behavior.
+  - id: stage-2
+    name: Stage 2 · Domain modeling
+    goal: Canonical language, entities, invariants, ownership and permissions before persistence.
+  - id: stage-3
+    name: Stage 3 · Database foundation
+    goal: D1-compatible Drizzle schema, migration discipline and synthetic data.
+  - id: stage-4
+    name: Stage 4 · Backend foundation
+    goal: Secure Worker pipeline, module boundaries, errors, logging and foundational API behavior.
+  - id: stage-5
+    name: Stage 5 · Authentication and authorization
+    goal: Invite-only identity shared by web and mobile, with authoritative permissions.
+  - id: stage-6
+    name: Stage 6 · R2 document storage
+    goal: Authorized, auditable document lifecycle without exposing buckets or client-chosen paths.
+  - id: stage-7
+    name: Stage 7 · API and shared contract layer
+    goal: Language-neutral contract/client pipeline from the Worker conventions.
+  - id: stage-8
+    name: Stage 8 · Flutter application foundation
+    goal: Adaptive, accessible mobile shell that can receive vertical feature slices.
+  - id: stage-9
+    name: Stage 9 · TanStack web application foundation
+    goal: Accessible, authenticated SPA shell with deliberate server-state and errors.
+  - id: stage-10
+    name: Stage 10 · Feature migration
+    goal: Migrate approved Command Center capabilities as secured vertical slices.
+  - id: stage-11
+    name: Stage 11 · Teaching Archive integration
+    goal: Private, native learning area while preserving the no-media default.
+  - id: stage-12
+    name: Stage 12 · Cross-platform feature parity
+    goal: Testable outcome equivalence across legacy, web, iOS and Android.
+  - id: stage-13
+    name: Stage 13 · Testing completion
+    goal: Stable release suites and proof of migrations and security-critical workflows.
+  - id: stage-14
+    name: Stage 14 · Security hardening
+    goal: Threat-based review, remediation, and accepted residual risk. No compliance claim.
+  - id: stage-15
+    name: Stage 15 · Observability and operations
+    goal: Redacted evidence, alerting and runbooks without enterprise overhead.
+  - id: stage-16
+    name: Stage 16 · Backup and recovery
+    goal: Proven restoration of data, objects, configuration and operational access.
+  - id: stage-17
+    name: Stage 17 · CI/CD and environments
+    goal: Environment-isolated, review-gated promotion and mobile release pipeline.
+  - id: stage-18
+    name: Stage 18 · Production readiness
+    goal: Functionality, security, quality, migration, recovery and ownership are ready.
+  - id: stage-19
+    name: Stage 19 · Initial production release
+    goal: Freeze, migrate, deploy, smoke, and close the first production release.
+  - id: stage-20
+    name: Stage 20 · Post-release iteration
+    goal: Feedback cadence, health review, legacy decommission and maintenance.
+
+# ── Initiatives ─────────────────────────────────────────────────────────────────
+initiatives:
+  - id: discovery
+    name: Discovery and baseline
+    color: "#95a2b3"
+    description: Stage 0. Evidence from the legacy apps. No product code.
+  - id: foundation
+    name: Engineering foundation
+    color: "#5e6ad2"
+    description: Stage 1. Repo, CI, tracker, agents, empty app scaffolds.
+  - id: platform
+    name: Platform
+    color: "#bb87fc"
+    description: Stages 2–9. Domain, D1, Worker, identity, R2, contracts, Flutter, web shells.
+  - id: product
+    name: Product
+    color: "#4cb782"
+    description: Stages 10–12. Feature migration, Teaching Archive, cross-platform parity.
+  - id: hardening
+    name: Hardening
+    color: "#f2994a"
+    description: Stages 13–18. Tests, security, ops, backup, CI/CD, readiness.
+  - id: release
+    name: Release
+    color: "#eb5757"
+    description: Stages 19–20. First production cut and post-release iteration.
+
+# ── People ──────────────────────────────────────────────────────────────────────
+members:
+  - id: unassigned
+    name: Unassigned
+    color: "#6b6f76"
+  - id: agent
+    name: Agent
+    color: "#4cb782"
+    description: Work an AI agent may pick up autonomously. Paired with the `agent-ok` label.
+  - id: shreyas
+    name: Shreyas Manolkar
+    color: "#e5484d"

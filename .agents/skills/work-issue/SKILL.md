@@ -7,7 +7,7 @@ description: Execute one ready Sadhana Yog issue end to end. Use when the user n
 
 Input: issue ID.
 
-1. `pnpm tracker:show <ID>`
+1. `pnpm tracker:show <ID>` (or open `pnpm tracker:board`)
 2. Confirm status is `ready` and every `blocked_by` is `done`.
 3. Read root/scoped AGENTS.md, the issue, foundation sections, implemented notes.
 4. `pnpm tracker:move <ID> in_progress`. Reserve the named files only.

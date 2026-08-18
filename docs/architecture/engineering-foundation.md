@@ -555,38 +555,40 @@ Do not add a repository-search MCP; `rg`, language analyzers, and Git are faster
 
 `docs/issue-tracking` is the source of truth until a deliberate migration to an external tracker. One issue is one Markdown file named `SY-NNNN.md`; IDs are zero-padded, monotonic, never reused or deleted. Moving to `archive/` preserves history.
 
-Required front matter:
+Required front matter (OKF 0.1 profile; see [docs/issue-tracking/SPEC.md](../issue-tracking/SPEC.md)):
 
 ```yaml
+type: Issue
 id: SY-0001
 title: Baseline legacy feature inventory
-type: Epic # Epic | Feature | Task | Bug | Technical Debt | Spike
-status: ready # triage | backlog | ready | in_progress | blocked | in_review | done | canceled | duplicate
+description: One sentence.
+status: ready # triage | backlog | todo | ready | in_progress | blocked | in_review | done | canceled | duplicate
 priority: P1 # P0 incident, P1 release blocker, P2 planned, P3 opportunistic
-stage: 0
+assignee: unassigned
+project: stage-0
+cycle: stage-0
+tags: [epic] # kind: epic | feature | task | bug | technical-debt | spike
 parent: null
 blocked_by: []
 blocks: []
 relates: []
-owner: unassigned
 resource: docs
-security_impact: low
 created: 2026-08-19
-updated: 2026-08-19
+timestamp: 2026-08-19T00:00:00Z
 ```
 
 The body contains Objective, Context/Architectural References, In Scope, Out of Scope, Implementation Requirements, Acceptance Criteria checkboxes, Testing Requirements, Security/Privacy Requirements, Documentation Requirements, Rollback/Recovery, Implementation Notes, Review Evidence, and Completion Checklist.
 
 Rules:
 
-- Epic contains cross-stage outcomes; Feature is user/domain capability; Task is bounded implementation; Bug is observed incorrect behavior; Technical Debt is known structural cost; Spike time-boxes uncertainty and ends with evidence/decision, not production code.
+- Kind is stored in `tags` (exclusive `kind` group): Epic contains cross-stage outcomes; Feature is user/domain capability; Task is bounded implementation; Bug is observed incorrect behavior; Technical Debt is known structural cost; Spike time-boxes uncertainty and ends with evidence/decision, not production code. `type:` is the OKF document type (`Issue`).
 - `blocked_by` must point to existing non-canceled issues and form a DAG. `blocks` is generated/validated inverse. `parent` cannot create cycles.
 - Only dependency-free, adequately specified issues enter `ready`. Only one agent owns an issue at a time.
 - Priority is product/human-owned. Agents may propose changes, not silently reprioritize.
 - Issue and code/test/doc status change in the same reviewable commit when practical.
 - `done` requires checked acceptance and DoD with evidence; closing is never inferred from code presence.
 - Bugs link the regression/observed version and reproduction. Migration/destructive/deployment issues include human approval gates.
-- A tracker validator checks schema, enums, unique IDs, links, relation symmetry, DAGs, required sections, valid state transitions, and completion evidence. `tracker next`, `show`, `lint`, `move`, and `board` are thin deterministic scripts, not a custom web app.
+- A tracker validator checks schema, enums, unique IDs, links, relation symmetry, DAGs, and completion evidence. `tracker next`, `show`, `lint`, `move`, `set`, `list`, `stats`, `index`, and `export` are deterministic. `tracker board` serves a Linear-style UI over the same files (live reload, drag writes markdown). The board is a view, never a second database.
 
 ## 21. Postmortems
 
@@ -710,7 +712,7 @@ Teaching Archive integration is native, not an iframe: move reviewed content to 
 | Online-first | full offline/local-first | protects consistency/PII and reduces conflict complexity; less resilience without network | scoped encrypted command outbox via ADR |
 | Worker-proxied initial upload | direct presigned upload | simplest auth/validation; Worker body/CPU limits | bounded presigned/multipart path for measured need |
 | Versioned content + native renderers | iframe, duplicate prose | parity, offline reading and maintainability; two renderers | public pre-rendered content or localization pipeline |
-| Markdown tracker | GitHub Issues only, custom board | issues evolve with code and agents can validate; weaker rich UI | sync outward while keeping stable IDs |
+| Markdown tracker + file-backed board | GitHub Issues only | issues evolve with code; board is a view over files; agents need no API token | sync outward while keeping stable IDs |
 | Provider MVVM | Riverpod/BLoC | aligns official samples and small-team simplicity; more manual wiring | adopt alternative only through measured need/ADR |
 
 ## 30. Assumptions and unresolved decisions
