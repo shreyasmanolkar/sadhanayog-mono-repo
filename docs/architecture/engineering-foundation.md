@@ -586,7 +586,7 @@ Rules:
 - Issue and code/test/doc status change in the same reviewable commit when practical.
 - `done` requires checked acceptance and DoD with evidence; closing is never inferred from code presence.
 - Bugs link the regression/observed version and reproduction. Migration/destructive/deployment issues include human approval gates.
-- A tracker validator checks schema, enums, unique IDs, links, relation symmetry, DAGs, required sections, valid state transitions, and completion evidence. `tracker next`, `show`, `lint`, and `move` are thin deterministic scripts, not a custom web app.
+- A tracker validator checks schema, enums, unique IDs, links, relation symmetry, DAGs, required sections, valid state transitions, and completion evidence. `tracker next`, `show`, `lint`, `move`, and `board` are thin deterministic scripts, not a custom web app.
 
 ## 21. Postmortems
 

@@ -11,6 +11,7 @@ never delete a file.
 ```bash
 pnpm tracker:lint
 pnpm tracker:next
+pnpm tracker:board
 pnpm tracker:show SY-0002
 pnpm tracker:move SY-0002 in_progress
 ```

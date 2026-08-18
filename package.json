@@ -19,6 +19,7 @@
     "tracker": "node tools/tracker/track.mjs",
     "tracker:lint": "node tools/tracker/track.mjs lint",
     "tracker:next": "node tools/tracker/track.mjs next",
+    "tracker:board": "node tools/tracker/track.mjs board",
     "tracker:show": "node tools/tracker/track.mjs show",
     "tracker:move": "node tools/tracker/track.mjs move",
     "tracker:test": "node tools/tracker/track.test.mjs",

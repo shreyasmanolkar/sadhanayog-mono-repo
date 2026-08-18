@@ -15,4 +15,16 @@ assert.match(next, /SY-0001|SY-0002/);
 const show = execFileSync("node", [track, "show", "SY-0002"], { encoding: "utf8", cwd: ROOT });
 assert.match(show, /Repository and deployment baseline/);
 
+const board = execFileSync("node", [track, "board"], { encoding: "utf8", cwd: ROOT });
+assert.match(board, /# Board · \d+ issues/);
+assert.match(board, /ready \(\d+\)/);
+assert.match(board, /SY-0001 /);
+
+const readyBoard = execFileSync("node", [track, "board", "ready"], {
+  encoding: "utf8",
+  cwd: ROOT,
+});
+assert.match(readyBoard, /ready \(\d+\)/);
+assert.match(readyBoard, /SY-0001 /);
+
 process.stdout.write("ok: tracker smoke\n");

@@ -4,6 +4,7 @@ Prefer the CLI over hand-editing frontmatter.
 
 ```bash
 pnpm tracker:next
+pnpm tracker:board
 pnpm tracker:show SY-0009
 pnpm tracker:move SY-0009 in_progress
 pnpm tracker:lint

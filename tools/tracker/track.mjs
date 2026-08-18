@@ -6,6 +6,7 @@
  *   node tools/tracker/track.mjs lint
  *   node tools/tracker/track.mjs show SY-0002
  *   node tools/tracker/track.mjs next
+ *   node tools/tracker/track.mjs board
  *   node tools/tracker/track.mjs move SY-0002 in_progress
  */
 import { existsSync, mkdirSync, readFileSync, readdirSync, writeFileSync } from "node:fs";
@@ -48,6 +49,17 @@ const REQUIRED_HEADINGS = [
   "Completion Checklist",
 ];
 const TERMINAL = new Set(["done", "canceled", "duplicate"]);
+const BOARD_COLUMNS = [
+  "ready",
+  "in_progress",
+  "blocked",
+  "in_review",
+  "triage",
+  "backlog",
+  "done",
+  "canceled",
+  "duplicate",
+];
 
 function parseScalar(raw) {
   const s = raw.trim();
@@ -271,6 +283,46 @@ function show(issues, id) {
   process.stdout.write(issue.body);
 }
 
+function board(issues, filter) {
+  let view = issues;
+  if (filter) {
+    if (STATUSES.has(filter)) {
+      view = issues.filter((issue) => issue.fm.status === filter);
+    } else if (/^\d+$/.test(filter)) {
+      const stage = Number(filter);
+      view = issues.filter((issue) => issue.fm.stage === stage);
+    } else {
+      console.error(`Unknown board filter ${filter} (status or stage number)`);
+      process.exit(1);
+    }
+  }
+
+  const grouped = new Map();
+  for (const status of BOARD_COLUMNS) grouped.set(status, []);
+  for (const issue of view) {
+    const column = grouped.get(issue.fm.status);
+    if (column) column.push(issue);
+  }
+  for (const column of grouped.values()) {
+    column.sort((a, b) => a.fm.id.localeCompare(b.fm.id));
+  }
+
+  const counts = BOARD_COLUMNS.map((status) => `${status} ${(grouped.get(status) || []).length}`);
+  process.stdout.write(`# Board · ${view.length} issues\n`);
+  process.stdout.write(`${counts.join(" · ")}\n\n`);
+
+  for (const status of BOARD_COLUMNS) {
+    const column = grouped.get(status) || [];
+    process.stdout.write(`${status} (${column.length})\n`);
+    for (const issue of column) {
+      process.stdout.write(
+        `- ${issue.fm.id} ${issue.fm.title} (${issue.fm.type}, ${issue.fm.priority}, stage ${issue.fm.stage})\n`,
+      );
+    }
+    process.stdout.write("\n");
+  }
+}
+
 function nextReady(issues) {
   const map = byId(issues);
   const ready = issues.filter((issue) => {
@@ -319,6 +371,7 @@ function usage() {
   track.mjs lint
   track.mjs show SY-NNNN
   track.mjs next
+  track.mjs board [status|stage]
   track.mjs move SY-NNNN <status>
 `);
 }
@@ -342,6 +395,8 @@ if (cmd === "lint" || cmd === undefined) {
   show(issues, a);
 } else if (cmd === "next") {
   nextReady(issues);
+} else if (cmd === "board") {
+  board(issues, a);
 } else if (cmd === "move") {
   if (!a || !b) {
     usage();

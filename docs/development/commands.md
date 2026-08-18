@@ -12,6 +12,7 @@ Last-reviewed: 2026-08-19
 | `pnpm tracker` | Tracker CLI (`lint` by default; extra args forwarded) |
 | `pnpm tracker:lint` | Issue DAG and schema |
 | `pnpm tracker:next` | Unblocked Ready issues |
+| `pnpm tracker:board` | Status board (`board in_review` or `board 1` to filter) |
 | `pnpm tracker:show SY-NNNN` | Print one issue |
 | `pnpm tracker:move SY-NNNN <status>` | Change issue status |
 | `pnpm tracker:test` | Tracker CLI smoke test |
