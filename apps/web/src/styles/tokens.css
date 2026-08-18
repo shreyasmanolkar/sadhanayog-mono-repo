@@ -1,0 +1,13 @@
+:root {
+  color-scheme: light;
+  --paper: #f3ece1;
+  --paper-2: #ebe1d2;
+  --ink: #1b1712;
+  --ink-soft: #5b5248;
+  --line: #cbbba4;
+  --terra: #9c3d2a;
+  --sage: #2f4a3c;
+  --focus: #1b1712;
+  --font-display: "Iowan Old Style", "Palatino Linotype", Palatino, "Times New Roman", serif;
+  --font-ui: "Segoe UI", "Helvetica Neue", system-ui, sans-serif;
+}
