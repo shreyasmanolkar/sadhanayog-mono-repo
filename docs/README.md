@@ -10,6 +10,7 @@ Last-reviewed: 2026-08-19
 | [discovery](discovery/README.md) | Legacy inventories and migration evidence | New evidence |
 | [product](product/README.md) | Terminology, workflows, parity | Product decision |
 | [architecture](architecture/README.md) | System view and ADR index | Architectural change |
+| [architecture/agentic-development-environment.md](architecture/agentic-development-environment.md) | Research briefing on the repository-native agentic development environment | Agent-process evolution |
 | [api](api/README.md) | API conventions | Contract change |
 | [database](database/README.md) | Schema, dictionary, migrations | Schema change |
 | [security](security/README.md) | Threat model, authz matrix | Threat/control change |
