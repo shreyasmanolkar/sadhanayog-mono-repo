@@ -38,7 +38,7 @@ are created with `flutter create` on a machine that has the SDK.
 | `packages/db` | Drizzle SQLite/D1 schema. No product tables yet. |
 | `packages/config` | Shared TypeScript config. |
 | `content/teaching-archive` | Versioned learning content (empty until Stage 11). |
-| `tools/tracker` | In-repo issue tracker. |
+| `docs/issue-tracking` | In-repo issue tracker and board. |
 | `docs/` | Architecture, product, operations, issues. |
 
 ## Support

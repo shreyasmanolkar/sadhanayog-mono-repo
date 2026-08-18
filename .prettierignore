@@ -9,4 +9,6 @@ apps/web/src/routeTree.gen.ts
 packages/contracts/openapi/openapi.json
 docs/issue-tracking/issues
 docs/issue-tracking/index.md
+docs/issue-tracking/board.html
+docs/issue-tracking/board
 *.md
