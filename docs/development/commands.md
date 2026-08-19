@@ -6,9 +6,10 @@ Last-reviewed: 2026-08-19
 
 | Command | Meaning |
 |---|---|
-| `pnpm bootstrap` | Install JS deps; Flutter pub get if SDK present |
+| `pnpm bootstrap` | Install JS deps, check toolchain pins, Flutter pub get if SDK present |
+| `pnpm toolchain:check` | Fail if mise, engines, CI, or present binaries drift from `tools/ci/tool-pins.json` |
 | `pnpm dev` | API (8787) + web (5173) |
-| `pnpm verify` | Tracker, docs, secrets, boundaries, lint, types, tests, build, generated drift |
+| `pnpm verify` | Tracker, pins, docs, secrets, boundaries, lint, types, tests, build, generated drift |
 | `pnpm tracker` | Tracker CLI (help if no args) |
 | `pnpm tracker:lint` | Issue DAG and schema |
 | `pnpm tracker:next` | Unblocked Ready/Todo issues |

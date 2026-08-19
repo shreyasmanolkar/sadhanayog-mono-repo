@@ -6,16 +6,14 @@ Last-reviewed: 2026-08-19
 
 ## Tools
 
-Pins live in [`mise.toml`](../../mise.toml):
-
-- Node 24.11.1
-- pnpm 10.33.0
-- Flutter 3.35.4
-- Java 25.0.1 (Android toolchain)
+Pins and the environment matrix live in [toolchain.md](toolchain.md).
+Canonical versions: [`tools/ci/tool-pins.json`](../../tools/ci/tool-pins.json).
 
 ```bash
+mise trust          # first clone or new git worktree
 mise install
 pnpm bootstrap
+pnpm toolchain:check
 ```
 
 Copy [`.env.example`](../../.env.example) names into ignored local files.
