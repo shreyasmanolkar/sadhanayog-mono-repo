@@ -26,7 +26,7 @@ redesign workflows.
 | Database | None. |
 | API | None. Current `POST /sync` is noted in [repository-baseline.md](repository-baseline.md); column/rule mapping is [legacy-data.md](legacy-data.md). |
 | Flutter | None. |
-| Web | None. Command Center navigation maps are [feature-inventory.md](feature-inventory.md). Teaching Archive walkthrough is [SY-0006](../issue-tracking/issues/SY-0006.md). |
+| Web | None. Command Center navigation maps are [feature-inventory.md](feature-inventory.md). Teaching Archive a11y walkthrough is [a11y-security-baseline.md](a11y-security-baseline.md). |
 | Infrastructure | None. Current Worker / Apps Script / DNS notes are [SY-0002](../issue-tracking/issues/SY-0002.md). |
 
 No production resource, secret value, or real-user export enters this
@@ -81,7 +81,7 @@ policy, and the scoped instructions. Child issues own the inventories.
 | [feature-inventory.md](feature-inventory.md) | [SY-0003](../issue-tracking/issues/SY-0003.md) | Draft evidence, reviewable; human gate to `done` |
 | `docs/discovery/legacy-data.md` | [SY-0004](../issue-tracking/issues/SY-0004.md) | Draft evidence, reviewable; human gate to `done` |
 | `docs/discovery/teaching-archive.md` | [SY-0005](../issue-tracking/issues/SY-0005.md) | Not written — blocked by SY-0002 |
-| `docs/discovery/a11y-security-baseline.md` | [SY-0006](../issue-tracking/issues/SY-0006.md) | Not written — blocked by SY-0003–SY-0005 |
+| [a11y-security-baseline.md](a11y-security-baseline.md) | [SY-0006](../issue-tracking/issues/SY-0006.md) | Draft evidence, reviewable; human gate to `done` |
 | `docs/discovery/source-of-truth.md` | [SY-0007](../issue-tracking/issues/SY-0007.md) | Not written — blocked by SY-0003–SY-0006 |
 
 Do not create empty inventory stubs. A missing file means the child has
@@ -98,7 +98,7 @@ the criteria and defers the unsatisfied rows.
 | Collections, encodings, calculation modules, derived sessions, outbox, last-write-wins inventoried | Satisfied as draft evidence in [legacy-data.md](legacy-data.md) | Human acceptance of SY-0004 (issue remains `in_review` / not `done`) |
 | Teaching Archive content IDs, five areas, journey/rituals/reviews/benchmarks, privacy wording, no-media invariant inventoried | Deferred | SY-0005 |
 | External dependencies and deployment assumptions inventoried | Satisfied as draft evidence in [repository-baseline.md](repository-baseline.md) | Human acceptance of SY-0002 (issue remains `in_review` / not `done`) |
-| Security and accessibility debt inventoried | Deferred | SY-0006 |
+| Security and accessibility debt inventoried | Satisfied as draft evidence in [a11y-security-baseline.md](a11y-security-baseline.md) | Human acceptance of SY-0006 (issue remains `in_review` / not `done`) |
 | Product owner signs preserve/change/defer matrix and data-source precedence | Deferred | SY-0007 (human) |
 | Sanitized fixtures can exercise critical rules | Format, starter vectors, and SY-0004 rule vectors | Representative exports and sign-off: SY-0007 |
 | No legacy file changed | Satisfied 2026-08-19 | Keep for every child |
@@ -150,8 +150,9 @@ Not executed in this epic.
 - Desktop/mobile workflow rendering, keyboard walkthrough, and
   page-level DOM/accessibility inspection for Command Center are
   recorded in [feature-inventory.md](feature-inventory.md) (SY-0003).
-  Teaching Archive walkthrough and the security/a11y debt catalogue
-  remain [SY-0006](../issue-tracking/issues/SY-0006.md).
+  Teaching Archive a11y walkthrough and the security/a11y debt
+  catalogue are [a11y-security-baseline.md](a11y-security-baseline.md)
+  (SY-0006). Content IDs remain SY-0005.
 - Sanitized characterization vectors begin in
   [sanitized-fixture-policy.md](sanitized-fixture-policy.md). Command
   Center rule vectors are in [legacy-data.md](legacy-data.md)
@@ -190,8 +191,10 @@ This epic did not open a browser profile, did not read `localStorage`,
 and did not fetch Sheets. Hostname `dash.omsadhanayog.com` is already
 published in Worker config and in SY-0002; no secret values were read.
 
-Threat and accessibility findings are SY-0006 (`security_impact: high`).
-This epic (`security_impact: low`) only sets handling rules.
+Threat and accessibility findings are
+[a11y-security-baseline.md](a11y-security-baseline.md) (SY-0006,
+`security_impact: high`). This epic (`security_impact: low`) only
+sets handling rules.
 
 ## Rollback
 
