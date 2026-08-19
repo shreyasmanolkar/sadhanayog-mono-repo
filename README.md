@@ -27,6 +27,10 @@ pnpm dev
 Flutter is pinned in `mise.toml` and lives in `apps/mobile`. Platform folders
 are created with `flutter create` on a machine that has the SDK.
 
+CI is GitHub Actions: docs/tracker/secret scan, TypeScript lint/test/build,
+Flutter analyze/test/bundle, and license policy. See
+[docs/development/ci.md](docs/development/ci.md).
+
 ## Layout
 
 | Path | Role |

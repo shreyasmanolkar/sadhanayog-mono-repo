@@ -28,5 +28,6 @@ Worker secrets go in `apps/api/.dev.vars` from
 pnpm verify
 ```
 
-Flutter analyze/test run only when `flutter` is on `PATH`. CI installs the
-SDK via `subosito/flutter-action`.
+Flutter analyze/test/`build bundle` run only when `flutter` is on `PATH`.
+CI installs the SDK via pinned `subosito/flutter-action` and runs those
+commands on every pull request. See [ci.md](ci.md).

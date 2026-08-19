@@ -4,7 +4,7 @@ import 'package:sadhanayog/core/result.dart';
 
 void main() {
   test('Result distinguishes success from failure', () {
-    expect(Result<int>.ok(1), isA<Ok<int>>());
-    expect(Result<int>.error(const UnexpectedFailure('nope')), isA<Err<int>>());
+    expect(const Result<int>.ok(1), isA<Ok<int>>());
+    expect(const Result<int>.error(UnexpectedFailure('nope')), isA<Err<int>>());
   });
 }

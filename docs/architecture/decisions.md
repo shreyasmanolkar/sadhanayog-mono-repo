@@ -14,5 +14,6 @@ This index is readable, not a second decision store. Authority lives in
 | ADR-0003 | proposed | REST and OpenAPI as the client boundary | [note](../../.agents/notes/proposed/architecture/2026-08-19-rest-openapi.md) |
 | ADR-0004 | proposed | D1 / SQLite via Drizzle | [note](../../.agents/notes/proposed/architecture/2026-08-19-d1-sqlite.md) |
 | ADR-0005 | proposed | Markdown issue tracker | [note](../../.agents/notes/proposed/process/2026-08-19-markdown-tracker.md) |
+| ADR-0006 | proposed | GitHub Actions as the CI host | [note](../../.agents/notes/proposed/process/2026-08-19-github-actions-ci.md) |
 
 Human architectural review moves high-impact notes into `implemented/`.

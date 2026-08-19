@@ -1,0 +1,48 @@
+# Weekly grouped non-major updates. No automatic merge (foundation §5.3).
+# Security updates stay ungrouped so they can be reviewed on their own.
+version: 2
+updates:
+  - package-ecosystem: npm
+    directory: /
+    schedule:
+      interval: weekly
+      day: monday
+    open-pull-requests-limit: 5
+    groups:
+      non-major-npm:
+        patterns:
+          - "*"
+        update-types:
+          - minor
+          - patch
+    commit-message:
+      prefix: "chore(deps)"
+
+  - package-ecosystem: github-actions
+    directory: /
+    schedule:
+      interval: weekly
+      day: monday
+    open-pull-requests-limit: 5
+    groups:
+      github-actions:
+        patterns:
+          - "*"
+    commit-message:
+      prefix: "chore(actions)"
+
+  - package-ecosystem: pub
+    directory: /apps/mobile
+    schedule:
+      interval: weekly
+      day: monday
+    open-pull-requests-limit: 5
+    groups:
+      non-major-pub:
+        patterns:
+          - "*"
+        update-types:
+          - minor
+          - patch
+    commit-message:
+      prefix: "chore(pub)"

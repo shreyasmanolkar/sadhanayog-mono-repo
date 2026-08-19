@@ -14,7 +14,7 @@ Last-reviewed: 2026-08-19
 | [api](api/README.md) | API conventions | Contract change |
 | [database](database/README.md) | Schema, dictionary, migrations | Schema change |
 | [security](security/README.md) | Threat model, authz matrix | Threat/control change |
-| [development](development/README.md) | Setup, commands, style | Tooling change |
+| [development](development/README.md) | Setup, commands, [CI](development/ci.md) | Tooling or CI-gate change |
 | [testing](testing/README.md) | Test policy | Quality-gate change |
 | [deployment](deployment/README.md) | Environments and promotion | Deploy change |
 | [operations](operations/README.md) | Runbooks and troubleshooting | Incident or drill |

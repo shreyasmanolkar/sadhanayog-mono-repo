@@ -8,7 +8,10 @@ Last-reviewed: 2026-08-19
 |---|---|
 | `pnpm bootstrap` | Install JS deps; Flutter pub get if SDK present |
 | `pnpm dev` | API (8787) + web (5173) |
-| `pnpm verify` | Tracker, docs, secrets, boundaries, lint, types, tests, build, generated drift |
+| `pnpm verify` | Tracker, docs, secrets, CI policy, licenses, lint, types, tests, build, generated drift |
+| `pnpm ci:policy` | Workflow / CODEOWNERS / Dependabot / gitignore invariants |
+| `pnpm ci:test` | Tests for secret scan, license policy, and CI policy |
+| `pnpm licenses:check` | Third-party npm license allowlist; Flutter git-dep ban |
 | `pnpm tracker` | Tracker CLI (help if no args) |
 | `pnpm tracker:lint` | Issue DAG and schema |
 | `pnpm tracker:next` | Unblocked Ready/Todo issues |
@@ -22,6 +25,7 @@ Last-reviewed: 2026-08-19
 | `pnpm db:generate` | Drizzle SQL generation (review before commit) |
 | `pnpm db:migrate:local` | Apply reviewed SQL to local D1 |
 | `cd apps/mobile && flutter test` | Mobile unit/widget tests |
+| `cd apps/mobile && flutter build bundle` | Flutter build smoke (CI) |
 
 Generated OpenAPI is committed. After changing contracts:
 
