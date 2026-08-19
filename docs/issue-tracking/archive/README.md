@@ -1,5 +1,9 @@
 # Archive
 
+Status: living  
+Owner: engineering  
+Last-reviewed: 2026-08-20
+
 Closed issues normally stay in [`../issues`](../issues) as `canceled` or `duplicate`.
 IDs are never reused, so a file is never deleted.
 
