@@ -13,8 +13,9 @@ Status: engineering foundation. No product features have been migrated yet.
 # 1. Install pinned tools (Node, pnpm, Flutter when available)
 mise install   # or follow docs/development/setup.md
 
-# 2. Install JS dependencies and verify
+# 2. Install JS dependencies, check pins, verify
 pnpm bootstrap
+pnpm toolchain:check
 pnpm verify
 
 # 3. Run API + web
@@ -40,6 +41,7 @@ are created with `flutter create` on a machine that has the SDK.
 | `content/teaching-archive` | Versioned learning content (empty until Stage 11). |
 | `docs/issue-tracking` | In-repo issue tracker and board. |
 | `docs/` | Architecture, product, operations, issues. |
+| `docs/development/toolchain.md` | Pinned tools, lockfiles, environment matrix. |
 
 ## Support
 

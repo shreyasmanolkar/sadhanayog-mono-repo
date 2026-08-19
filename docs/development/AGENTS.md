@@ -3,8 +3,9 @@
 Stage 1 workspace rules. Product features are not implemented from this
 directory.
 
-- Pins live in [`mise.toml`](../../mise.toml). Do not silently float Node,
-  pnpm, Flutter, or Java.
+- Canonical pins: [`tools/ci/tool-pins.json`](../../tools/ci/tool-pins.json).
+  `mise.toml` installs Node, pnpm, Flutter, and Java. Do not silently float
+  those, Dart, or Wrangler. Do not add a mise `dart` tool.
 - [README.md](README.md) is the Stage 1 program and unsigned decision
   register. It does not approve the engineering foundation.
 - Child issues [SY-0009](../issue-tracking/issues/SY-0009.md)–[SY-0017](../issue-tracking/issues/SY-0017.md)

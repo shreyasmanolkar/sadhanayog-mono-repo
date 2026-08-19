@@ -11,6 +11,8 @@ This file is the named Stage 1 outcome. It makes the runnable monorepo
 skeleton, governance, agent system, and CI foundation reviewable. It is
 not a signed architecture approval and it does not close child work
 packages [SY-0009](../issue-tracking/issues/SY-0009.md)–[SY-0017](../issue-tracking/issues/SY-0017.md).
+Operational docs: [setup.md](setup.md), [commands.md](commands.md),
+[toolchain.md](toolchain.md).
 
 The engineering foundation document itself remains **Proposed foundation
 for human approval**. Proposed Agent Notes are not authority.
@@ -56,8 +58,9 @@ owe their own notes, evidence, and human gate to `done`.
 | [README.md](README.md) (this program) | SY-0008 | Draft, reviewable |
 | [AGENTS.md](AGENTS.md) | SY-0008 | Draft |
 | [setup.md](setup.md), [commands.md](commands.md) | [SY-0017](../issue-tracking/issues/SY-0017.md) | Present; bootstrap evidence still on SY-0017 |
+| [toolchain.md](toolchain.md) | [SY-0009](../issue-tracking/issues/SY-0009.md) | Named SY-0009 outcome. Pins, lockfiles, generated-file policy, environment matrix. |
 | [../operations/troubleshooting/README.md](../operations/troubleshooting/README.md) | SY-0017 | Thin placeholder |
-| `mise.toml`, root `package.json`, `pnpm-lock.yaml`, `pnpm-workspace.yaml` | [SY-0009](../issue-tracking/issues/SY-0009.md) | Present. Dart/Wrangler are not mise pins; Wrangler is the `apps/api` package pin `4.124.0`. Dart ships with Flutter 3.35.4 (Dart 3.9.2). |
+| `tools/ci/tool-pins.json`, `mise.toml`, root `package.json`, `pnpm-lock.yaml`, `pnpm-workspace.yaml` | [SY-0009](../issue-tracking/issues/SY-0009.md) | Canonical pins in `tool-pins.json`. Dart/Wrangler are not mise pins; Wrangler is the `apps/api` package pin `4.124.0`. Dart ships with Flutter 3.35.4 (Dart 3.9.2). `pnpm toolchain:check` fails on drift. |
 | `apps/{api,web,mobile}`, `packages/{config,contracts,db}`, `content/teaching-archive` | [SY-0010](../issue-tracking/issues/SY-0010.md) | Compiling shells. Health only. No product tables or routes. |
 | `eslint.config.js`, `prettier.config.js`, `apps/mobile/analysis_options.yaml`, `tools/ci/check-boundaries.mjs`, `tools/ci/check-generated.mjs` | [SY-0011](../issue-tracking/issues/SY-0011.md) | Present. No Conventional Commits hook, Dependabot/Renovate, or `LICENSE` file. |
 | `docs/**` READMEs, `.agents/notes`, `docs/postmortems/template.md`, `tools/ci/lint-docs.mjs`, `tools/ci/lint-decisions.mjs` | [SY-0012](../issue-tracking/issues/SY-0012.md) | Present. Note lifecycle dirs other than `proposed/` are empty; no note template file. |
@@ -83,7 +86,7 @@ just to match the drawing.
 | `packages/db/{src,migrations,test}` | Present. No `fixtures/` (Stage 3). Schema is `schema_migrations` only. |
 | `packages/contracts/{src,openapi,test}` | Present. Committed OpenAPI 3.1. No generated Dart client yet (Stage 4). |
 | `content/teaching-archive/manifest.json` | Present. `content/`, `schema/`, `test/` wait for Stage 11. |
-| `tools/{tracker,ci}` | Present. `tools/migration` and `tools/content` wait for SY-0009 / later stages. |
+| `tools/{tracker,ci,migration,content}` | Present. `migration/` and `content/` are placeholders (no extractors or content pipeline). |
 | `docs/issue-tracking/{issues,templates,projects}` | Present. No `archive/` until an issue is archived. |
 | `.agents/notes/proposed` | Present. `implemented/`, `rejected/`, `archived/` appear when a note transitions. |
 | `.codex/config.toml`, `.github/{workflows,CODEOWNERS,pull_request_template.md}`, `.env.example`, `mise.toml` | Present. |
@@ -118,11 +121,11 @@ architectural reviewer moves them.
 |---|---|---|---|
 | Approve the engineering foundation as authority | Architecture reviewer | Any work that treats §5–20 as approved | Unsigned. Document status is still Proposed. |
 | CI host | Engineering + security | SY-0016 close | Unsigned. GitHub Actions is what the scaffold uses. |
-| Exact tool versions (Node, pnpm, Flutter/Dart, Wrangler, Java) | Engineering | SY-0009 close | Draft pins in `mise.toml` and package manifests. Not signed. |
+| Exact tool versions (Node, pnpm, Flutter/Dart, Wrangler, Java) | Engineering | SY-0009 close | Draft pins in [`tools/ci/tool-pins.json`](../../tools/ci/tool-pins.json). Proposed note [2026-08-19-toolchain-pins.md](../../.agents/notes/proposed/process/2026-08-19-toolchain-pins.md) (ADR-0007). Not signed. |
 | Package licenses | Product / legal | First public or third-party distribution; also Dependabot/license policy | Unsigned. No `LICENSE` file. |
 | Whether a shared development (non-local) environment is needed | Product + engineering | Staging/production promotion (foundation §14) | Unsigned. Local + CI only. |
 | Protected-path reviewers beyond the current CODEOWNERS placeholder | Engineering lead | Merge of auth, schema, contracts, R2, production config, CI permissions, mobile signing, security docs, decision records | Unsigned. `.github/CODEOWNERS` currently names `@shreyas` on `*` and on the protected paths. |
-| Record stack selections as **implemented** ADRs after scaffolds prove viable | Architecture reviewer | Before Stage 2 treats them as given | Five notes remain `proposed/` (Worker monolith, Vite SPA, REST/OpenAPI, D1/Drizzle, Markdown tracker). |
+| Record stack selections as **implemented** ADRs after scaffolds prove viable | Architecture reviewer | Before Stage 2 treats them as given | Seven notes remain `proposed/` (Worker monolith, Vite SPA, REST/OpenAPI, D1/Drizzle, Markdown tracker, Flutter shell, toolchain pins). |
 
 ## Commands, generated files, dependencies, environment, authority
 
@@ -153,11 +156,9 @@ Conflicts are defects. They are listed, not resolved.
    [architecture/README.md](../architecture/README.md) calls it
    “approved direction.” The foundation document status line does not.
    This program treats it as proposed.
-3. **Children SY-0009–SY-0017 are `in_review` with empty implementation
-   notes.** The bulk scaffold landed first; issues were advanced without
-   per-issue evidence. `pnpm tracker:next` returns zero schedulable
-   items while those children sit in review. This epic does not move
-   them to `done` and does not empty their notes.
+3. **Children SY-0011–SY-0017 may still lack per-issue evidence.** The
+   bulk scaffold landed first. SY-0008, SY-0009, and SY-0010 now have
+   named outcomes. This epic does not move children to `done`.
 4. **GitHub Actions was red on `main` and `staging` before this
    closeout.** Clean-checkout `pnpm verify` failed (`tsup` DTS: missing
    `@types/node` required by `packages/config/typescript/node.json`).

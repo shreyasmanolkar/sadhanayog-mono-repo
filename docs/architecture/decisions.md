@@ -15,5 +15,6 @@ This index is readable, not a second decision store. Authority lives in
 | ADR-0004 | proposed | D1 / SQLite via Drizzle | [note](../../.agents/notes/proposed/architecture/2026-08-19-d1-sqlite.md) |
 | ADR-0005 | proposed | Markdown issue tracker | [note](../../.agents/notes/proposed/process/2026-08-19-markdown-tracker.md) |
 | ADR-0006 | proposed | Flutter iOS and Android shell | [note](../../.agents/notes/proposed/architecture/2026-08-19-flutter-mobile.md) |
+| ADR-0007 | proposed | Pinned workspace toolchain | [note](../../.agents/notes/proposed/process/2026-08-19-toolchain-pins.md) |
 
 Human architectural review moves high-impact notes into `implemented/`.

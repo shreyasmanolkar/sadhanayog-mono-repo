@@ -1,3 +1,6 @@
+# Canonical versions live in tools/ci/tool-pins.json.
+# Dart ships with Flutter — do not add a dart tool (it would shadow the SDK).
+# Wrangler is the apps/api pnpm pin — not a mise tool.
 [tools]
 node = "24.11.1"
 pnpm = "10.33.0"
