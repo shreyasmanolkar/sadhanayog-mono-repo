@@ -10,7 +10,9 @@ Program: [Stage 1 — Repository and engineering foundation](README.md)
 | `pnpm bootstrap` | Install JS deps, check toolchain pins, Flutter pub get if SDK present |
 | `pnpm toolchain:check` | Fail if mise, engines, CI, or present binaries drift from `tools/ci/tool-pins.json` |
 | `pnpm dev` | API (8787) + web (5173) |
-| `pnpm verify` | Tracker, pins, MCP inventory, docs, skills, secrets, boundaries, licenses, quality tests, lint, types, tests, build, generated drift |
+| `pnpm verify` | Tracker, pins, MCP, docs, skills, secrets, CI policy, boundaries, licenses, quality tests, lint, types, tests, build, generated drift |
+| `pnpm ci:policy` | Workflow / CODEOWNERS / Dependabot / gitignore invariants |
+| `pnpm ci:test` | Tests for secret scan and CI policy |
 | `pnpm mcp:check` | Project MCP inventory vs `.codex` / `.grok` TOML |
 | `pnpm docs:lint` | Documentation links/headers and Agent Note schema/index drift |
 | `pnpm docs:test` | Fixture tests for the docs and decision linters |
@@ -20,7 +22,7 @@ Program: [Stage 1 — Repository and engineering foundation](README.md)
 | `pnpm lint` | ESLint plus Prettier check |
 | `pnpm format` | Prettier write |
 | `pnpm boundaries` | Import and package.json boundary scan |
-| `pnpm licenses:check` | Allowlisted dependency licenses |
+| `pnpm licenses:check` | Allowlisted dependency licenses (SY-0011) |
 | `pnpm quality:test` | Fixture tests for quality checkers |
 | `pnpm commits:check` | Conventional Commit header (message or range) |
 | `pnpm tracker` | Tracker CLI (help if no args) |
@@ -37,6 +39,7 @@ Program: [Stage 1 — Repository and engineering foundation](README.md)
 | `pnpm db:generate` | Drizzle SQL generation (review before commit) |
 | `pnpm db:migrate:local` | Apply reviewed SQL to local D1 |
 | `cd apps/mobile && flutter test` | Mobile unit/widget tests |
+| `cd apps/mobile && flutter build bundle` | Flutter build smoke (CI) |
 | `cd apps/mobile && flutter run --dart-define=SADHANAYOG_ENV=dev --dart-define=SADHANAYOG_API_ORIGIN=http://127.0.0.1:8787` | Mobile shell against local API |
 
 Generated OpenAPI is committed. After changing contracts:

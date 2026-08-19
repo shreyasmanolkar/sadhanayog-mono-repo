@@ -29,6 +29,10 @@ Flutter is pinned in `mise.toml` and lives in `apps/mobile`. Setup, commands,
 generated files, environment matrix, and agent authority live in
 [docs/development](docs/development/README.md).
 
+CI is GitHub Actions: docs/tracker/secret scan, TypeScript lint/test/build,
+Flutter analyze/test/bundle, and license policy. See
+[docs/development/ci.md](docs/development/ci.md).
+
 ## Layout
 
 | Path | Role |

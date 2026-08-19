@@ -30,7 +30,7 @@ Stage 1 program is docs/development/README.md. Children SY-0009–SY-0017 own th
 * [SY-0014 — Agent instructions and skills](./issues/SY-0014.md) - In Review · Stage 1 · Repository and engineering foundation · Stage 1
 * [SY-0015 — MCP/tool configuration](./issues/SY-0015.md) - In Review · Stage 1 · Repository and engineering foundation · Stage 1
 * [SY-0016 — CI foundation](./issues/SY-0016.md) - In Review · Stage 1 · Repository and engineering foundation · Stage 1
-* [SY-0017 — Developer bootstrap](./issues/SY-0017.md) - In Progress · Stage 1 · Repository and engineering foundation · Stage 1
+* [SY-0017 — Developer bootstrap](./issues/SY-0017.md) - In Review · Stage 1 · Repository and engineering foundation · Stage 1
 
 ## Stage 10 — Feature migration — 0/11
 

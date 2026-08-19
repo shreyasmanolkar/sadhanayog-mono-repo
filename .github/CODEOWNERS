@@ -1,11 +1,29 @@
-# Protected paths require a human reviewer.
+# Protected paths require a human reviewer (foundation §16.2).
+# The named owner is a placeholder until a human signs the reviewer set
+# (see docs/development/ci.md). Do not treat this file as that approval.
 * @shreyas
 
+# Auth, authorization, and request middleware
 /apps/api/src/auth/ @shreyas
 /apps/api/src/middleware/ @shreyas
+
+# Contracts and schema / migrations
 /packages/contracts/ @shreyas
 /packages/db/migrations/ @shreyas
+/packages/db/src/schema.ts @shreyas
+
+# Worker / production-shaped config (no production resources in Stage 1)
+/apps/api/wrangler.jsonc @shreyas
+
+# Security documents and decision records
 /docs/security/ @shreyas
 /.agents/notes/ @shreyas
+
+# CI permissions, workflows, and review policy
 /.github/ @shreyas
-/apps/api/wrangler.jsonc @shreyas
+
+# Mobile signing material must never be committed. These paths are owned
+# so a later file is not merged without a human.
+/apps/mobile/android/key.properties @shreyas
+/apps/mobile/android/app/*.jks @shreyas
+/apps/mobile/android/app/*.keystore @shreyas

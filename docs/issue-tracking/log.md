@@ -7,6 +7,14 @@ reader would otherwise have to reverse-engineer.
 
 ---
 
+## 2026-08-20 — SY-0016 CI foundation is ADR-0011 after staging merge
+
+Staging already assigned ADR-0006–0010. The GitHub Actions host note is
+therefore ADR-0011. License allowlist stays SY-0011. SY-0016 owns the
+four-job workflow, SHA pins, in-process secret scan, and `ci:policy`.
+Flutter `build bundle` is the Stage 1 smoke. Playwright, APK/IPA, path
+filters, production environments, and branch protection stay deferred.
+
 ## 2026-08-20 — Stage 1 board cards get unique descriptions
 
 Seeded Stage 1 issues all carried the epic sentence as `description`, so
