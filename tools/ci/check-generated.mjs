@@ -15,4 +15,22 @@ if (before !== after) {
   );
   process.exit(1);
 }
+
+let doc;
+try {
+  doc = JSON.parse(after);
+} catch (error) {
+  console.error("packages/contracts/openapi/openapi.json is not valid JSON");
+  throw error;
+}
+
+if (doc["x-generated-from"] !== "packages/contracts/src/openapi.ts") {
+  console.error("generated OpenAPI is missing x-generated-from");
+  process.exit(1);
+}
+if (doc["x-generated-by"] !== "packages/contracts/scripts/write-openapi.mjs") {
+  console.error("generated OpenAPI is missing x-generated-by");
+  process.exit(1);
+}
+
 process.stdout.write("ok: generated OpenAPI matches source\n");
