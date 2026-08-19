@@ -67,6 +67,8 @@ Each `docs/**/README.md` carries `Status`, `Owner`, and `Last-reviewed`.
 | [database](database/README.md) | Schema, dictionary, migrations | Schema change |
 | [security](security/README.md) | Threat model, authz matrix | Threat/control change |
 | [development](development/README.md) | Stage 1 program, setup, commands, [style](development/style.md) | Tooling change or Stage 1 exit account |
+| [development/agent-instructions.md](development/agent-instructions.md) | Agent instruction map and skill catalog | Instruction or skill change |
+| [development/mcp.md](development/mcp.md) | Project MCP inventory and tool permissions | MCP server or agent-tool policy change |
 | [testing](testing/README.md) | Test policy | Quality-gate change |
 | [deployment](deployment/README.md) | Environments and promotion | Deploy change |
 | [operations](operations/README.md) | Runbooks and troubleshooting | Incident or drill |

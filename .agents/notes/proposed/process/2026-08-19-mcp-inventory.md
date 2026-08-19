@@ -1,5 +1,6 @@
 # Agent Note: Project MCP inventory
 
+ID: ADR-0010
 Status: proposed
 
 ## Problem
@@ -36,10 +37,21 @@ in this repository's current agent.
 - **GitHub or Cloudflare account MCP:** rejected; write and production blast
   radius are too high for a default tool.
 
+## Impact
+
+- **Security:** docs MCP is read-only; Playwright is disabled; no account
+  mutation servers. Optional Context7 key stays in ignored env files.
+- **Operations:** `pnpm mcp:check` is part of `pnpm verify`.
+- **Data:** none. Prompts may name libraries, never source or secrets.
+
 ## Affected components
 
 `.codex/config.toml`, `.grok/config.toml`, `tools/ci/mcp-inventory.json`,
 `tools/ci/check-mcp.mjs`, `docs/development/mcp.md`, `.env.example`.
+
+## Approvers
+
+Human architectural reviewer. Not self-approved.
 
 ## Related records
 
