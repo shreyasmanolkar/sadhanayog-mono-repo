@@ -19,7 +19,7 @@ required check must exist before any skip-by-path is allowed
 
 | Job | What it runs |
 |---|---|
-| Docs, tracker, secrets | `tracker:lint`, `tracker:test`, `toolchain:check`, `mcp:check`, `docs:lint`, `docs:test`, `skills:lint`, `skills:test`, `secrets:scan`, `boundaries`, `ci:policy`, `ci:test` |
+| Docs, tracker, secrets | `tracker:lint`, `tracker:test`, `bootstrap:check`, `bootstrap:test`, `toolchain:check`, `mcp:check`, `docs:lint`, `docs:test`, `skills:lint`, `skills:test`, `secrets:scan`, `boundaries`, `ci:policy`, `ci:test` |
 | Format, lint, typecheck, test, build | `lint`, `typecheck`, `test`, `build`, `generated:check` |
 | Flutter analyze, test, build smoke | `flutter pub get`, `analyze`, `test`, `build bundle` |
 | Dependency and license policy | `licenses:check` |
@@ -37,7 +37,7 @@ runs `pnpm verify`.
 
 | Command | Meaning |
 |---|---|
-| `pnpm verify` | Tracker, pins, MCP, docs, skills, secrets, CI policy, licenses, quality tests, lint, types, tests, build, generated drift |
+| `pnpm verify` | Tracker, bootstrap checks, pins, MCP, docs, skills, secrets, CI policy, licenses, quality tests, lint, types, tests, build, generated drift |
 | `pnpm ci:policy` | Workflow/CODEOWNERS/Dependabot/gitignore invariants |
 | `pnpm ci:test` | Unit tests for secret scan and workflow policy |
 | `pnpm secrets:scan` | In-process scan for PEM keys, AWS access-key patterns, GitHub tokens |

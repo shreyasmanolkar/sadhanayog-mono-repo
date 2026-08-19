@@ -18,12 +18,21 @@ pnpm bootstrap
 pnpm toolchain:check
 pnpm verify
 
-# 3. Run API + web
+# 3. Copy secret *names* only
+#    .env.example → ignored local files
+#    apps/api/.dev.vars.example → apps/api/.dev.vars
+
+# 4. Local D1 ledger (no product rows)
+pnpm db:seed:local -- --database sadhanayog-dev
+
+# 5. Run API + web
 pnpm dev
 ```
 
 - Web: http://127.0.0.1:5173
 - API liveness: http://127.0.0.1:8787/health/live
+
+Reset the local database only: `pnpm db:reset:local -- --database sadhanayog-dev --confirm sadhanayog-dev`.
 
 Flutter is pinned in `mise.toml` and lives in `apps/mobile`. Setup, commands,
 generated files, environment matrix, and agent authority live in
