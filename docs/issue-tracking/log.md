@@ -7,6 +7,15 @@ reader would otherwise have to reverse-engineer.
 
 ---
 
+## 2026-08-20 — Stage 1 board cards get unique descriptions
+
+Seeded Stage 1 issues all carried the epic sentence as `description`, so
+every card drawer looked the same. SY-0008–SY-0017 now have one-line
+descriptions that match the roadmap work package. SY-0008 `pr` is `9` so
+the board chip renders `#9`. The stage-1 project card points at
+`docs/development/README.md`. Child implementation notes stay on the
+child PRs.
+
 ## 2026-08-20 — SY-0012 ADR path note is ADR-0009 after staging merge
 
 Staging already assigned ADR-0006 to the Flutter shell, ADR-0007 to
