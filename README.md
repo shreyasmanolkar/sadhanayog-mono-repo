@@ -25,8 +25,9 @@ pnpm dev
 - Web: http://127.0.0.1:5173
 - API liveness: http://127.0.0.1:8787/health/live
 
-Flutter is pinned in `mise.toml` and lives in `apps/mobile`. Platform folders
-are created with `flutter create` on a machine that has the SDK.
+Flutter is pinned in `mise.toml` and lives in `apps/mobile`. Setup, commands,
+generated files, environment matrix, and agent authority live in
+[docs/development](docs/development/README.md).
 
 ## Layout
 
@@ -43,6 +44,7 @@ are created with `flutter create` on a machine that has the SDK.
 | `docs/issue-tracking` | In-repo issue tracker and board. |
 | `docs/` | Architecture, product, operations, issues. |
 | `docs/development/toolchain.md` | Pinned tools, lockfiles, environment matrix. |
+| `.agents/` | Instructions, skills, decision notes. |
 
 ## Support
 

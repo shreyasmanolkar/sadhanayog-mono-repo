@@ -2,7 +2,7 @@
 
 Status: living  
 Owner: engineering  
-Last-reviewed: 2026-08-19  
+Last-reviewed: 2026-08-20  
 Program: [Stage 1 — Repository and engineering foundation](README.md)
 
 | Command | Meaning |
@@ -10,10 +10,13 @@ Program: [Stage 1 — Repository and engineering foundation](README.md)
 | `pnpm bootstrap` | Install JS deps, check toolchain pins, Flutter pub get if SDK present |
 | `pnpm toolchain:check` | Fail if mise, engines, CI, or present binaries drift from `tools/ci/tool-pins.json` |
 | `pnpm dev` | API (8787) + web (5173) |
-| `pnpm verify` | Tracker, pins, docs, secrets, boundaries, licenses, quality tests, lint, types, tests, build, generated drift |
+| `pnpm verify` | Tracker, pins, MCP inventory, docs, skills, secrets, boundaries, licenses, quality tests, lint, types, tests, build, generated drift |
+| `pnpm mcp:check` | Project MCP inventory vs `.codex` / `.grok` TOML |
 | `pnpm docs:lint` | Documentation links/headers and Agent Note schema/index drift |
 | `pnpm docs:test` | Fixture tests for the docs and decision linters |
 | `pnpm decisions:index` | Regenerate `docs/architecture/decisions.md` from Agent Notes |
+| `pnpm skills:lint` | Agent Skills frontmatter and required AGENTS.md (`quick_validate`) |
+| `pnpm skills:test` | Skill trigger/use classification fixtures |
 | `pnpm lint` | ESLint plus Prettier check |
 | `pnpm format` | Prettier write |
 | `pnpm boundaries` | Import and package.json boundary scan |

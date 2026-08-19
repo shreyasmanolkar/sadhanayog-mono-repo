@@ -19,6 +19,7 @@ index is readable, not a second decision store. Authority lives in
 | ADR-0007 | proposed | Pinned workspace toolchain | [note](../../.agents/notes/proposed/process/2026-08-19-toolchain-pins.md) |
 | ADR-0008 | proposed | Code quality conventions | [note](../../.agents/notes/proposed/process/2026-08-19-code-quality-conventions.md) |
 | ADR-0009 | proposed | Decision record paths and ADR IDs | [note](../../.agents/notes/proposed/process/2026-08-19-decision-record-paths.md) |
+| ADR-0010 | proposed | Project MCP inventory | [note](../../.agents/notes/proposed/process/2026-08-19-mcp-inventory.md) |
 
 Human architectural review moves high-impact notes into `implemented/`.
 Proposed records are not authority. IDs are never reused.

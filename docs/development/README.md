@@ -12,7 +12,8 @@ skeleton, governance, agent system, and CI foundation reviewable. It is
 not a signed architecture approval and it does not close child work
 packages [SY-0009](../issue-tracking/issues/SY-0009.md)–[SY-0017](../issue-tracking/issues/SY-0017.md).
 Operational docs: [setup.md](setup.md), [commands.md](commands.md),
-[toolchain.md](toolchain.md), [style.md](style.md).
+[toolchain.md](toolchain.md), [style.md](style.md),
+[agent-instructions.md](agent-instructions.md).
 
 The engineering foundation document itself remains **Proposed foundation
 for human approval**. Proposed Agent Notes are not authority.
@@ -65,8 +66,8 @@ owe their own notes, evidence, and human gate to `done`.
 | [style.md](style.md), `packages/config/{eslint,typescript,vitest}`, `tools/ci/check-{boundaries,commits,licenses,generated}.mjs` | [SY-0011](../issue-tracking/issues/SY-0011.md) | Named SY-0011 outcome. Conventional Commits checker has no git hook (by design). Dependabot/Renovate and a `LICENSE` file remain out of scope. |
 | `docs/**` READMEs, `.agents/notes`, `docs/postmortems/template.md`, `tools/ci/lint-docs.mjs`, `tools/ci/lint-decisions.mjs` | [SY-0012](../issue-tracking/issues/SY-0012.md) | Present. Note lifecycle dirs other than `proposed/` are empty; no note template file. |
 | `docs/issue-tracking/**`, `tools/tracker/**` | [SY-0013](../issue-tracking/issues/SY-0013.md) | Present. 152 seeded issues. Smoke test only; no invalid-state fixture suite. |
-| Root/scoped `AGENTS.md`, `.agents/skills/*/SKILL.md` | [SY-0014](../issue-tracking/issues/SY-0014.md) | Present. No skill trigger-test harness. |
-| `.codex/config.toml` | [SY-0015](../issue-tracking/issues/SY-0015.md) | Context7 + Cloudflare docs declared. Playwright commented. GitHub/log/database MCP not added (intentional). |
+| Root/scoped `AGENTS.md`, `.agents/skills/*/SKILL.md`, [agent-instructions.md](agent-instructions.md) | [SY-0014](../issue-tracking/issues/SY-0014.md) | Named outcome plus `pnpm skills:lint` / `pnpm skills:test`. |
+| `.codex/config.toml`, [mcp.md](mcp.md) | [SY-0015](../issue-tracking/issues/SY-0015.md) | Context7 + Cloudflare docs declared. Playwright pinned and disabled. GitHub/log/database MCP not added (intentional). |
 | `.github/workflows/ci.yml`, `.github/CODEOWNERS`, `.github/pull_request_template.md`, `tools/ci/check-secrets.mjs` | [SY-0016](../issue-tracking/issues/SY-0016.md) | Present. Permissions `contents: read`. No workflow secrets. |
 | `tools/ci/bootstrap.sh`, `.env.example`, `apps/api/.dev.vars.example` | SY-0017 | Present. No synthetic seed/reset command. |
 
@@ -101,7 +102,7 @@ records the criteria and defers unsatisfied rows.
 | New contributor/agent can clone and bootstrap | `pnpm bootstrap` (`tools/ci/bootstrap.sh`) documented in [setup.md](setup.md) | Clean-machine evidence on Linux and one mobile build host: SY-0017. Flutter SDK is pinned; a host without `flutter` on `PATH` skips mobile bootstrap. |
 | Run the three empty apps locally | `pnpm dev` starts API `:8787` + web `:5173`. Flutter: `cd apps/mobile && flutter run` | SY-0010 owns the shells; SY-0017 owns bootstrap friction. No identity provider, so apps are empty shells. |
 | Run `pnpm verify` | Root script runs tracker lint/test, toolchain pins, docs/decision lint, secret scan, import boundaries, licenses, quality-checker tests, eslint/prettier, typecheck, unit tests, web/api build, OpenAPI drift | Child packages still own their tests. |
-| Create/validate an issue and an ADR | `pnpm tracker` + `node tools/ci/lint-decisions.mjs`. Skills: `work-issue`, `record-decision` | Invalid-state tracker fixtures: SY-0013. Skill trigger tests: SY-0014. |
+| Create/validate an issue and an ADR | `pnpm tracker` + `node tools/ci/lint-decisions.mjs`. Skills: `work-issue`, `record-decision` | Invalid-state tracker fixtures: SY-0013. Skill trigger tests land in this checkout (`pnpm skills:test`). |
 | Understand protected operations from documentation | Root [AGENTS.md](../../AGENTS.md), [CODEOWNERS](../../.github/CODEOWNERS), this program, [record-decision](../../.agents/skills/record-decision/SKILL.md) | Human reviewers for protected paths remain an unsigned decision. |
 | CI green from a clean checkout | Workflow `.github/workflows/ci.yml` runs `pnpm verify` and `flutter analyze`/`flutter test` with `permissions: contents: read` | See [Open contradictions](#open-contradictions). Human confirmation after this branch is on GitHub Actions. No iOS/Android *build* smoke in CI (analyze/test only). |
 | No product feature implemented | Health placeholder, empty Drizzle ledger, two shells that say the desk is empty | Keep for every child. |
