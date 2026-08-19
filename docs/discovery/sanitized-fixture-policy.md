@@ -135,7 +135,12 @@ pinned revisions. They use synthetic data only. They are not signed.
   `teaching-archive.v1`
 - Not then: media bytes are not stored in the application
 
-Further vectors (session derivation, invoice arithmetic, last-write-wins,
+Workflow vectors (unknown hash, Business bookmark-only, FAB hidden on
+attendance, shortcuts ignored in fields, empty-desk catalog seed,
+missing attendance session) live in
+[feature-inventory.md](feature-inventory.md).
+
+Further data vectors (session derivation, invoice arithmetic, last-write-wins,
 outbox, journey-day/returns) wait for SY-0004 and SY-0005.
 
 ## Checksums
