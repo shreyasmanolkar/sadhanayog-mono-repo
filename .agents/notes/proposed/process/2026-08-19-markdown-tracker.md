@@ -1,5 +1,6 @@
 # Agent Note: Markdown issue tracker
 
+ID: ADR-0005
 Status: proposed
 
 ## Problem
@@ -17,15 +18,37 @@ Issues evolve with code. Agents can lint the DAG without an external token.
 
 ## Alternatives considered
 
+- **Status quo (roadmap prose only):** rejected; agents would re-interpret
+  sequencing every session.
 - **GitHub Issues only:** rejected as the source of truth; weaker local DAG
   and poorer code co-evolution. An outward sync remains possible later.
-- **Custom web board:** rejected; too much product for three users.
+- **Custom web board as the database:** rejected; too much product for three
+  users. The in-repo board is a view.
+
+## Impact
+
+- **Security:** no tracker API token in agent context. Issue files must not
+  contain secrets or raw user data.
+- **Operations:** `pnpm tracker:lint` is part of `pnpm verify`.
+- **Data:** markdown files are the database; the board is not.
 
 ## Affected components
 
 `docs/issue-tracking`, `tools/tracker`, CI.
 
+## Approvers
+
+Human architectural reviewer. Not self-approved.
+
 ## Related records
 
 - **Supersedes:** None — first record
 - **Superseded by:** None — still proposed
+
+## Current repository state
+
+The executable and seeded graph live under `docs/issue-tracking` (`track.mjs`,
+`config.yml`, templates, board, 152 roadmap issues). Canonical CLI path is
+`docs/issue-tracking/track.mjs`; `tools/tracker/track.mjs` is a wrapper.
+Isolated fixtures are `tools/tracker/track.test.mjs`. This note stays
+**proposed** until a human architectural reviewer moves it.

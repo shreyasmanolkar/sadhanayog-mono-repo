@@ -1,3 +1,5 @@
-# Local-only Worker secrets. Copy to .dev.vars (gitignored).
-# SADHANAYOG_ENV=development
+# Local-only Worker secrets. Copy to apps/api/.dev.vars (gitignored).
+# Leave secret names empty until an identity provider exists.
+# Wrangler already injects SADHANAYOG_ENV=development from wrangler.jsonc.
+
 # OIDC_CLIENT_SECRET=

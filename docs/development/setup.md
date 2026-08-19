@@ -2,20 +2,19 @@
 
 Status: living  
 Owner: engineering  
-Last-reviewed: 2026-08-19
+Last-reviewed: 2026-08-19  
+Program: [Stage 1 — Repository and engineering foundation](README.md)
 
 ## Tools
 
-Pins live in [`mise.toml`](../../mise.toml):
-
-- Node 24.11.1
-- pnpm 10.33.0
-- Flutter 3.35.4
-- Java 25.0.1 (Android toolchain)
+Pins and the environment matrix live in [toolchain.md](toolchain.md).
+Canonical versions: [`tools/ci/tool-pins.json`](../../tools/ci/tool-pins.json).
 
 ```bash
+mise trust          # first clone or new git worktree
 mise install
 pnpm bootstrap
+pnpm toolchain:check
 ```
 
 Copy [`.env.example`](../../.env.example) names into ignored local files.
@@ -31,3 +30,7 @@ pnpm verify
 Flutter analyze/test/`build bundle` run only when `flutter` is on `PATH`.
 CI installs the SDK via pinned `subosito/flutter-action` and runs those
 commands on every pull request. See [ci.md](ci.md).
+
+Install the recommended VS Code extensions in
+[`.vscode/extensions.json`](../../.vscode/extensions.json) so Prettier, ESLint,
+EditorConfig, and Dart format-on-save match [style.md](style.md).

@@ -19,7 +19,7 @@ required check must exist before any skip-by-path is allowed
 
 | Job | What it runs |
 |---|---|
-| Docs, tracker, secrets | `tracker:lint`, `tracker:test`, `docs:lint`, `secrets:scan`, `boundaries`, `ci:policy`, `ci:test` |
+| Docs, tracker, secrets | `tracker:lint`, `tracker:test`, `toolchain:check`, `mcp:check`, `docs:lint`, `docs:test`, `skills:lint`, `skills:test`, `secrets:scan`, `boundaries`, `ci:policy`, `ci:test` |
 | Format, lint, typecheck, test, build | `lint`, `typecheck`, `test`, `build`, `generated:check` |
 | Flutter analyze, test, build smoke | `flutter pub get`, `analyze`, `test`, `build bundle` |
 | Dependency and license policy | `licenses:check` |
@@ -37,11 +37,11 @@ runs `pnpm verify`.
 
 | Command | Meaning |
 |---|---|
-| `pnpm verify` | Tracker, docs, secrets, CI policy, license policy, lint, types, tests, build, generated drift |
+| `pnpm verify` | Tracker, pins, MCP, docs, skills, secrets, CI policy, licenses, quality tests, lint, types, tests, build, generated drift |
 | `pnpm ci:policy` | Workflow/CODEOWNERS/Dependabot/gitignore invariants |
-| `pnpm ci:test` | Unit tests for the CI checkers |
+| `pnpm ci:test` | Unit tests for secret scan and workflow policy |
 | `pnpm secrets:scan` | In-process scan for PEM keys, AWS access-key patterns, GitHub tokens |
-| `pnpm licenses:check` | Third-party npm license allowlist; Flutter git-dep ban |
+| `pnpm licenses:check` | Third-party npm license allowlist (SY-0011) |
 | `pnpm generated:check` | Committed OpenAPI matches contracts source |
 | `pnpm boundaries` | Import-direction scan (web ↛ db/Worker, contracts ↛ apps/db) |
 
@@ -99,12 +99,11 @@ placeholder until that decision is signed.
 
 ## Dependencies and licenses
 
-`pnpm licenses:check` fails closed on unknown licenses and strong copyleft
-(GPL, AGPL, SSPL, BUSL, Commons Clause). The allowlist is OSI-style
-permissive licenses plus LGPL (weak copyleft) because Wrangler/miniflare
-pulls `sharp` → `@img/sharp-libvips-*` (`LGPL-3.0-or-later`) as a native
-image library. **Product SPDX / `LICENSE` is unsigned** and is not decided
-here. Do not add GPL/AGPL to go green.
+`pnpm licenses:check` is SY-0011: `tools/ci/license-allowlist.json` fails
+closed on unknown licenses and strong copyleft. The optional sharp libvips
+binary is a named LGPL exception, not a general copyleft allow. **Product
+SPDX / `LICENSE` is unsigned** and is not decided here. Do not add GPL/AGPL
+to go green.
 
 Flutter `pubspec.yaml` must not introduce `git:` dependencies. A full Dart
 license inventory is deferred; the pub lockfile is the current evidence.
@@ -153,7 +152,7 @@ must not:
 
 | Decision | Status |
 |---|---|
-| CI host is GitHub Actions | Proposed in [ADR-0006](../../.agents/notes/proposed/process/2026-08-19-github-actions-ci.md). This remote already runs Actions. |
+| CI host is GitHub Actions | Proposed in [ADR-0011](../../.agents/notes/proposed/process/2026-08-19-github-actions-ci.md). This remote already runs Actions. |
 | Protected-path reviewers | CODEOWNERS names `@shreyas` on `*` and on protected paths. Not a signed reviewer set. |
 | Product SPDX / `LICENSE` | Unsigned. Third-party allowlist only. |
 | Shared development environment | Not created. |

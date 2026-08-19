@@ -57,6 +57,7 @@ apps/mobile/ios/Flutter/ephemeral/
 *.jks
 *.keystore
 *.p12
+*.p8
 *.mobileprovision
 exports/
 backups/

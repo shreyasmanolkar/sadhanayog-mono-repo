@@ -34,7 +34,12 @@ jobs:
       - run: pnpm install --frozen-lockfile
       - run: pnpm tracker:lint
       - run: pnpm tracker:test
+      - run: pnpm toolchain:check
+      - run: pnpm mcp:check
       - run: pnpm docs:lint
+      - run: pnpm docs:test
+      - run: pnpm skills:lint
+      - run: pnpm skills:test
       - run: pnpm secrets:scan
       - run: pnpm boundaries
       - run: pnpm ci:policy
@@ -97,3 +102,4 @@ jobs:
           cache: pnpm
       - run: pnpm install --frozen-lockfile
       - run: pnpm licenses:check
+      - run: pnpm quality:test

@@ -1,5 +1,6 @@
 # Agent Note: GitHub Actions as the CI host
 
+ID: ADR-0011
 Status: proposed
 
 ## Problem
@@ -20,7 +21,7 @@ Dependabot opens weekly grouped non-major PRs with no automerge.
 The repository already lives on GitHub. A second CI product would add
 credentials and a second permission model for three operators. Actions can
 express least privilege in the workflow file, which agents and `ci:policy`
-can lint.
+can lint. Staging already used ADR-0006–0010, so this note is ADR-0011.
 
 ## Alternatives considered
 
@@ -31,11 +32,25 @@ can lint.
   they need another identity, secret store, and reviewer path while the
   code host is already GitHub.
 
+## Impact
+
+- **Security:** workflow is read-only, fork PRs get no repository secrets,
+  artifacts are not uploaded, Actions are SHA-pinned.
+- **Operations:** four parallel jobs on every PR and on `main`/`staging`.
+  `pnpm ci:policy` is part of `pnpm verify`.
+- **Data:** none. Secret scan looks for credential-like strings, not product
+  records.
+
 ## Affected components
 
 `.github/workflows/ci.yml`, `.github/CODEOWNERS`,
 `.github/pull_request_template.md`, `.github/dependabot.yml`,
-`tools/ci/check-*.mjs`, `docs/development/ci.md`.
+`tools/ci/check-secrets.mjs`, `tools/ci/check-ci-policy.mjs`,
+`docs/development/ci.md`.
+
+## Approvers
+
+Human architectural reviewer. Not self-approved.
 
 ## Related records
 
