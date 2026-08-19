@@ -14,8 +14,9 @@ Stage 0 program [README.md](README.md)
 This file is the named SY-0004 outcome. It maps `sadhanayog.v1`, Sheet
 tabs and columns, identifiers, list/JSON encodings, calculation
 modules, derived sessions, the outbox, and last-write-wins. It is not
-a signed preserve/change/remove matrix. Sign-off is
-[SY-0007](../issue-tracking/issues/SY-0007.md). Page/workflow maps are
+a signed preserve/change/remove matrix. The unsigned register is
+[source-of-truth.md](source-of-truth.md)
+([SY-0007](../issue-tracking/issues/SY-0007.md)). Page/workflow maps are
 [feature-inventory.md](feature-inventory.md). Teaching Archive store
 and content are [SY-0005](../issue-tracking/issues/SY-0005.md).
 Threat/accessibility debt is
@@ -864,8 +865,8 @@ Command Center still has no `package.json` and no test files.
 | Stage 0 exit criterion | This issue |
 |---|---|
 | Collections, encodings, calculation modules, derived sessions, outbox, last-write-wins inventoried | Satisfied as **draft evidence** in this file. Human acceptance of SY-0004 is still required before `done`. |
-| Product owner signs preserve/change/defer and data-source precedence | Deferred to SY-0007 |
-| Sanitized fixtures can exercise critical rules | Rule vectors begun here; attendance/comms starters remain in the fixture policy; representative exports wait for SY-0007 |
+| Product owner signs preserve/change/defer and data-source precedence | Unsigned matrix in [source-of-truth.md](source-of-truth.md); signature still missing |
+| Sanitized fixtures can exercise critical rules | Rule vectors begun here; attendance/comms starters remain in the fixture policy; representative exports still empty in [source-of-truth.md](source-of-truth.md) |
 | No legacy file changed | Satisfied 2026-08-19 |
 
 Render/DOM/accessibility inspection was not repeated; SY-0003

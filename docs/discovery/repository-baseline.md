@@ -11,8 +11,9 @@ Stage 0 program: [README.md](README.md)
 
 This file is the named SY-0002 outcome. It inventories files, dependencies,
 build, deploy, tests, generator drift, environment assumptions, revisions,
-and ownership. It is not a signed preserve/change/remove matrix. Sign-off
-is [SY-0007](../issue-tracking/issues/SY-0007.md).
+and ownership. It is not a signed preserve/change/remove matrix. The
+unsigned register is [source-of-truth.md](source-of-truth.md)
+([SY-0007](../issue-tracking/issues/SY-0007.md)).
 
 ## Purpose
 
@@ -525,7 +526,7 @@ Conflicts are defects. They are listed, not resolved.
 | `sadhanayog.v1` collections, encodings, derived sessions, outbox rules | SY-0004 |
 | Archive content IDs, journey/rituals, privacy prose | SY-0005 |
 | Threat sketch, CSP sinks, keyboard/axe | SY-0006 |
-| Preserve/change/remove and source-of-truth sign-off | SY-0007 |
+| Preserve/change/remove and source-of-truth sign-off | SY-0007 ([source-of-truth.md](source-of-truth.md), unsigned) |
 | Target monorepo scaffold | SY-0008 / SY-0009 (blocked by this issue) |
 
 ## Rollback

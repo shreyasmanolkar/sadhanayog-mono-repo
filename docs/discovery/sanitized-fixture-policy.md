@@ -61,15 +61,18 @@ context to re-identify the person.
    access-controlled temporary location outside the clone.
 2. Record device/store label, export time, byte size, and SHA-256 of the
    **raw** file in a private note that is not committed. The hash may
-   later appear in SY-0007 without the bytes.
+   later appear in [source-of-truth.md](source-of-truth.md) without
+   the bytes.
 3. Produce a sanitized or synthetic derivative before any agent reads
    the material. Agents see only the derivative.
-4. Destroy the raw file on the schedule SY-0007 records. Until that
+4. Destroy the raw file on the schedule
+   [source-of-truth.md](source-of-truth.md) records. Until that
    schedule exists, destroy it when the immediate inventory step ends.
 5. Never paste raw JSON into an issue, chat, or prompt.
 
-SY-0007 captures representative sanitized exports and checksums. This
-epic does not collect them.
+[source-of-truth.md](source-of-truth.md) holds the checksum slots and
+destruction protocol. Representative exports have **not** been
+captured. This epic does not collect them.
 
 ## Characterization vector format
 
@@ -90,7 +93,9 @@ archive rules). Use this shape:
 - Not then: adjacent outcomes that must not occur
 ```
 
-A vector is not a product requirement until SY-0007 marks it approved.
+A vector is not a product requirement until
+[source-of-truth.md](source-of-truth.md) marks it approved. Every
+Stage 0 vector is still unsigned.
 
 ## Starter vectors
 
@@ -146,7 +151,8 @@ invoice number floor, pull-replace, membership expiry) live in
 
 ## Checksums
 
-When SY-0007 records a representative export:
+When [source-of-truth.md](source-of-truth.md) records a representative
+export:
 
 - Algorithm: SHA-256
 - Hash the sanitized file that is allowed to be discussed, and separately
@@ -161,4 +167,5 @@ the redaction catalog.
 
 A reviewer of this policy checks that no raw export, secret, or
 personal field is in the diff, and that starter vectors cite revision
-and path. Product approval of the *rules* is SY-0007, not this file.
+and path. Product approval of the *rules* is the signature block in
+[source-of-truth.md](source-of-truth.md), not this file.

@@ -12,8 +12,9 @@ Sources: Command Center `c724be0e116582b5c73d324d00a81ac23eb0bbf2`;
 This file is the named SY-0003 outcome. It inventories every Command
 Center page, nested surface, hash, action, empty/loading/error path,
 shortcut, responsive behaviour, and outbound deep link. It is not a
-signed preserve/change/remove matrix. Sign-off is
-[SY-0007](../issue-tracking/issues/SY-0007.md). Collection encodings,
+signed preserve/change/remove matrix. The unsigned register is
+[source-of-truth.md](source-of-truth.md)
+([SY-0007](../issue-tracking/issues/SY-0007.md)). Collection encodings,
 calculation modules, outbox, and last-write-wins are
 [SY-0004](../issue-tracking/issues/SY-0004.md). Keyboard/focus/semantics
 debt as a quality baseline is
@@ -866,7 +867,7 @@ Command Center still has no `package.json` and no test files.
 | Stage 0 exit criterion | This issue |
 |---|---|
 | All Command Center pages, workflows, empty/loading/error, shortcuts, responsive behaviour, and deep links inventoried | Satisfied as **draft evidence** in this file. Human acceptance of SY-0003 is still required before `done`. |
-| Product owner signs preserve/change/defer | Deferred to SY-0007 |
+| Product owner signs preserve/change/defer | Unsigned matrix in [source-of-truth.md](source-of-truth.md); signature still missing |
 | Sanitized fixtures can exercise critical rules | Workflow vectors begun here; attendance/comms starters remain in the fixture policy; calculation vectors are in [legacy-data.md](legacy-data.md) |
 | No legacy file changed | Satisfied 2026-08-19 |
 
