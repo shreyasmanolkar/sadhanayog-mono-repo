@@ -7,6 +7,15 @@ reader would otherwise have to reverse-engineer.
 
 ---
 
+## 2026-08-19 — SY-0016 splits CI into four read-only jobs and stops no-oping secrets
+
+The bulk scaffold ran `pnpm verify` plus Flutter analyze/test as two jobs
+and skipped the secret scan when `rg` was missing. SY-0016 makes the scan
+in-process, adds license policy and a workflow policy linter, pins Actions
+by SHA, and runs Flutter `build bundle` as the Stage 1 smoke. Playwright,
+APK/IPA, path filters, production environments, and GitHub branch
+protection remain deferred. CI host and CODEOWNERS reviewers stay unsigned.
+
 ## 2026-08-19 — SY-0002 inventories deploy topology from executables, not stale Worker docs
 
 The Command Center revision ships three descriptions of custom-domain deploy:
