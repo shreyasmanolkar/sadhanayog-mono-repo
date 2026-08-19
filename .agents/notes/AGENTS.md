@@ -32,5 +32,5 @@ No other transitions. Do not reopen sealed history.
 
 Foundation §18.2 names files `proposed/ADR-NNNN-slug.md`. This tree uses
 class/date-slug paths plus an `ID:` field. See
-[ADR-0006](proposed/process/2026-08-19-decision-record-paths.md). That note
+[ADR-0009](proposed/process/2026-08-19-decision-record-paths.md). That note
 is not authority until a human implements it.

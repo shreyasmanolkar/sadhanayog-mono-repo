@@ -9,5 +9,14 @@ flutter analyze
 flutter test
 ```
 
-iOS and Android platform folders are present. Flavors `dev` and `prod` arrive
-in Stage 8. Keep signing material out of this repository.
+Compile-time config (Stage 1 shell):
+
+```bash
+flutter run \
+  --dart-define=SADHANAYOG_ENV=dev \
+  --dart-define=SADHANAYOG_API_ORIGIN=http://127.0.0.1:8787
+```
+
+iOS and Android platform folders are present. Native product flavors `dev` and
+`prod` arrive in Stage 8 (SY-0064). Keep signing material out of this
+repository.

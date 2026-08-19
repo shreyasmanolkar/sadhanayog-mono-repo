@@ -7,6 +7,19 @@
     "./typescript/base.json": "./typescript/base.json",
     "./typescript/node.json": "./typescript/node.json",
     "./typescript/worker.json": "./typescript/worker.json",
-    "./typescript/web.json": "./typescript/web.json"
+    "./typescript/web.json": "./typescript/web.json",
+    "./eslint": "./eslint/index.js",
+    "./vitest/node": {
+      "types": "./vitest/node.d.ts",
+      "import": "./vitest/node.js"
+    }
+  },
+  "dependencies": {
+    "@eslint/js": "9.34.0",
+    "eslint": "9.34.0",
+    "eslint-plugin-react-hooks": "5.2.0",
+    "eslint-plugin-react-refresh": "0.4.20",
+    "globals": "16.3.0",
+    "typescript-eslint": "8.42.0"
   }
 }

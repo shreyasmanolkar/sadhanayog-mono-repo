@@ -1,6 +1,6 @@
 # Agent Note: Decision record paths and ADR IDs
 
-ID: ADR-0006
+ID: ADR-0009
 Status: proposed
 
 ## Problem

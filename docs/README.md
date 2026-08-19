@@ -66,7 +66,7 @@ Each `docs/**/README.md` carries `Status`, `Owner`, and `Last-reviewed`.
 | [api](api/README.md) | API conventions | Contract change |
 | [database](database/README.md) | Schema, dictionary, migrations | Schema change |
 | [security](security/README.md) | Threat model, authz matrix | Threat/control change |
-| [development](development/README.md) | Setup, commands, style | Tooling change |
+| [development](development/README.md) | Stage 1 program, setup, commands, [style](development/style.md) | Tooling change or Stage 1 exit account |
 | [testing](testing/README.md) | Test policy | Quality-gate change |
 | [deployment](deployment/README.md) | Environments and promotion | Deploy change |
 | [operations](operations/README.md) | Runbooks and troubleshooting | Incident or drill |
@@ -95,7 +95,7 @@ Path: `.agents/notes/<lifecycle>/<class>/YYYY-MM-DD-<topic>.md`.
 
 Foundation §18.2 names files `proposed/ADR-NNNN-slug.md`. The on-disk
 convention already used class/date-slug paths. That contradiction is recorded
-in [ADR-0006](../.agents/notes/proposed/process/2026-08-19-decision-record-paths.md)
+in [ADR-0009](../.agents/notes/proposed/process/2026-08-19-decision-record-paths.md)
 and is **not** resolved here.
 
 ## Setup, commands, generated files, environment, authority
@@ -151,7 +151,7 @@ decided by this issue.**
 | Decision | Owner | Due before | Status |
 |---|---|---|---|
 | Approve the engineering foundation as authority | Architecture reviewer | Any work that treats §5–20 as approved | Unsigned. Document status is still Proposed. |
-| On-disk ADR path versus foundation §18.2 literal names | Architecture reviewer | Treating either layout as signed | Unsigned. Recorded as proposed [ADR-0006](../.agents/notes/proposed/process/2026-08-19-decision-record-paths.md). This issue follows the existing class/date-slug files. |
+| On-disk ADR path versus foundation §18.2 literal names | Architecture reviewer | Treating either layout as signed | Unsigned. Recorded as proposed [ADR-0009](../.agents/notes/proposed/process/2026-08-19-decision-record-paths.md). This issue follows the existing class/date-slug files. Staging already used ADR-0006–0008. |
 | Who may move a high-impact note into `implemented/` | Architecture reviewer | First stack ADR promotion | Unsigned. Conduct already forbids agent self-approval. |
 | Protected-path reviewers beyond the CODEOWNERS placeholder | Engineering lead | Merge of notes, security docs, schema, auth, CI permissions | Unsigned. `.github/CODEOWNERS` currently names `@shreyas`. |
 | Record stack selections as **implemented** ADRs after scaffolds prove viable | Architecture reviewer | Before Stage 2 treats them as given | ADR-0001–ADR-0005 remain `proposed/`. |
@@ -166,7 +166,7 @@ Conflicts are defects. They are listed, not resolved.
    named SY-0012. Recorded, not a rewrite of `blocked_by`.
 2. **Foundation §18.2 versus on-disk notes.** §18.2 says
    `proposed/ADR-NNNN-slug.md`. `.agents/notes/README.md` and the five stack
-   notes use `<lifecycle>/<class>/YYYY-MM-DD-<topic>.md`. ADR-0006 records the
+   notes use `<lifecycle>/<class>/YYYY-MM-DD-<topic>.md`. ADR-0009 records the
    choice to keep the latter and put `ADR-NNNN` inside the file. Still
    proposed.
 3. **Engineering foundation is still Proposed.**
