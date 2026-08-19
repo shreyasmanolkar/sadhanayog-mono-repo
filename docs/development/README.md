@@ -58,9 +58,9 @@ owe their own notes, evidence, and human gate to `done`.
 |---|---|---|
 | [README.md](README.md) (this program) | SY-0008 | Draft, reviewable |
 | [AGENTS.md](AGENTS.md) | SY-0008 | Draft |
-| [setup.md](setup.md), [commands.md](commands.md) | [SY-0017](../issue-tracking/issues/SY-0017.md) | Present; bootstrap evidence still on SY-0017 |
+| [setup.md](setup.md), [commands.md](commands.md), [generated-files.md](generated-files.md), [environment.md](environment.md), [agent-authority.md](agent-authority.md) | [SY-0017](../issue-tracking/issues/SY-0017.md) | Named SY-0017 outcome. Clean-checkout, seed/reset, env templates. |
 | [toolchain.md](toolchain.md) | [SY-0009](../issue-tracking/issues/SY-0009.md) | Named SY-0009 outcome. Pins, lockfiles, generated-file policy, environment matrix. |
-| [../operations/troubleshooting/README.md](../operations/troubleshooting/README.md) | SY-0017 | Thin placeholder |
+| [../operations/troubleshooting/README.md](../operations/troubleshooting/README.md) | SY-0017 | Bootstrap and local-dev failures, including seed/reset. |
 | `tools/ci/tool-pins.json`, `mise.toml`, root `package.json`, `pnpm-lock.yaml`, `pnpm-workspace.yaml` | [SY-0009](../issue-tracking/issues/SY-0009.md) | Canonical pins in `tool-pins.json`. Dart/Wrangler are not mise pins; Wrangler is the `apps/api` package pin `4.124.0`. Dart ships with Flutter 3.35.4 (Dart 3.9.2). `pnpm toolchain:check` fails on drift. |
 | `apps/{api,web,mobile}`, `packages/{config,contracts,db}`, `content/teaching-archive` | [SY-0010](../issue-tracking/issues/SY-0010.md) | Compiling shells. Health only. No product tables or routes. |
 | [style.md](style.md), `packages/config/{eslint,typescript,vitest}`, `tools/ci/check-{boundaries,commits,licenses,generated}.mjs` | [SY-0011](../issue-tracking/issues/SY-0011.md) | Named SY-0011 outcome. Conventional Commits checker has no git hook (by design). Dependabot/Renovate and a `LICENSE` file remain out of scope. |
@@ -69,7 +69,7 @@ owe their own notes, evidence, and human gate to `done`.
 | Root/scoped `AGENTS.md`, `.agents/skills/*/SKILL.md`, [agent-instructions.md](agent-instructions.md) | [SY-0014](../issue-tracking/issues/SY-0014.md) | Named outcome plus `pnpm skills:lint` / `pnpm skills:test`. |
 | `.codex/config.toml`, [mcp.md](mcp.md) | [SY-0015](../issue-tracking/issues/SY-0015.md) | Context7 + Cloudflare docs declared. Playwright pinned and disabled. GitHub/log/database MCP not added (intentional). |
 | [ci.md](ci.md), `.github/workflows/ci.yml`, `.github/CODEOWNERS`, `.github/pull_request_template.md`, `.github/dependabot.yml`, `tools/ci/check-{secrets,ci-policy}.mjs` | [SY-0016](../issue-tracking/issues/SY-0016.md) | Named SY-0016 outcome. Four parallel jobs, SHA-pinned Actions, `permissions: contents: read`, no workflow secrets, Flutter `build bundle`. License allowlist remains SY-0011. |
-| `tools/ci/bootstrap.sh`, `.env.example`, `apps/api/.dev.vars.example` | SY-0017 | Present. No synthetic seed/reset command. |
+| `tools/ci/bootstrap.sh`, `tools/ci/local-db.mjs`, `tools/ci/check-bootstrap.mjs`, `.env.example`, `apps/api/.dev.vars.example` | SY-0017 | Present. Local `sadhanayog-dev` seed/reset with confirmation guard. |
 
 Do not close a child because its files exist on this branch.
 

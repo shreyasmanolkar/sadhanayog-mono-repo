@@ -34,6 +34,6 @@ Read the tree, create a local branch, implement a **ready** issue whose blockers
 
 The backend is authoritative. Client checks are not authorization.
 
-Local D1 seed/reset commands, when they exist, are SY-0017. They are not permission to touch a Cloudflare account.
+`pnpm db:reset:local` and `pnpm db:seed:local` are local-only. They refuse `--remote` and any database name other than `sadhanayog-dev`. They are not permission to touch a Cloudflare account.
 
 Project MCP is documented in [mcp.md](mcp.md). Agents may query Context7 and Cloudflare **documentation**. They must stop before adding a server, committing a token, enabling headed Playwright against a personal profile, or calling a Cloudflare account API through MCP.

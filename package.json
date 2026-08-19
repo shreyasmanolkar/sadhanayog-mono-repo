@@ -10,6 +10,8 @@
   },
   "scripts": {
     "bootstrap": "bash tools/ci/bootstrap.sh",
+    "bootstrap:check": "node tools/ci/check-bootstrap.mjs",
+    "bootstrap:test": "node tools/ci/local-db.test.mjs",
     "dev": "pnpm --filter @sadhanayog/api --filter @sadhanayog/web --parallel dev",
     "build": "pnpm --filter @sadhanayog/contracts build && pnpm --filter @sadhanayog/db build && pnpm --filter @sadhanayog/web build && pnpm --filter @sadhanayog/api build",
     "lint": "eslint . && prettier --check .",
@@ -41,9 +43,11 @@
     "ci:policy": "node tools/ci/check-ci-policy.mjs",
     "ci:test": "node tools/ci/check-secrets.test.mjs && node tools/ci/check-ci-policy.test.mjs",
     "generated:check": "node tools/ci/check-generated.mjs",
-    "verify": "pnpm tracker:lint && pnpm tracker:test && pnpm toolchain:check && pnpm mcp:check && pnpm docs:lint && pnpm docs:test && pnpm skills:lint && pnpm skills:test && pnpm secrets:scan && pnpm ci:policy && pnpm ci:test && pnpm boundaries && pnpm licenses:check && pnpm quality:test && pnpm lint && pnpm typecheck && pnpm test && pnpm build && pnpm generated:check",
+    "verify": "pnpm tracker:lint && pnpm tracker:test && pnpm bootstrap:test && pnpm bootstrap:check && pnpm toolchain:check && pnpm mcp:check && pnpm docs:lint && pnpm docs:test && pnpm skills:lint && pnpm skills:test && pnpm secrets:scan && pnpm ci:policy && pnpm ci:test && pnpm boundaries && pnpm licenses:check && pnpm quality:test && pnpm lint && pnpm typecheck && pnpm test && pnpm build && pnpm generated:check",
     "db:generate": "pnpm --filter @sadhanayog/db generate",
     "db:migrate:local": "pnpm --filter @sadhanayog/api db:migrate:local",
+    "db:seed:local": "node tools/ci/local-db.mjs seed",
+    "db:reset:local": "node tools/ci/local-db.mjs reset",
     "db:verify": "pnpm --filter @sadhanayog/db test"
   },
   "devDependencies": {
