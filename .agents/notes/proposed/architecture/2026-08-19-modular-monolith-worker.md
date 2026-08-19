@@ -1,5 +1,6 @@
 # Agent Note: Modular monolith on a Cloudflare Worker
 
+ID: ADR-0001
 Status: proposed
 
 ## Problem
@@ -20,14 +21,27 @@ user count.
 
 ## Alternatives considered
 
+- **Status quo (single HTML file plus Apps Script sync):** rejected; it cannot
+  authorize, test, or evolve a schema safely.
 - **Microservices / Kubernetes:** rejected because there is no scale or team
   to operate them.
 - **Separate web host plus API:** rejected; it splits deploy and loses
   same-origin session cookies.
 
+## Impact
+
+- **Security:** authorization stays on the Worker. Clients are not the
+  security boundary.
+- **Operations:** one deployable backend and one D1 per environment.
+- **Data:** one transactional store; no second database in this proposal.
+
 ## Affected components
 
 `apps/api`, `apps/web`, `packages/db`, Cloudflare account layout.
+
+## Approvers
+
+Human architectural reviewer. Not self-approved.
 
 ## Related records
 

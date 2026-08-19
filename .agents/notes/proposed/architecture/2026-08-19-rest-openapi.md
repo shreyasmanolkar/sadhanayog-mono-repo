@@ -1,5 +1,6 @@
 # Agent Note: REST and OpenAPI as the client boundary
 
+ID: ADR-0003
 Status: proposed
 
 ## Problem
@@ -19,12 +20,25 @@ Language-neutral, reviewable compatibility, and no second conceptual layer.
 
 ## Alternatives considered
 
+- **Status quo (no contract, browser-only modules):** rejected; Flutter cannot
+  import them and there is no reviewable compatibility surface.
 - **tRPC:** rejected; it does not naturally serve Dart.
 - **GraphQL:** rejected; the resource/workflow scale does not justify it.
+
+## Impact
+
+- **Security:** contracts validate shape, not authorization. The Worker still
+  authorizes.
+- **Operations:** OpenAPI is committed; drift is a CI failure.
+- **Data:** wire DTOs are not persistence rows.
 
 ## Affected components
 
 `packages/contracts`, `apps/api`, `apps/web`, `apps/mobile`.
+
+## Approvers
+
+Human architectural reviewer. Not self-approved.
 
 ## Related records
 
