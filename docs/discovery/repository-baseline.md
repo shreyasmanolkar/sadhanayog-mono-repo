@@ -471,7 +471,8 @@ and did not fetch the live hostname or Apps Script `/exec` URL.
 No new vectors. Starter vectors already live in
 [sanitized-fixture-policy.md](sanitized-fixture-policy.md)
 (attendance consumption, comms “opened”, archive no-media). Sync /
-outbox / last-write-wins vectors wait for SY-0004. Threat findings wait
+outbox / last-write-wins vectors are in
+[legacy-data.md](legacy-data.md) (SY-0004). Threat findings wait
 for SY-0006.
 
 ## Required human decisions
