@@ -3,13 +3,13 @@
 > **Generated — do not hand-edit.** Run `node docs/issue-tracking/track.mjs index`.
 > OKF 0.1 reserved catalog file for this bundle.
 
-152 issues · 152 open · 21 projects · updated 2026-08-18
+152 issues · 152 open · 21 projects · updated 2026-08-19
 
 ## Stage 0 — Discovery and baseline — 0/7
 
 Implementation-roadmap Stage 0. Discovery and baseline.
 
-* [SY-0001 — Stage 0 — Discovery and baseline](./issues/SY-0001.md) - Ready · Stage 0 · Discovery and baseline · Stage 0
+* [SY-0001 — Stage 0 — Discovery and baseline](./issues/SY-0001.md) - In Review · Stage 0 · Discovery and baseline · Stage 0
 * [SY-0002 — Repository and deployment baseline](./issues/SY-0002.md) - In Review · Stage 0 · Discovery and baseline · Stage 0
 * [SY-0003 — Command Center feature/workflow inventory](./issues/SY-0003.md) - Backlog · Stage 0 · Discovery and baseline · Stage 0
 * [SY-0004 — Legacy data and rule inventory](./issues/SY-0004.md) - Backlog · Stage 0 · Discovery and baseline · Stage 0

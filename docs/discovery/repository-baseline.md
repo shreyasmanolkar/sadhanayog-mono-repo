@@ -3,7 +3,8 @@
 Status: draft evidence  
 Owner: engineering  
 Last-reviewed: 2026-08-19  
-Sources: read-only copies of the four reference repositories
+Sources: read-only copies of the four reference repositories  
+Stage 0 program: [README.md](README.md)
 
 ## Revisions inspected
 
