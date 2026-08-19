@@ -26,7 +26,7 @@ redesign workflows.
 | Database | None. |
 | API | None. Current `POST /sync` is noted in [repository-baseline.md](repository-baseline.md); column/rule mapping is [SY-0004](../issue-tracking/issues/SY-0004.md). |
 | Flutter | None. |
-| Web | None. Screenshots and navigation maps are [SY-0003](../issue-tracking/issues/SY-0003.md) and [SY-0006](../issue-tracking/issues/SY-0006.md). |
+| Web | None. Command Center navigation maps are [feature-inventory.md](feature-inventory.md). Teaching Archive walkthrough is [SY-0006](../issue-tracking/issues/SY-0006.md). |
 | Infrastructure | None. Current Worker / Apps Script / DNS notes are [SY-0002](../issue-tracking/issues/SY-0002.md). |
 
 No production resource, secret value, or real-user export enters this
@@ -78,7 +78,7 @@ policy, and the scoped instructions. Child issues own the inventories.
 | [AGENTS.md](AGENTS.md) | SY-0001 | Draft |
 | [sanitized-fixture-policy.md](sanitized-fixture-policy.md) | SY-0001 | Draft, reviewable |
 | [repository-baseline.md](repository-baseline.md) | [SY-0002](../issue-tracking/issues/SY-0002.md) | Draft evidence, reviewable; human gate to `done` |
-| `docs/discovery/feature-inventory.md` | [SY-0003](../issue-tracking/issues/SY-0003.md) | Not written — blocked by SY-0002 |
+| [feature-inventory.md](feature-inventory.md) | [SY-0003](../issue-tracking/issues/SY-0003.md) | Draft evidence, reviewable; human gate to `done` |
 | `docs/discovery/legacy-data.md` | [SY-0004](../issue-tracking/issues/SY-0004.md) | Not written — blocked by SY-0002 |
 | `docs/discovery/teaching-archive.md` | [SY-0005](../issue-tracking/issues/SY-0005.md) | Not written — blocked by SY-0002 |
 | `docs/discovery/a11y-security-baseline.md` | [SY-0006](../issue-tracking/issues/SY-0006.md) | Not written — blocked by SY-0003–SY-0005 |
@@ -94,7 +94,7 @@ the criteria and defers the unsatisfied rows.
 
 | Stage 0 exit criterion | This epic | Remainder |
 |---|---|---|
-| All Command Center pages, workflows, empty/loading/error, shortcuts, responsive behavior, and deep links inventoried | Deferred | SY-0003 |
+| All Command Center pages, workflows, empty/loading/error, shortcuts, responsive behavior, and deep links inventoried | Satisfied as draft evidence in [feature-inventory.md](feature-inventory.md) | Human acceptance of SY-0003 (issue remains `in_review` / not `done`) |
 | Collections, encodings, calculation modules, derived sessions, outbox, last-write-wins inventoried | Deferred | SY-0004 |
 | Teaching Archive content IDs, five areas, journey/rituals/reviews/benchmarks, privacy wording, no-media invariant inventoried | Deferred | SY-0005 |
 | External dependencies and deployment assumptions inventoried | Satisfied as draft evidence in [repository-baseline.md](repository-baseline.md) | Human acceptance of SY-0002 (issue remains `in_review` / not `done`) |
@@ -148,8 +148,10 @@ to repair here.
 Not executed in this epic.
 
 - Desktop/mobile workflow rendering, keyboard walkthrough, and
-  DOM/accessibility inspection are [SY-0003](../issue-tracking/issues/SY-0003.md)
-  and [SY-0006](../issue-tracking/issues/SY-0006.md).
+  page-level DOM/accessibility inspection for Command Center are
+  recorded in [feature-inventory.md](feature-inventory.md) (SY-0003).
+  Teaching Archive walkthrough and the security/a11y debt catalogue
+  remain [SY-0006](../issue-tracking/issues/SY-0006.md).
 - Sanitized characterization vectors begin in
   [sanitized-fixture-policy.md](sanitized-fixture-policy.md). Full rule
   vectors wait for SY-0004 and sign-off in SY-0007.
@@ -166,8 +168,10 @@ Conflicts are defects. They are listed, not resolved.
 2. **Business page versus navigation.** Command Center `index.html`
    defines `SY.Pages.business` at line 10584 and registers it in `PAGES()`
    at line 16491. The sidebar `NAV` at lines 16424–16442 has no `business`
-   item. Settings also has a `business` section (line 12822). How a user
-   reaches the Business page is SY-0003, not a preserve/remove decision.
+   item. Settings also has a `business` section (line 12822). SY-0003
+   confirmed the page opens from `#/business` and from search “Go to”;
+   it is still absent from sidebar and phone tabs. Preserve/remove is
+   SY-0007.
 3. **Leads versus Enquiries.** `NAV` labels the `leads` page “Enquiries”
    (`index.html:16432`). Foundation §2 says “Leads.” Terminology waits
    for Stage 2 ([SY-0019](../issue-tracking/issues/SY-0019.md)).
@@ -203,4 +207,7 @@ SY-0002 (inventory landed; human gate) ─┬─ SY-0003 ─┐
 ```
 
 An agent may start a child only when that child’s `blocked_by` issues
-are `done`. Do not start SY-0003–SY-0007 from this epic.
+are `done`. SY-0003 started while SY-0002 was `in_review` because a
+human named the issue after the SY-0002 named outcome had landed.
+That process contradiction is recorded on SY-0003; it is not a rewrite
+of this rule for later children.
