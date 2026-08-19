@@ -18,6 +18,7 @@ const REQUIRED = [
   "docs/database/README.md",
   "docs/security/README.md",
   "docs/development/README.md",
+  "docs/development/agent-instructions.md",
   "docs/testing/README.md",
   "docs/deployment/README.md",
   "docs/operations/README.md",
