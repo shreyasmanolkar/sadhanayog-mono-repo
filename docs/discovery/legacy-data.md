@@ -17,7 +17,8 @@ modules, derived sessions, the outbox, and last-write-wins. It is not
 a signed preserve/change/remove matrix. Sign-off is
 [SY-0007](../issue-tracking/issues/SY-0007.md). Page/workflow maps are
 [feature-inventory.md](feature-inventory.md). Teaching Archive store
-and content are [SY-0005](../issue-tracking/issues/SY-0005.md).
+and content are [teaching-archive.md](teaching-archive.md)
+([SY-0005](../issue-tracking/issues/SY-0005.md)).
 Threat/accessibility debt is
 [SY-0006](../issue-tracking/issues/SY-0006.md).
 
@@ -72,7 +73,8 @@ was modified.
 | Command Center | `/home/shreyas/Work/sadhanayog/sadhana-yog-command-center` | `c724be0e116582b5c73d324d00a81ac23eb0bbf2` |
 
 Teaching Archive (`teaching-archive.v1`) is out of this issue; it is
-[SY-0005](../issue-tracking/issues/SY-0005.md).
+[teaching-archive.md](teaching-archive.md)
+([SY-0005](../issue-tracking/issues/SY-0005.md)).
 
 Inspection machine: Node `v24.11.1`, Python `3.13.7`. The Command
 Center has no `package.json` and does not pin either.
