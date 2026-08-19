@@ -24,7 +24,7 @@ redesign workflows.
 |---|---|
 | Files/docs | `docs/discovery/*` only |
 | Database | None. |
-| API | None. Current `POST /sync` is noted in [repository-baseline.md](repository-baseline.md); column/rule mapping is [SY-0004](../issue-tracking/issues/SY-0004.md). |
+| API | None. Current `POST /sync` is noted in [repository-baseline.md](repository-baseline.md); column/rule mapping is [legacy-data.md](legacy-data.md). |
 | Flutter | None. |
 | Web | None. Command Center navigation maps are [feature-inventory.md](feature-inventory.md). Teaching Archive walkthrough is [SY-0006](../issue-tracking/issues/SY-0006.md). |
 | Infrastructure | None. Current Worker / Apps Script / DNS notes are [SY-0002](../issue-tracking/issues/SY-0002.md). |
@@ -79,7 +79,7 @@ policy, and the scoped instructions. Child issues own the inventories.
 | [sanitized-fixture-policy.md](sanitized-fixture-policy.md) | SY-0001 | Draft, reviewable |
 | [repository-baseline.md](repository-baseline.md) | [SY-0002](../issue-tracking/issues/SY-0002.md) | Draft evidence, reviewable; human gate to `done` |
 | [feature-inventory.md](feature-inventory.md) | [SY-0003](../issue-tracking/issues/SY-0003.md) | Draft evidence, reviewable; human gate to `done` |
-| `docs/discovery/legacy-data.md` | [SY-0004](../issue-tracking/issues/SY-0004.md) | Not written — blocked by SY-0002 |
+| `docs/discovery/legacy-data.md` | [SY-0004](../issue-tracking/issues/SY-0004.md) | Draft evidence, reviewable; human gate to `done` |
 | `docs/discovery/teaching-archive.md` | [SY-0005](../issue-tracking/issues/SY-0005.md) | Not written — blocked by SY-0002 |
 | `docs/discovery/a11y-security-baseline.md` | [SY-0006](../issue-tracking/issues/SY-0006.md) | Not written — blocked by SY-0003–SY-0005 |
 | `docs/discovery/source-of-truth.md` | [SY-0007](../issue-tracking/issues/SY-0007.md) | Not written — blocked by SY-0003–SY-0006 |
@@ -95,12 +95,12 @@ the criteria and defers the unsatisfied rows.
 | Stage 0 exit criterion | This epic | Remainder |
 |---|---|---|
 | All Command Center pages, workflows, empty/loading/error, shortcuts, responsive behavior, and deep links inventoried | Satisfied as draft evidence in [feature-inventory.md](feature-inventory.md) | Human acceptance of SY-0003 (issue remains `in_review` / not `done`) |
-| Collections, encodings, calculation modules, derived sessions, outbox, last-write-wins inventoried | Deferred | SY-0004 |
+| Collections, encodings, calculation modules, derived sessions, outbox, last-write-wins inventoried | Satisfied as draft evidence in [legacy-data.md](legacy-data.md) | Human acceptance of SY-0004 (issue remains `in_review` / not `done`) |
 | Teaching Archive content IDs, five areas, journey/rituals/reviews/benchmarks, privacy wording, no-media invariant inventoried | Deferred | SY-0005 |
 | External dependencies and deployment assumptions inventoried | Satisfied as draft evidence in [repository-baseline.md](repository-baseline.md) | Human acceptance of SY-0002 (issue remains `in_review` / not `done`) |
 | Security and accessibility debt inventoried | Deferred | SY-0006 |
 | Product owner signs preserve/change/defer matrix and data-source precedence | Deferred | SY-0007 (human) |
-| Sanitized fixtures can exercise critical rules | Format and starter vectors only | SY-0004 / SY-0007 |
+| Sanitized fixtures can exercise critical rules | Format, starter vectors, and SY-0004 rule vectors | Representative exports and sign-off: SY-0007 |
 | No legacy file changed | Satisfied 2026-08-19 | Keep for every child |
 
 This epic therefore **does not close Stage 0**. It closes only the
@@ -153,8 +153,9 @@ Not executed in this epic.
   Teaching Archive walkthrough and the security/a11y debt catalogue
   remain [SY-0006](../issue-tracking/issues/SY-0006.md).
 - Sanitized characterization vectors begin in
-  [sanitized-fixture-policy.md](sanitized-fixture-policy.md). Full rule
-  vectors wait for SY-0004 and sign-off in SY-0007.
+  [sanitized-fixture-policy.md](sanitized-fixture-policy.md). Command
+  Center rule vectors are in [legacy-data.md](legacy-data.md)
+  (SY-0004). Sign-off remains SY-0007.
 
 ## Open contradictions
 
@@ -207,7 +208,7 @@ SY-0002 (inventory landed; human gate) ─┬─ SY-0003 ─┐
 ```
 
 An agent may start a child only when that child’s `blocked_by` issues
-are `done`. SY-0003 started while SY-0002 was `in_review` because a
-human named the issue after the SY-0002 named outcome had landed.
-That process contradiction is recorded on SY-0003; it is not a rewrite
-of this rule for later children.
+are `done`. SY-0003 and SY-0004 started while SY-0002 was `in_review`
+because a human named each issue after the SY-0002 named outcome had
+landed. Those process contradictions are recorded on the child
+issues; they are not a rewrite of this rule for later children.

@@ -867,7 +867,7 @@ Command Center still has no `package.json` and no test files.
 |---|---|
 | All Command Center pages, workflows, empty/loading/error, shortcuts, responsive behaviour, and deep links inventoried | Satisfied as **draft evidence** in this file. Human acceptance of SY-0003 is still required before `done`. |
 | Product owner signs preserve/change/defer | Deferred to SY-0007 |
-| Sanitized fixtures can exercise critical rules | Workflow vectors begun here; attendance/comms starters remain in the fixture policy; calculation vectors wait for SY-0004 |
+| Sanitized fixtures can exercise critical rules | Workflow vectors begun here; attendance/comms starters remain in the fixture policy; calculation vectors are in [legacy-data.md](legacy-data.md) |
 | No legacy file changed | Satisfied 2026-08-19 |
 
 ## Security and redaction

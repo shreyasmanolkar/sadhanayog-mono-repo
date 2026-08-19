@@ -140,8 +140,9 @@ attendance, shortcuts ignored in fields, empty-desk catalog seed,
 missing attendance session) live in
 [feature-inventory.md](feature-inventory.md).
 
-Further data vectors (session derivation, invoice arithmetic, last-write-wins,
-outbox, journey-day/returns) wait for SY-0004 and SY-0005.
+Command Center rule vectors (session derivation, invoice arithmetic,
+invoice number floor, pull-replace, membership expiry) live in
+[legacy-data.md](legacy-data.md). Journey-day/returns wait for SY-0005.
 
 ## Checksums
 
