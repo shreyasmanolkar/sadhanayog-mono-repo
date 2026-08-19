@@ -15,6 +15,7 @@ and validates against `config.yml`:
 
 ```bash
 pnpm tracker:next
+pnpm tracker:next -- --all
 pnpm tracker:board
 pnpm tracker:show SY-0009
 pnpm tracker:move SY-0009 in_progress
@@ -38,7 +39,8 @@ import { loadState, patchIssue } from "./docs/issue-tracking/track.mjs";
 issues whose every blocker is terminal. Picking up a blocked issue is the most expensive
 mistake available here.
 
-**Run `track lint` before you commit.** Zero errors.
+**Run `track lint` before you commit.** Zero errors. `status: done` is refused unless
+Acceptance Criteria are checked and Review Evidence is more than a placeholder.
 
 **Update the issue in the same commit as the code.** Do not batch tracker updates into a
 separate "update issues" commit.

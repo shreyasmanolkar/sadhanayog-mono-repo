@@ -118,17 +118,25 @@ Why this exists. Cite files and lines.
 
 ### Rules the tooling enforces (`track.mjs lint`)
 
-1. `id` must equal the filename. `SY-0010` lives in `issues/SY-0010.md`.
+1. `id` must equal the filename. `SY-0010` lives in `issues/SY-0010.md` or, after a deliberate
+   move, `archive/SY-0010.md`.
 2. Every enum value must exist in `config.yml`. An unknown `status`, `priority`, `cycle`,
    `assignee`, `estimate`, `project`, or label is an **error**, not a warning.
 3. Every `blocked_by` / `blocks` / `relates` / `parent` reference must resolve to a real issue.
 4. **Relation symmetry.** `A.blocks: [B]` ⟺ `B.blocked_by: [A]`. A one-sided edge is an invisible
-   dependency — the board draws from either side, so the graph would lie. Lint warns on asymmetry.
-5. **No dependency cycles.** If A blocks B blocks A, nothing can ever start. Lint reports the loop.
+   dependency — the board draws from either side, so the graph would lie. Lint errors on
+   asymmetry. Declare the edge once in `blocked_by`; `set`/`new` mirror `blocks` on the peer.
+5. **No dependency or parent cycles.** If A blocks B blocks A, or A is parent of B is parent of
+   A, nothing can ever start. Lint reports the loop.
 6. `status: blocked` requires a non-empty `blocked_by` — name what blocks it.
 7. `status: duplicate` requires a non-empty `relates` — name the survivor.
 8. Label groups marked `exclusive: true` in `config.yml` (`kind`, `surface`) permit at most one
    label each.
+9. `status: done` requires checked Acceptance Criteria, non-placeholder Review Evidence, and
+   the Completion Checklist items for acceptance and verification commands. `move`/`done`
+   refuse the transition without that evidence.
+10. `next` returns only `ready` issues whose every blocker is terminal (`done`, `canceled`,
+    `duplicate`). `next --all` also lists unblocked `triage`/`backlog`/`todo`.
 
 ### ID allocation
 
