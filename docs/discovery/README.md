@@ -26,7 +26,7 @@ redesign workflows.
 | Database | None. |
 | API | None. Current `POST /sync` is noted in [repository-baseline.md](repository-baseline.md); column/rule mapping is [legacy-data.md](legacy-data.md). |
 | Flutter | None. |
-| Web | None. Command Center navigation maps are [feature-inventory.md](feature-inventory.md). Teaching Archive a11y walkthrough is [a11y-security-baseline.md](a11y-security-baseline.md). |
+| Web | None. Command Center navigation maps are [feature-inventory.md](feature-inventory.md). Teaching Archive workflow walk is [teaching-archive.md](teaching-archive.md). Quality/a11y catalogue is [a11y-security-baseline.md](a11y-security-baseline.md). |
 | Infrastructure | None. Current Worker / Apps Script / DNS notes are [SY-0002](../issue-tracking/issues/SY-0002.md). |
 
 No production resource, secret value, or real-user export enters this
@@ -80,7 +80,7 @@ policy, and the scoped instructions. Child issues own the inventories.
 | [repository-baseline.md](repository-baseline.md) | [SY-0002](../issue-tracking/issues/SY-0002.md) | Draft evidence, reviewable; human gate to `done` |
 | [feature-inventory.md](feature-inventory.md) | [SY-0003](../issue-tracking/issues/SY-0003.md) | Draft evidence, reviewable; human gate to `done` |
 | `docs/discovery/legacy-data.md` | [SY-0004](../issue-tracking/issues/SY-0004.md) | Draft evidence, reviewable; human gate to `done` |
-| `docs/discovery/teaching-archive.md` | [SY-0005](../issue-tracking/issues/SY-0005.md) | Not written — blocked by SY-0002 |
+| [teaching-archive.md](teaching-archive.md) | [SY-0005](../issue-tracking/issues/SY-0005.md) | Draft evidence, reviewable; human gate to `done` |
 | [a11y-security-baseline.md](a11y-security-baseline.md) | [SY-0006](../issue-tracking/issues/SY-0006.md) | Draft evidence, reviewable; human gate to `done` |
 | `docs/discovery/source-of-truth.md` | [SY-0007](../issue-tracking/issues/SY-0007.md) | Not written — blocked by SY-0003–SY-0006 |
 
@@ -96,11 +96,11 @@ the criteria and defers the unsatisfied rows.
 |---|---|---|
 | All Command Center pages, workflows, empty/loading/error, shortcuts, responsive behavior, and deep links inventoried | Satisfied as draft evidence in [feature-inventory.md](feature-inventory.md) | Human acceptance of SY-0003 (issue remains `in_review` / not `done`) |
 | Collections, encodings, calculation modules, derived sessions, outbox, last-write-wins inventoried | Satisfied as draft evidence in [legacy-data.md](legacy-data.md) | Human acceptance of SY-0004 (issue remains `in_review` / not `done`) |
-| Teaching Archive content IDs, five areas, journey/rituals/reviews/benchmarks, privacy wording, no-media invariant inventoried | Deferred | SY-0005 |
+| Teaching Archive content IDs, five areas, journey/rituals/reviews/benchmarks, privacy wording, no-media invariant inventoried | Satisfied as draft evidence in [teaching-archive.md](teaching-archive.md) | Human acceptance of SY-0005 (issue remains `in_review` / not `done`) |
 | External dependencies and deployment assumptions inventoried | Satisfied as draft evidence in [repository-baseline.md](repository-baseline.md) | Human acceptance of SY-0002 (issue remains `in_review` / not `done`) |
 | Security and accessibility debt inventoried | Satisfied as draft evidence in [a11y-security-baseline.md](a11y-security-baseline.md) | Human acceptance of SY-0006 (issue remains `in_review` / not `done`) |
 | Product owner signs preserve/change/defer matrix and data-source precedence | Deferred | SY-0007 (human) |
-| Sanitized fixtures can exercise critical rules | Format, starter vectors, and SY-0004 rule vectors | Representative exports and sign-off: SY-0007 |
+| Sanitized fixtures can exercise critical rules | Format, starter vectors, SY-0004 rule vectors, and SY-0005 journey/ritual/filename vectors | Representative exports and sign-off: SY-0007 |
 | No legacy file changed | Satisfied 2026-08-19 | Keep for every child |
 
 This epic therefore **does not close Stage 0**. It closes only the
@@ -150,13 +150,16 @@ Not executed in this epic.
 - Desktop/mobile workflow rendering, keyboard walkthrough, and
   page-level DOM/accessibility inspection for Command Center are
   recorded in [feature-inventory.md](feature-inventory.md) (SY-0003).
-  Teaching Archive a11y walkthrough and the security/a11y debt
-  catalogue are [a11y-security-baseline.md](a11y-security-baseline.md)
-  (SY-0006). Content IDs remain SY-0005.
+  Teaching Archive workflow walk is in
+  [teaching-archive.md](teaching-archive.md) (SY-0005). The
+  security/a11y debt catalogue is
+  [a11y-security-baseline.md](a11y-security-baseline.md) (SY-0006).
 - Sanitized characterization vectors begin in
   [sanitized-fixture-policy.md](sanitized-fixture-policy.md). Command
   Center rule vectors are in [legacy-data.md](legacy-data.md)
-  (SY-0004). Sign-off remains SY-0007.
+  (SY-0004). Teaching Archive rule vectors are in
+  [teaching-archive.md](teaching-archive.md) (SY-0005). Sign-off
+  remains SY-0007.
 
 ## Open contradictions
 
@@ -211,7 +214,7 @@ SY-0002 (inventory landed; human gate) ─┬─ SY-0003 ─┐
 ```
 
 An agent may start a child only when that child’s `blocked_by` issues
-are `done`. SY-0003 and SY-0004 started while SY-0002 was `in_review`
-because a human named each issue after the SY-0002 named outcome had
-landed. Those process contradictions are recorded on the child
-issues; they are not a rewrite of this rule for later children.
+are `done`. SY-0003, SY-0004, and SY-0005 started while SY-0002 was
+`in_review` because a human named each issue after the SY-0002 named
+outcome had landed. Those process contradictions are recorded on the
+child issues; they are not a rewrite of this rule for later children.

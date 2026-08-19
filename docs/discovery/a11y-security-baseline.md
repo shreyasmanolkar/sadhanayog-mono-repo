@@ -25,7 +25,8 @@ compliance claim. Sign-off is
 modelling is [SY-0020](../issue-tracking/issues/SY-0020.md). Threat
 model refresh is [SY-0109](../issue-tracking/issues/SY-0109.md).
 Teaching Archive content IDs remain
-[SY-0005](../issue-tracking/issues/SY-0005.md).
+[teaching-archive.md](teaching-archive.md)
+([SY-0005](../issue-tracking/issues/SY-0005.md)).
 
 ## Purpose
 
@@ -93,12 +94,14 @@ pins a browser.
 SY-0006 `blocked_by` SY-0003, SY-0004, SY-0005. On 2026-08-19
 SY-0003 and SY-0004 were `in_review` (named outcomes
 [feature-inventory.md](feature-inventory.md) and
-[legacy-data.md](legacy-data.md) exist) and not `done`. SY-0005
-was not `done`; `docs/discovery/teaching-archive.md` is not on
-this branch. Work started because a human named this issue after
-the SY-0003/SY-0004 inventories landed. Teaching Archive
-security/a11y claims below re-cite the pinned revision directly;
-the content-ID catalogue remains SY-0005. Recorded, not rewritten.
+[legacy-data.md](legacy-data.md) exist) and not `done`. Work
+started because a human named this issue after those inventories
+landed. SY-0005's named outcome
+[teaching-archive.md](teaching-archive.md) has since merged to
+`staging` (PR #5) and is on this branch after the merge. Teaching
+Archive security/a11y claims below still re-cite the pinned
+revision; the content-ID catalogue remains that file. Recorded,
+not rewritten.
 
 ## Threat sketch
 
@@ -714,7 +717,7 @@ Conflicts are defects. They are listed, not resolved.
 |---|---|
 | Every page, shortcut, empty/loading/error, responsive behaviour | SY-0003 |
 | `sadhanayog.v1` collections, encodings, derived sessions, outbox | SY-0004 |
-| Archive content IDs, journey/rituals, filename rules, no-media catalogue | SY-0005 |
+| Archive content IDs, journey/rituals, filename rules, no-media catalogue | [teaching-archive.md](teaching-archive.md) (SY-0005) |
 | Preserve/change/remove and source-of-truth sign-off | SY-0007 |
 | Identity/permission model | SY-0020 |
 | OIDC provider | SY-0042 |

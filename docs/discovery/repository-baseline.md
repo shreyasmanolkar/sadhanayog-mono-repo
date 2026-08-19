@@ -359,7 +359,8 @@ control plane:
 3. Email the file to yourself (discouraged; storage may not persist).
 
 Identity, remote persistence, and media bytes: not present. Content and
-privacy wording are SY-0005.
+privacy wording are [teaching-archive.md](teaching-archive.md)
+([SY-0005](../issue-tracking/issues/SY-0005.md)).
 
 Remote: `origin` is `git@github.com:shreyasmanolkar/yog-documentation.git`.
 Single commit on the inspected copy.
@@ -523,7 +524,7 @@ Conflicts are defects. They are listed, not resolved.
 |---|---|
 | Every page, shortcut, empty/loading/error, responsive behaviour | SY-0003 |
 | `sadhanayog.v1` collections, encodings, derived sessions, outbox rules | SY-0004 |
-| Archive content IDs, journey/rituals, privacy prose | SY-0005 |
+| Archive content IDs, journey/rituals, privacy prose | [teaching-archive.md](teaching-archive.md) (SY-0005) |
 | Threat sketch, CSP sinks, keyboard/axe | [a11y-security-baseline.md](a11y-security-baseline.md) (SY-0006) |
 | Preserve/change/remove and source-of-truth sign-off | SY-0007 |
 | Target monorepo scaffold | SY-0008 / SY-0009 (blocked by this issue) |
