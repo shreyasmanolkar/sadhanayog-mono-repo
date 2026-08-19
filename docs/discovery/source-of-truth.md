@@ -5,13 +5,14 @@ Owner: engineering (register); product owner (signature)
 Last-reviewed: 2026-08-19  
 Issue: [SY-0007](../issue-tracking/issues/SY-0007.md)  
 Sources: Command Center `c724be0e116582b5c73d324d00a81ac23eb0bbf2`;
-Teaching Archive `c6732f59cf66af9a238caaccc185104afa534d7f` (pin only;
-inventory is [SY-0005](../issue-tracking/issues/SY-0005.md));
+Teaching Archive `c6732f59cf66af9a238caaccc185104afa534d7f`;
 [engineering foundation](../architecture/engineering-foundation.md) §2–3, §28, §30;
 [implementation roadmap](../roadmap/implementation-roadmap.md) Stage 0;
 [README.md](README.md); [repository-baseline.md](repository-baseline.md);
 [feature-inventory.md](feature-inventory.md);
 [legacy-data.md](legacy-data.md);
+[teaching-archive.md](teaching-archive.md);
+[a11y-security-baseline.md](a11y-security-baseline.md);
 [sanitized-fixture-policy.md](sanitized-fixture-policy.md)
 
 This file is the named SY-0007 outcome. It is the preserve / change /
@@ -85,17 +86,17 @@ On 2026-08-19, when a human named this issue:
 |---|---|---|
 | SY-0003 | `in_review` | [feature-inventory.md](feature-inventory.md) exists |
 | SY-0004 | `in_review` | [legacy-data.md](legacy-data.md) exists |
-| SY-0005 | `backlog` | `docs/discovery/teaching-archive.md` **does not exist** |
-| SY-0006 | `backlog` on `staging` | `docs/discovery/a11y-security-baseline.md` **does not exist** |
+| SY-0005 | `in_review` after merge | [teaching-archive.md](teaching-archive.md) exists (was missing on this branch at start) |
+| SY-0006 | `in_review` after merge | [a11y-security-baseline.md](a11y-security-baseline.md) exists (was missing on this branch at start) |
 
 [README.md](README.md) already says the SY-0003/SY-0004 exception (start
 while a blocker is `in_review` after its named outcome landed) is **not**
 a rewrite of the rule for later children. This issue records the
 contradiction instead of pretending the graph was satisfied.
 
-Because SY-0005 and SY-0006 have no named outcomes, Teaching Archive
-rows and quality/security/accessibility rows are **deferred**, not
-invented from foundation §2.
+This file started while SY-0005 and SY-0006 had no named outcome on
+this branch. After merging `staging`, those inventories exist. T-\*
+and Q-\* rows now cite them. Dispositions stay **Unsigned**.
 
 ## What this file does not do
 
@@ -103,8 +104,8 @@ invented from foundation §2.
   2–3 studio users the roadmap names.
 - It does not read `localStorage`, Sheets, or a production hostname.
 - It does not copy `SY.DEMO` or catalog identity field values.
-- It does not write `teaching-archive.md` or
-  `a11y-security-baseline.md`.
+- It does not rewrite [teaching-archive.md](teaching-archive.md) or
+  [a11y-security-baseline.md](a11y-security-baseline.md).
 - It does not change a product disposition from Unsigned.
 - It does not close Stage 0.
 
@@ -117,9 +118,9 @@ invented from foundation §2.
 | User interviews (2–3) | **None conducted** |
 | Browser vs Sheets precedence | **Unsigned** (mechanism observed in SY-0004) |
 | Representative sanitized exports / checksums | **None captured** |
-| Teaching Archive inventory | **Missing** — SY-0005 |
-| Quality/security/accessibility inventory | **Missing** — SY-0006 |
-| Human acceptance of SY-0002–SY-0004 | Issues remain `in_review`, not `done` |
+| Teaching Archive inventory | Draft evidence in [teaching-archive.md](teaching-archive.md); T-\* **unsigned** |
+| Quality/security/accessibility inventory | Draft evidence in [a11y-security-baseline.md](a11y-security-baseline.md); Q-\* **unsigned** |
+| Human acceptance of SY-0002–SY-0006 | Issues remain `in_review`, not `done` |
 
 ## Interviews
 
@@ -162,7 +163,7 @@ Three stores exist today. A fourth is the **proposed** target
 |---|---|---|---|---|---|
 | S-01 | Browser `localStorage` `sadhanayog.v1` | Canonical **device** store; always writable | [legacy-data.md](legacy-data.md) store envelope; [repository-baseline.md](repository-baseline.md) | Rewrite the mechanism; migrate the entities | **Unsigned** |
 | S-02 | Google Sheet + Apps Script (`SCHEMA` tabs, last-write-wins pull replace) | Optional **shared** store. Sync comments and Settings copy say “the spreadsheet stays the source of truth.” Pull replaces each collection array. Device remains writable offline. | [legacy-data.md](legacy-data.md) last-write-wins; `index.html:6910–6911`, `7080–7112`, `13518`; `Code.gs:412–440` | **Deprecate** as operational source of truth; keep read-only during a verified cutover window | **Unsigned** |
-| S-03 | Browser `localStorage` `teaching-archive.v1` | Archive progress/metadata; no identity; no remote persistence | [repository-baseline.md](repository-baseline.md); starter vector `teaching-archive.no-media`. **Detail inventory is SY-0005.** | Migrate progress; preserve no-media and privacy intent | **Unsigned** — blocked on SY-0005 |
+| S-03 | Browser `localStorage` `teaching-archive.v1` | Archive progress/metadata; no identity; no remote persistence | [teaching-archive.md](teaching-archive.md); starter vector `teaching-archive.no-media` | Migrate progress; preserve no-media and privacy intent | **Unsigned** |
 | S-04 | Target D1 per environment | Not a legacy store | foundation §1, §28 | Authoritative after cutover; no dual-write with Sheets | **Unsigned** as a product cutover date; architecture remains proposed |
 
 **Observed** conflict behaviour (SY-0004, not exercised live):
@@ -311,37 +312,38 @@ Mechanism rows (engineering, still unsigned as product impact):
 | M-04 | Worker HTML + `/sync` proxy | **Rewrite** (keep hostname decision as D-01) | Do not treat `CLOUDFLARE_WORKER.md` as the running Worker |
 | M-05 | Client-authoritative rules | **Rewrite** (server authoritative) | Preserve R-\* outcomes in characterization tests |
 
-## F. Teaching Archive (deferred)
+## F. Teaching Archive
 
-`docs/discovery/teaching-archive.md` does not exist. Foundation §2.2
-is a **starting index**, not signed evidence
-([AGENTS.md](AGENTS.md)). This table is a reminder of what SY-0005
-must make signable. Rows are **not observed here**.
+Evidence: [teaching-archive.md](teaching-archive.md), Teaching Archive
+`c6732f59…`. Proposed column is foundation §3 unless noted.
 
-| Id | Topic (from foundation §2.2 index only) | Product disposition |
-|---|---|---|
-| T-01 | First-class experience (not an iframe); Today / Log / Class review / Rituals / Guide / Plan | **Unsigned** — blocked on SY-0005 |
-| T-02 | Benchmarks and journey phases (elapsed days, returns not streaks) | **Unsigned** — blocked on SY-0005 |
-| T-03 | No-media invariant (`teaching-archive.v1` metadata only) | Starter vector exists; **Unsigned** until SY-0005 |
-| T-04 | Privacy wording (no recording by default, revocable consent, no health data in filenames, limited retention) | **Unsigned** — blocked on SY-0005. Wording is not an enforceable control |
-| T-05 | Content IDs / five navigation areas / data shape | **Unsigned** — blocked on SY-0005 |
+| Id | Item | Observed (short) | Proposed (§3) | Product disposition |
+|---|---|---|---|---|
+| T-01 | First-class experience (not an iframe); Today / Log / Class review / Rituals / Guide / Plan | Five areas inventoried; review/benchmark are sheets, not routes | Preserve content; migrate as native Learning | **Unsigned** |
+| T-02 | Benchmarks and journey phases (elapsed days, returns not streaks) | `dayNum` / phases / `returns` when `dayDiff > 2` | **Preserve** journey phases/content | **Unsigned** |
+| T-03 | No-media invariant | Store is metadata + suggested filename only | **Preserve** | **Unsigned** |
+| T-04 | Privacy wording vs controls | Consent/retention/filename/encryption are copy, not enforced | Preserve intent; wording is not a control | **Unsigned** |
+| T-05 | Content IDs / data shape / unused fields | Stable IDs inventoried; unused `settings.name` / `settings.teaches` / `entries.what` / `days.note` / `reviews.overuse` | Migrate reviewed content | **Unsigned** |
+| T-06 | Ritual due windows | Weekly/monthly/quarterly/annual; annual is modulo-365 | Preserve unless SY-0023 changes them | **Unsigned** |
+| T-07 | Import last-write replace of the whole store | `import.replace-state` | Rewrite mechanism with identity | **Unsigned** |
+| T-08 | No daily suggested task after week 1 | Observed Today | — | **Unsigned** |
 
 Do not close [SY-0005](../issue-tracking/issues/SY-0005.md) from this
 file.
 
-## G. Quality, security, accessibility (deferred)
+## G. Quality, security, accessibility
 
-`docs/discovery/a11y-security-baseline.md` does not exist. Workflow-
-facing DOM notes in [feature-inventory.md](feature-inventory.md) are
-not a threat model. Foundation §2 lists CSP inline script/style,
-unencrypted device data, last-write-wins, and a11y risks as a
-**proposed** summary.
+Evidence: [a11y-security-baseline.md](a11y-security-baseline.md).
+Workflow-facing DOM notes in [feature-inventory.md](feature-inventory.md)
+are not a substitute for that file.
 
-| Id | Topic | Product disposition |
-|---|---|---|
-| Q-01 | Threat sketch, localStorage/Access/shared-key, CSP/DOM sinks | **Unsigned** — blocked on SY-0006 |
-| Q-02 | Keyboard / focus / semantics / responsive debt, absence of tests | **Unsigned** — blocked on SY-0006 |
-| Q-03 | Privacy data classes beyond the fixture policy | **Unsigned** — blocked on SY-0006; R-16 still unsigned here |
+| Id | Item | Observed (short) | Proposed (§3) | Product disposition |
+|---|---|---|---|---|
+| Q-01 | Shared-key `/sync`, assumed Access, unencrypted device store | Inventoried; Access **not observed** live | **Deprecate** public/static and shared-key as the security boundary | **Unsigned** |
+| Q-02 | CSP / DOM sinks (`h()` text nodes; viz `innerHTML` after `esc`) | Inventoried | Rewrite inline CSP; do not drop escaping | **Unsigned** |
+| Q-03 | Keyboard / focus / semantics / contrast / no skip-link | Inventoried; Archive sheet has no trap | Change only by named a11y issues | **Unsigned** |
+| Q-04 | Absence of tests | No package/test suite in either legacy app | Add characterization tests from unsigned vectors | **Unsigned** as a product gate |
+| Q-05 | Privacy data classes (health/goal/emergency; archive review text) | Field names only; values not copied | R-16; T-04 | **Unsigned** |
 
 Do not close [SY-0006](../issue-tracking/issues/SY-0006.md) from this
 file. That issue is `security_impact: high`.
@@ -356,7 +358,7 @@ this is the Stage 0 index.
 |---|---|---|
 | `attendance.consume.present-late` | [sanitized-fixture-policy.md](sanitized-fixture-policy.md) | observed, **unsigned** |
 | `comms.opened-not-delivered` | [sanitized-fixture-policy.md](sanitized-fixture-policy.md) | observed, **unsigned** |
-| `teaching-archive.no-media` | [sanitized-fixture-policy.md](sanitized-fixture-policy.md) | observed starter; archive inventory SY-0005 |
+| `teaching-archive.no-media` | [sanitized-fixture-policy.md](sanitized-fixture-policy.md) | observed starter, **unsigned** |
 | `nav.business-bookmark-only` | [feature-inventory.md](feature-inventory.md) | observed, **unsigned** |
 | `router.unknown-and-constructor` | [feature-inventory.md](feature-inventory.md) | observed, **unsigned** |
 | `chrome.fab-hidden-on-attendance` | [feature-inventory.md](feature-inventory.md) | observed, **unsigned** |
@@ -369,9 +371,22 @@ this is the Stage 0 index.
 | `invoice.number-floor` | [legacy-data.md](legacy-data.md) | observed + probe, **unsigned** |
 | `sync.pull-replaces-collections` | [legacy-data.md](legacy-data.md) | observed, **unsigned** |
 | `membership.expiry-from-start` | [legacy-data.md](legacy-data.md) | observed + probe, **unsigned** |
-
-Journey-day / returns vectors wait for SY-0005. Security
-characterization waits for SY-0006.
+| `journey.daynum-from-start` | [teaching-archive.md](teaching-archive.md) | observed + probe, **unsigned** |
+| `journey.returns-not-streaks` | [teaching-archive.md](teaching-archive.md) | observed + probe, **unsigned** |
+| `journey.no-backfill` | [teaching-archive.md](teaching-archive.md) | observed, **unsigned** |
+| `ritual.due-one-and-priority` | [teaching-archive.md](teaching-archive.md) | observed + probe, **unsigned** |
+| `ritual.annual-modulo-365` | [teaching-archive.md](teaching-archive.md) | observed + probe, **unsigned** |
+| `filename.closed-types` | [teaching-archive.md](teaching-archive.md) | observed + probe, **unsigned** |
+| `import.replace-state` | [teaching-archive.md](teaching-archive.md) | observed, **unsigned** |
+| `cc.h.text-nodes-only` | [a11y-security-baseline.md](a11y-security-baseline.md) | observed, **unsigned** |
+| `cc.viz-tip.escapes-labels` | [a11y-security-baseline.md](a11y-security-baseline.md) | observed, **unsigned** |
+| `cc.export.strips-credentials` | [a11y-security-baseline.md](a11y-security-baseline.md) | observed, **unsigned** |
+| `cc.sync.worker-attaches-key` | [a11y-security-baseline.md](a11y-security-baseline.md) | observed, **unsigned** |
+| `cc.shortcut.letters-from-chrome` | [a11y-security-baseline.md](a11y-security-baseline.md) | observed, **unsigned** |
+| `cc.dialog.help-traps-tab` | [a11y-security-baseline.md](a11y-security-baseline.md) | observed, **unsigned** |
+| `ta.sheet.no-trap-no-escape` | [a11y-security-baseline.md](a11y-security-baseline.md) | observed, **unsigned** |
+| `ta.csp.absent` | [a11y-security-baseline.md](a11y-security-baseline.md) | observed, **unsigned** |
+| `ta.privacy.wording-not-control` | [a11y-security-baseline.md](a11y-security-baseline.md) | observed, **unsigned** |
 
 Sanitized fixtures **cannot** yet exercise critical rules against a
 representative studio export. Synthetic probes in SY-0004 can
@@ -438,8 +453,8 @@ sign. **None are decided here.**
 | Whether invoice displayed status must be stored, derived, or both | Product owner | Finance slice | Unsigned | R-08 |
 | Cross-currency: forbid arithmetic, or INR-only at launch | Product owner | Finance invariants ([SY-0022](../issue-tracking/issues/SY-0022.md)) | Unsigned | R-20 |
 | Waitlist: longest-wait copy vs collection order | Product owner | Classes slice | Unsigned | R-11 |
-| Teaching Archive dispositions | Product owner | After SY-0005; native learning area | Unsigned | T-01–T-05 |
-| Quality/security/accessibility residual risk | Product / security | After SY-0006 | Unsigned | Q-01–Q-03 |
+| Teaching Archive dispositions | Product owner | SY-0007 close; native learning area ([SY-0023](../issue-tracking/issues/SY-0023.md)) | Unsigned | T-01–T-08 |
+| Quality/security/accessibility residual risk | Product / security | SY-0007 close; a11y/identity issues | Unsigned | Q-01–Q-05 |
 | Raw-export destruction date | Product / privacy | Before any capture | Unsigned | checksum table |
 | Repair STALE Apps Script HTML / Worker doc drift | Engineering after a tagged legacy revision | Not Stage 0 | Unsigned; recorded not fixed | D-05 |
 
@@ -459,9 +474,10 @@ file later must name a disposition for each.
 7. **Empty desk vs empty collections** (SY-0003). C-01.
 8. **Worker markdown vs `worker.js`** (SY-0002). Executable file
    wins as observed behaviour. Product still chooses D-01.
-9. **Foundation §2 versus missing SY-0005/SY-0006 evidence.** §2.2
-   and the a11y/security paragraph are not inventories. This file
-   does not promote them to signed rows.
+9. **Foundation §2 versus child inventories.** [teaching-archive.md](teaching-archive.md)
+   and [a11y-security-baseline.md](a11y-security-baseline.md) re-cite
+   evidence. Where they disagree with §2, prefer the child file as
+   observed behaviour. This file still does not sign those rows.
 
 ## Generator consistency checks
 
@@ -484,8 +500,9 @@ Teaching Archive still has no build and no tests.
 Not repeated in this issue. Desktop/mobile workflow rendering,
 keyboard walkthrough, and page-level DOM notes are in
 [feature-inventory.md](feature-inventory.md) (SY-0003). Teaching
-Archive walkthrough and the security/a11y debt catalogue remain
-SY-0006 (blocked on SY-0005 as well).
+Archive walkthrough is in [teaching-archive.md](teaching-archive.md)
+(SY-0005). The security/a11y debt catalogue is
+[a11y-security-baseline.md](a11y-security-baseline.md) (SY-0006).
 
 ## Stage exit
 
@@ -493,9 +510,9 @@ SY-0006 (blocked on SY-0005 as well).
 |---|---|
 | All Command Center pages, workflows, empty/loading/error, shortcuts, responsive behaviour, and deep links inventoried | Draft evidence in [feature-inventory.md](feature-inventory.md). Human acceptance of SY-0003 still required |
 | Collections, encodings, calculation modules, derived sessions, outbox, last-write-wins inventoried | Draft evidence in [legacy-data.md](legacy-data.md). Human acceptance of SY-0004 still required |
-| Teaching Archive content IDs, five areas, journey/rituals/reviews/benchmarks, privacy wording, no-media inventoried | **Deferred** — SY-0005. T-\* unsigned |
+| Teaching Archive content IDs, five areas, journey/rituals/reviews/benchmarks, privacy wording, no-media inventoried | Draft evidence in [teaching-archive.md](teaching-archive.md). T-\* unsigned. Human acceptance of SY-0005 still required |
 | External dependencies and deployment assumptions inventoried | Draft evidence in [repository-baseline.md](repository-baseline.md). Human acceptance of SY-0002 still required |
-| Security and accessibility debt inventoried | **Deferred** — SY-0006. Q-\* unsigned |
+| Security and accessibility debt inventoried | Draft evidence in [a11y-security-baseline.md](a11y-security-baseline.md). Q-\* unsigned. Human acceptance of SY-0006 still required |
 | Product owner signs preserve/change/defer matrix and data-source precedence | **Not satisfied.** Register exists; signature block empty |
 | Sanitized fixtures can exercise critical rules | Synthetic rule/workflow vectors exist and remain unsigned. Representative exports **not** captured |
 | No legacy file changed | Satisfied 2026-08-19 |
@@ -518,10 +535,11 @@ note, invoice identifier, key, or live `/exec` URL was committed.
 
 Do not ask an agent to fill this block.
 
-1. SY-0005 and SY-0006 named outcomes exist, or each remaining T-\*
-   and Q-\* row is explicitly **Defer** with a surviving issue.
+1. SY-0005 and SY-0006 named outcomes exist (they do, as draft
+   evidence). Every remaining T-\* and Q-\* row is Preserve, Change,
+   Remove, or explicit **Defer** with a surviving issue.
 2. Interviews in the protocol above are done (2–3 users).
-3. Every W/R/S/I/D/C row that is not Defer is Preserve, Change, or
+3. Every W/R/S/I/D/C/T/Q row that is not Defer is Preserve, Change, or
    Remove. Change/Remove names the surviving behaviour.
 4. S-01 vs S-02 is chosen.
 5. Checksum table has at least the stores the studio actually uses,

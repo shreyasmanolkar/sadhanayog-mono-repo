@@ -18,7 +18,8 @@ signed preserve/change/remove matrix. The unsigned register is
 calculation modules, outbox, and last-write-wins are
 [SY-0004](../issue-tracking/issues/SY-0004.md). Keyboard/focus/semantics
 debt as a quality baseline is
-[SY-0006](../issue-tracking/issues/SY-0006.md).
+[a11y-security-baseline.md](a11y-security-baseline.md)
+([SY-0006](../issue-tracking/issues/SY-0006.md)).
 
 ## Purpose
 
@@ -68,7 +69,9 @@ modified.
 |---|---|---|
 | Command Center | `/home/shreyas/Work/sadhanayog/sadhana-yog-command-center` | `c724be0e116582b5c73d324d00a81ac23eb0bbf2` |
 
-Teaching Archive is out of this issue; it is [SY-0005](../issue-tracking/issues/SY-0005.md).
+Teaching Archive is out of this issue; it is
+[teaching-archive.md](teaching-archive.md)
+([SY-0005](../issue-tracking/issues/SY-0005.md)).
 
 Inspection machine: Chromium `/usr/bin/chromium`, Node `v24.11.1`. The
 Command Center has no `package.json` and does not pin a browser.
@@ -695,8 +698,9 @@ print, `.ics` download, hosted onboarding, demo studio, live Sheets.
 
 ## DOM / accessibility (workflow-facing)
 
-Detailed threat/semantics baseline is SY-0006. This issue only records
-what the walk and static chrome required.
+Detailed threat/semantics baseline is
+[a11y-security-baseline.md](a11y-security-baseline.md) (SY-0006).
+This issue only records what the walk and static chrome required.
 
 **Observed** positives (static-read + render on empty Today at 1280×900):
 
@@ -715,7 +719,8 @@ what the walk and static chrome required.
 - Render unlabeled visible `button`/`a` count on empty Today: **0**
 - Decorative `svg` mostly `aria-hidden="true"` (41 counted on empty Today)
 
-**Observed** risks, not a verdict (for SY-0006):
+**Observed** risks, not a verdict (expanded in
+[a11y-security-baseline.md](a11y-security-baseline.md)):
 
 - Many interactive `div`/`button.listrow`/`stat.hoverable` patterns;
   `C.stat` is `role="button"` when clickable (`index.html:7617–7618`)

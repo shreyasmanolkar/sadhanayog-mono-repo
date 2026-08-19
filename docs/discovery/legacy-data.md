@@ -18,9 +18,11 @@ a signed preserve/change/remove matrix. The unsigned register is
 [source-of-truth.md](source-of-truth.md)
 ([SY-0007](../issue-tracking/issues/SY-0007.md)). Page/workflow maps are
 [feature-inventory.md](feature-inventory.md). Teaching Archive store
-and content are [SY-0005](../issue-tracking/issues/SY-0005.md).
+and content are [teaching-archive.md](teaching-archive.md)
+([SY-0005](../issue-tracking/issues/SY-0005.md)).
 Threat/accessibility debt is
-[SY-0006](../issue-tracking/issues/SY-0006.md).
+[a11y-security-baseline.md](a11y-security-baseline.md)
+([SY-0006](../issue-tracking/issues/SY-0006.md)).
 
 ## Purpose
 
@@ -73,7 +75,8 @@ was modified.
 | Command Center | `/home/shreyas/Work/sadhanayog/sadhana-yog-command-center` | `c724be0e116582b5c73d324d00a81ac23eb0bbf2` |
 
 Teaching Archive (`teaching-archive.v1`) is out of this issue; it is
-[SY-0005](../issue-tracking/issues/SY-0005.md).
+[teaching-archive.md](teaching-archive.md)
+([SY-0005](../issue-tracking/issues/SY-0005.md)).
 
 Inspection machine: Node `v24.11.1`, Python `3.13.7`. The Command
 Center has no `package.json` and does not pin either.
@@ -870,8 +873,10 @@ Command Center still has no `package.json` and no test files.
 | No legacy file changed | Satisfied 2026-08-19 |
 
 Render/DOM/accessibility inspection was not repeated; SY-0003
-already walked workflows, and SY-0006 owns the quality baseline.
-Calculation probes above substitute for a live Sheet.
+already walked workflows, and
+[a11y-security-baseline.md](a11y-security-baseline.md) owns the
+quality baseline. Calculation probes above substitute for a live
+Sheet.
 
 ## Security and redaction
 

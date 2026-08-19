@@ -360,7 +360,8 @@ control plane:
 3. Email the file to yourself (discouraged; storage may not persist).
 
 Identity, remote persistence, and media bytes: not present. Content and
-privacy wording are SY-0005.
+privacy wording are [teaching-archive.md](teaching-archive.md)
+([SY-0005](../issue-tracking/issues/SY-0005.md)).
 
 Remote: `origin` is `git@github.com:shreyasmanolkar/yog-documentation.git`.
 Single commit on the inspected copy.
@@ -461,8 +462,8 @@ Assumptions carried forward (labelled, not approved):
 
 Not executed in this issue. Desktop/mobile workflow rendering, keyboard
 walkthrough, and DOM/accessibility inspection remain
-[SY-0003](../issue-tracking/issues/SY-0003.md) and
-[SY-0006](../issue-tracking/issues/SY-0006.md).
+[feature-inventory.md](feature-inventory.md) (SY-0003) and
+[a11y-security-baseline.md](a11y-security-baseline.md) (SY-0006).
 
 This issue did not open a browser profile, did not read `localStorage`,
 and did not fetch the live hostname or Apps Script `/exec` URL.
@@ -473,8 +474,8 @@ No new vectors. Starter vectors already live in
 [sanitized-fixture-policy.md](sanitized-fixture-policy.md)
 (attendance consumption, comms “opened”, archive no-media). Sync /
 outbox / last-write-wins vectors are in
-[legacy-data.md](legacy-data.md) (SY-0004). Threat findings wait
-for SY-0006.
+[legacy-data.md](legacy-data.md) (SY-0004). Threat findings are
+[a11y-security-baseline.md](a11y-security-baseline.md) (SY-0006).
 
 ## Required human decisions
 
@@ -524,8 +525,8 @@ Conflicts are defects. They are listed, not resolved.
 |---|---|
 | Every page, shortcut, empty/loading/error, responsive behaviour | SY-0003 |
 | `sadhanayog.v1` collections, encodings, derived sessions, outbox rules | SY-0004 |
-| Archive content IDs, journey/rituals, privacy prose | SY-0005 |
-| Threat sketch, CSP sinks, keyboard/axe | SY-0006 |
+| Archive content IDs, journey/rituals, privacy prose | [teaching-archive.md](teaching-archive.md) (SY-0005) |
+| Threat sketch, CSP sinks, keyboard/axe | [a11y-security-baseline.md](a11y-security-baseline.md) (SY-0006) |
 | Preserve/change/remove and source-of-truth sign-off | SY-0007 ([source-of-truth.md](source-of-truth.md), unsigned) |
 | Target monorepo scaffold | SY-0008 / SY-0009 (blocked by this issue) |
 

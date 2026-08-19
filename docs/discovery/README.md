@@ -28,7 +28,7 @@ redesign workflows.
 | Database | None. |
 | API | None. Current `POST /sync` is noted in [repository-baseline.md](repository-baseline.md); column/rule mapping is [legacy-data.md](legacy-data.md). |
 | Flutter | None. |
-| Web | None. Command Center navigation maps are [feature-inventory.md](feature-inventory.md). Teaching Archive walkthrough is [SY-0006](../issue-tracking/issues/SY-0006.md). |
+| Web | None. Command Center navigation maps are [feature-inventory.md](feature-inventory.md). Teaching Archive workflow walk is [teaching-archive.md](teaching-archive.md). Quality/a11y catalogue is [a11y-security-baseline.md](a11y-security-baseline.md). |
 | Infrastructure | None. Current Worker / Apps Script / DNS notes are [SY-0002](../issue-tracking/issues/SY-0002.md). |
 
 No production resource, secret value, or real-user export enters this
@@ -82,9 +82,9 @@ policy, and the scoped instructions. Child issues own the inventories.
 | [repository-baseline.md](repository-baseline.md) | [SY-0002](../issue-tracking/issues/SY-0002.md) | Draft evidence, reviewable; human gate to `done` |
 | [feature-inventory.md](feature-inventory.md) | [SY-0003](../issue-tracking/issues/SY-0003.md) | Draft evidence, reviewable; human gate to `done` |
 | `docs/discovery/legacy-data.md` | [SY-0004](../issue-tracking/issues/SY-0004.md) | Draft evidence, reviewable; human gate to `done` |
-| `docs/discovery/teaching-archive.md` | [SY-0005](../issue-tracking/issues/SY-0005.md) | Not written — blocked by SY-0002 |
-| `docs/discovery/a11y-security-baseline.md` | [SY-0006](../issue-tracking/issues/SY-0006.md) | Not written — blocked by SY-0003–SY-0005 |
-| [source-of-truth.md](source-of-truth.md) | [SY-0007](../issue-tracking/issues/SY-0007.md) | Draft **unsigned** register, reviewable; signature, interviews, and representative exports still missing. Teaching Archive / a11y-security rows deferred to SY-0005 / SY-0006 |
+| [teaching-archive.md](teaching-archive.md) | [SY-0005](../issue-tracking/issues/SY-0005.md) | Draft evidence, reviewable; human gate to `done` |
+| [a11y-security-baseline.md](a11y-security-baseline.md) | [SY-0006](../issue-tracking/issues/SY-0006.md) | Draft evidence, reviewable; human gate to `done` |
+| [source-of-truth.md](source-of-truth.md) | [SY-0007](../issue-tracking/issues/SY-0007.md) | Draft **unsigned** register, reviewable; signature, interviews, and representative exports still missing |
 
 Do not create empty inventory stubs. A missing file means the child has
 not produced evidence.
@@ -98,11 +98,11 @@ the criteria and defers the unsatisfied rows.
 |---|---|---|
 | All Command Center pages, workflows, empty/loading/error, shortcuts, responsive behavior, and deep links inventoried | Satisfied as draft evidence in [feature-inventory.md](feature-inventory.md) | Human acceptance of SY-0003 (issue remains `in_review` / not `done`) |
 | Collections, encodings, calculation modules, derived sessions, outbox, last-write-wins inventoried | Satisfied as draft evidence in [legacy-data.md](legacy-data.md) | Human acceptance of SY-0004 (issue remains `in_review` / not `done`) |
-| Teaching Archive content IDs, five areas, journey/rituals/reviews/benchmarks, privacy wording, no-media invariant inventoried | Deferred | SY-0005 |
+| Teaching Archive content IDs, five areas, journey/rituals/reviews/benchmarks, privacy wording, no-media invariant inventoried | Satisfied as draft evidence in [teaching-archive.md](teaching-archive.md) | Human acceptance of SY-0005 (issue remains `in_review` / not `done`) |
 | External dependencies and deployment assumptions inventoried | Satisfied as draft evidence in [repository-baseline.md](repository-baseline.md) | Human acceptance of SY-0002 (issue remains `in_review` / not `done`) |
-| Security and accessibility debt inventoried | Deferred | SY-0006 |
-| Product owner signs preserve/change/defer matrix and data-source precedence | Unsigned register exists in [source-of-truth.md](source-of-truth.md) | Human signature, interviews, SY-0005/SY-0006 rows |
-| Sanitized fixtures can exercise critical rules | Format, starter vectors, and SY-0004 rule vectors | Representative exports and vector approval: [source-of-truth.md](source-of-truth.md) |
+| Security and accessibility debt inventoried | Satisfied as draft evidence in [a11y-security-baseline.md](a11y-security-baseline.md) | Human acceptance of SY-0006 (issue remains `in_review` / not `done`) |
+| Product owner signs preserve/change/defer matrix and data-source precedence | Unsigned register exists in [source-of-truth.md](source-of-truth.md) | Human signature, interviews, and representative exports |
+| Sanitized fixtures can exercise critical rules | Format, starter vectors, SY-0004 rule vectors, and SY-0005 journey/ritual/filename vectors | Representative exports and vector approval: [source-of-truth.md](source-of-truth.md) |
 | No legacy file changed | Satisfied 2026-08-19 | Keep for every child |
 
 This epic therefore **does not close Stage 0**. It closes only the
@@ -155,12 +155,16 @@ Not executed in this epic.
 - Desktop/mobile workflow rendering, keyboard walkthrough, and
   page-level DOM/accessibility inspection for Command Center are
   recorded in [feature-inventory.md](feature-inventory.md) (SY-0003).
-  Teaching Archive walkthrough and the security/a11y debt catalogue
-  remain [SY-0006](../issue-tracking/issues/SY-0006.md).
+  Teaching Archive workflow walk is in
+  [teaching-archive.md](teaching-archive.md) (SY-0005). The
+  security/a11y debt catalogue is
+  [a11y-security-baseline.md](a11y-security-baseline.md) (SY-0006).
 - Sanitized characterization vectors begin in
   [sanitized-fixture-policy.md](sanitized-fixture-policy.md). Command
   Center rule vectors are in [legacy-data.md](legacy-data.md)
-  (SY-0004). The unsigned approval index is
+  (SY-0004). Teaching Archive rule vectors are in
+  [teaching-archive.md](teaching-archive.md) (SY-0005). The
+  unsigned approval index is
   [source-of-truth.md](source-of-truth.md); the signature is still
   missing.
 
@@ -197,8 +201,10 @@ This epic did not open a browser profile, did not read `localStorage`,
 and did not fetch Sheets. Hostname `dash.omsadhanayog.com` is already
 published in Worker config and in SY-0002; no secret values were read.
 
-Threat and accessibility findings are SY-0006 (`security_impact: high`).
-This epic (`security_impact: low`) only sets handling rules.
+Threat and accessibility findings are
+[a11y-security-baseline.md](a11y-security-baseline.md) (SY-0006,
+`security_impact: high`). This epic (`security_impact: low`) only
+sets handling rules.
 
 ## Rollback
 
@@ -215,12 +221,12 @@ SY-0002 (inventory landed; human gate) ─┬─ SY-0003 ─┐
 ```
 
 An agent may start a child only when that child’s `blocked_by` issues
-are `done`. SY-0003 and SY-0004 started while SY-0002 was `in_review`
-because a human named each issue after the SY-0002 named outcome had
-landed. Those process contradictions are recorded on the child
-issues; they are not a rewrite of this rule for later children.
+are `done`. SY-0003, SY-0004, and SY-0005 started while SY-0002 was
+`in_review` because a human named each issue after the SY-0002 named
+outcome had landed. Those process contradictions are recorded on the
+child issues; they are not a rewrite of this rule for later children.
 
-SY-0007 also started at human request while SY-0003/SY-0004 were
-`in_review` and SY-0005/SY-0006 had **no** named outcome on this
-branch. The unsigned register records that contradiction and defers
-Teaching Archive and quality/security rows instead of inventing them.
+SY-0007 also started at human request while SY-0005/SY-0006 had **no**
+named outcome on this branch. After merging `staging`, those
+inventories exist and the unsigned register cites them. It still does
+not invent dispositions or fill the signature block.
