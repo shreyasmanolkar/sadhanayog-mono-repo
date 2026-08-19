@@ -8,4 +8,9 @@ const loaded = await import(pathToFileURL(join(root, "../dist/index.js")).href);
 
 const dest = join(root, "../openapi/openapi.json");
 mkdirSync(dirname(dest), { recursive: true });
-writeFileSync(dest, `${JSON.stringify(loaded.openApiDocument, null, 2)}\n`);
+const document = {
+  ...loaded.openApiDocument,
+  "x-generated-from": "packages/contracts/src/openapi.ts",
+  "x-generated-by": "packages/contracts/scripts/write-openapi.mjs",
+};
+writeFileSync(dest, `${JSON.stringify(document, null, 2)}\n`);

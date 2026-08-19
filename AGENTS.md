@@ -53,6 +53,15 @@ ready → in_progress → implement + test → in_review → (human gate) → do
 Use `pnpm tracker:next` to pick work. Never start a blocked
 issue. Update the issue in the same commit as the code.
 
+Implemented notes may be absent; that means none are in force,
+not that proposed notes apply.
+
+## Skills
+
+Workflows live in [`.agents/skills`](.agents/skills). Load the matching
+skill; do not invent a parallel procedure. Catalog:
+[docs/development/agent-instructions.md](docs/development/agent-instructions.md).
+
 ## Validation
 
 ```bash

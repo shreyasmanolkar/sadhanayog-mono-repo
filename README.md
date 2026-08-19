@@ -13,19 +13,34 @@ Status: engineering foundation. No product features have been migrated yet.
 # 1. Install pinned tools (Node, pnpm, Flutter when available)
 mise install   # or follow docs/development/setup.md
 
-# 2. Install JS dependencies and verify
+# 2. Install JS dependencies, check pins, verify
 pnpm bootstrap
+pnpm toolchain:check
 pnpm verify
 
-# 3. Run API + web
+# 3. Copy secret *names* only
+#    .env.example → ignored local files
+#    apps/api/.dev.vars.example → apps/api/.dev.vars
+
+# 4. Local D1 ledger (no product rows)
+pnpm db:seed:local -- --database sadhanayog-dev
+
+# 5. Run API + web
 pnpm dev
 ```
 
 - Web: http://127.0.0.1:5173
 - API liveness: http://127.0.0.1:8787/health/live
 
-Flutter is pinned in `mise.toml` and lives in `apps/mobile`. Platform folders
-are created with `flutter create` on a machine that has the SDK.
+Reset the local database only: `pnpm db:reset:local -- --database sadhanayog-dev --confirm sadhanayog-dev`.
+
+Flutter is pinned in `mise.toml` and lives in `apps/mobile`. Setup, commands,
+generated files, environment matrix, and agent authority live in
+[docs/development](docs/development/README.md).
+
+CI is GitHub Actions: docs/tracker/secret scan, TypeScript lint/test/build,
+Flutter analyze/test/bundle, and license policy. See
+[docs/development/ci.md](docs/development/ci.md).
 
 ## Layout
 
@@ -36,10 +51,13 @@ are created with `flutter create` on a machine that has the SDK.
 | `apps/mobile` | Flutter iOS/Android shell. |
 | `packages/contracts` | Zod wire schemas and committed OpenAPI 3.1. |
 | `packages/db` | Drizzle SQLite/D1 schema. No product tables yet. |
-| `packages/config` | Shared TypeScript config. |
+| `packages/config` | Shared TypeScript, ESLint, and Vitest config. |
+| `docs/development/style.md` | Format, lint, boundaries, commits, generated files, licenses. |
 | `content/teaching-archive` | Versioned learning content (empty until Stage 11). |
 | `docs/issue-tracking` | In-repo issue tracker and board. |
 | `docs/` | Architecture, product, operations, issues. |
+| `docs/development/toolchain.md` | Pinned tools, lockfiles, environment matrix. |
+| `.agents/` | Instructions, skills, decision notes. |
 
 ## Support
 

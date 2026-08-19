@@ -1,0 +1,29 @@
+{
+  "playwrightPackage": "@playwright/mcp@0.0.79",
+  "playwrightOutputDir": "/tmp/sadhanayog-playwright-mcp",
+  "context7TokenEnv": "CONTEXT7_API_KEY",
+  "context7Tools": ["query-docs", "resolve-library-id"],
+  "allowedOrigins": [
+    "http://127.0.0.1:5173",
+    "http://127.0.0.1:8787",
+    "http://localhost:5173",
+    "http://localhost:8787"
+  ],
+  "servers": {
+    "context7": {
+      "url": "https://mcp.context7.com/mcp",
+      "enabled": true,
+      "approval": "prompt"
+    },
+    "cloudflare_docs": {
+      "url": "https://docs.mcp.cloudflare.com/mcp",
+      "enabled": true,
+      "approval": "prompt"
+    },
+    "playwright": {
+      "command": "npx",
+      "enabled": false,
+      "approval": "approve"
+    }
+  }
+}

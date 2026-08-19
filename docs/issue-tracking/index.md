@@ -19,7 +19,7 @@ Implementation-roadmap Stage 0. Discovery and baseline.
 
 ## Stage 1 — Repository and engineering foundation — 0/10
 
-Implementation-roadmap Stage 1. Repository and engineering foundation.
+Stage 1 program is docs/development/README.md. Children SY-0009–SY-0017 own the named artifacts.
 
 * [SY-0008 — Stage 1 — Repository and engineering foundation](./issues/SY-0008.md) - In Review · Stage 1 · Repository and engineering foundation · Stage 1
 * [SY-0009 — Workspace/toolchain scaffold](./issues/SY-0009.md) - In Review · Stage 1 · Repository and engineering foundation · Stage 1

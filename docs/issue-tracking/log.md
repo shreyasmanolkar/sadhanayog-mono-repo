@@ -7,6 +7,101 @@ reader would otherwise have to reverse-engineer.
 
 ---
 
+## 2026-08-20 — SY-0016 CI foundation is ADR-0011 after staging merge
+
+Staging already assigned ADR-0006–0010. The GitHub Actions host note is
+therefore ADR-0011. License allowlist stays SY-0011. SY-0016 owns the
+four-job workflow, SHA pins, in-process secret scan, and `ci:policy`.
+Flutter `build bundle` is the Stage 1 smoke. Playwright, APK/IPA, path
+filters, production environments, and branch protection stay deferred.
+
+## 2026-08-20 — Stage 1 board cards get unique descriptions
+
+Seeded Stage 1 issues all carried the epic sentence as `description`, so
+every card drawer looked the same. SY-0008–SY-0017 now have one-line
+descriptions that match the roadmap work package. SY-0008 `pr` is `9` so
+the board chip renders `#9`. The stage-1 project card points at
+`docs/development/README.md`. Child implementation notes stay on the
+child PRs.
+
+## 2026-08-20 — SY-0012 ADR path note is ADR-0009 after staging merge
+
+Staging already assigned ADR-0006 to the Flutter shell, ADR-0007 to
+toolchain pins, and ADR-0008 to quality conventions. The SY-0012 path
+and ID convention note is therefore ADR-0009. IDs are never reused.
+
+## 2026-08-19 — SY-0012 records the docs/decision system without promoting ADRs
+
+The documentation map (`docs/README.md`) is the named SY-0012 outcome:
+hierarchy, owners, generated ADR index, postmortem template, and runbook
+name placeholders. Agent Notes keep lifecycle/class/date-slug paths and
+gain an `ID: ADR-NNNN` field. Foundation §18.2's `proposed/ADR-NNNN-slug.md`
+layout is recorded as proposed ADR-0009, not implemented. Stack ADRs
+0001–0005 stay proposed. SY-0009 was not `done` when this work started;
+a human named the issue.
+
+## 2026-08-20 — Quality conventions stay Prettier/ESLint/tsc, no git hooks
+
+SY-0011 names format, lint, Dart/TS strictness, import boundaries, Conventional
+Commits, generated-file labels, and a license allowlist. A second formatter
+(Biome), type-aware ESLint, and Husky were rejected as duplicate machinery.
+GPL/AGPL stay forbidden; the optional sharp libvips binary is a named LGPL
+exception, not a general copyleft allow. Staging already used ADR-0006 for
+the Flutter shell, so this note is ADR-0008.
+
+## 2026-08-19 — SY-0009 records toolchain pins without claiming empty apps
+
+Stage 1 was bulk-scaffolded before this issue had a named outcome. SY-0009
+owns the workspace directories, lockfiles, and version pins — not compiling
+Worker/web/Flutter shells (SY-0010) or CI jobs (SY-0016). Canonical versions
+live in `tools/ci/tool-pins.json`. Dart stays a Flutter-bundled pin so a
+second mise Dart cannot shadow the SDK. Wrangler stays an npm pin.
+Proposed as ADR-0007 because staging already assigned ADR-0006 to the
+Flutter shell (SY-0010). Unsigned: license SPDX, shared staging, Java 25
+vs Android JDK 17, Windows hosts, and human approval of the foundation
+document.
+
+## 2026-08-19 — SY-0010 empty shells keep later composition out of Stage 1
+
+The compiling Worker/web/Flutter/db/contracts packages already existed on
+`staging`. SY-0010 fills the Stage 1 gaps without taking Stage 4/8/9 work:
+readiness stays unprotected, native product flavors stay SY-0064, file-based
+TanStack routes stay SY-0072. Dart-define `AppConfig` is the flavors/config
+shell named by the Stage 1 expected changes. Proposed ADR-0006 records the
+Flutter client; it is not authority.
+
+## 2026-08-19 — Stage 1 epic records the scaffold unsigned and does not close children
+
+SY-0008 is the Stage 1 program, not a signed architecture approval and not
+the child work packages. CI host, tool versions, licenses, shared
+development, CODEOWNERS reviewers, and moving stack ADRs to `implemented/`
+stay unsigned. Children SY-0009–SY-0017 still own their artifacts. The
+epic started while SY-0002 was `in_review` because a human named it after
+the SY-0002 named outcome had landed.
+
+Clean-checkout GitHub Actions was red: contracts/db DTS required
+`@types/node` (declared by `packages/config/typescript/node.json` but not
+installed), and `flutter analyze` treated `prefer_const_constructors` in
+`apps/mobile/test/result_test.dart` as failure. The secret scanner no-oped
+when `rg` was missing. Those three defects are repaired on the SY-0008
+branch so the Stage 1 smoke can be true; they are not a rewrite of child
+ownership.
+
+## 2026-08-19 — SY-0013 reconciles tracker executable with its contract
+
+`track next` now returns only `ready` issues (use `--all` for unblocked triage/backlog/todo).
+Writes that set `blocked_by` mirror `blocks` on the peer. Asymmetry is a lint error.
+`done` requires checked acceptance criteria and review evidence; the CLI refuses the
+transition without them. Isolated fixtures cover cycles, invalid states, and that
+evidence rule. `archive/` is a valid home for `SY-NNNN.md` without deleting the id.
+
+## 2026-08-19 — SY-0014 validates skills in-repo instead of adding skills-ref
+
+Foundation §18.3 wants `quick_validate` and trigger tests. Installing
+`skills-ref` would be a new package, which Stage 1 says needs a human.
+The harness is Node in `tools/ci`, same pattern as docs/decision lint, and
+classifies prompts from the `Use when` clause of each skill description.
+
 ## 2026-08-19 — SY-0002 inventories deploy topology from executables, not stale Worker docs
 
 The Command Center revision ships three descriptions of custom-domain deploy:

@@ -12,4 +12,7 @@ Legacy quality/security/accessibility evidence is
 (SY-0006). Threat model refresh for the target system is
 [SY-0109](../issue-tracking/issues/SY-0109.md).
 OIDC provider selection is [SY-0042](../issue-tracking/issues/SY-0042.md).
-Do not claim regulatory compliance from this foundation.
+CI supply-chain controls (read-only default, no secrets on fork PRs, no
+sensitive artifacts, SHA-pinned Actions, license allowlist) are
+[development/ci.md](../development/ci.md). Do not claim regulatory
+compliance from this foundation.

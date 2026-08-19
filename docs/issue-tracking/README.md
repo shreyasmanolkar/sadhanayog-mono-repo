@@ -1,5 +1,9 @@
 # Sadhana Yog Track
 
+Status: living  
+Owner: engineering  
+Last-reviewed: 2026-08-19
+
 A Linear-style issue tracker that lives in the repo. **The markdown files are the database.**
 
 ```bash
@@ -35,7 +39,8 @@ node docs/issue-tracking/track.mjs <cmd>
 | | |
 |---|---|
 | `board [--port 4322]` | The board. Read/write, live-reloads on any file change |
-| `next` | **What is unblocked right now** — walks the dependency graph |
+| `next` | **What is unblocked and `ready` right now** — walks the dependency graph |
+| `next --all` | Unblocked `ready` plus unblocked `triage`/`backlog`/`todo` |
 | `new "<title>" [k=v…]` | File an issue. `project=`, `cycle=`, `tags=a,b`, `template=bug\|feature\|migration\|chore\|task` |
 | `set <ID> <k=v>…` | Edit fields. `move`, `done` are shorthands |
 | `list [k=v]…` | Filter. `list cycle=stage-1 status=ready` |
@@ -86,8 +91,10 @@ it — **when they disagree, the guide wins.**
 pnpm tracker:next
 ```
 
-`blocked_by` is a hard, symmetric, cycle-checked relation. `track next` walks it and returns
-only what every blocker has cleared. Start there, not from a wish list.
+`blocked_by` is a hard, symmetric, cycle-checked relation. Writes that set `blocked_by` also
+mirror `blocks` on the other file. `track next` walks the graph and returns only `ready`
+issues whose every blocker is terminal. Use `next --all` to see unblocked work that is not
+yet `ready`. Start from `next`, not from a wish list.
 
 ---
 

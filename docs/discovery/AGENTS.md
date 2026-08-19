@@ -15,3 +15,5 @@ the behavioral baseline, not the target product.
   show it, write that it was not observed.
 - Child issues own the named inventories. Do not close those issues from
   this epic, and do not treat foundation §2 as a signed inventory.
+
+Validate: every claim cites revision, path, and observation method.

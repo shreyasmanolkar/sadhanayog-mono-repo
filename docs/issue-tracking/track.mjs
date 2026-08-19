@@ -15,13 +15,19 @@ import { join, dirname, extname, basename } from "node:path";
 import { fileURLToPath, pathToFileURL } from "node:url";
 
 const ROOT = dirname(fileURLToPath(import.meta.url));
-const DIR = {
-  issues: join(ROOT, "issues"),
-  projects: join(ROOT, "projects"),
-  board: join(ROOT, "board"),
-  templates: join(ROOT, "templates"),
-};
-const CONFIG_PATH = join(ROOT, "config.yml");
+const TERMINAL = new Set(["done", "canceled", "duplicate"]);
+
+function trackerPaths(root = ROOT) {
+  return {
+    root,
+    issues: join(root, "issues"),
+    archive: join(root, "archive"),
+    projects: join(root, "projects"),
+    board: join(root, "board"),
+    templates: join(root, "templates"),
+    config: join(root, "config.yml"),
+  };
+}
 
 /* ══════════════════════════════════════════════════════════════════════════════
    1. YAML — a deliberately small subset (see SPEC.md §3)
@@ -294,8 +300,8 @@ function nowIso() {
    3. The store
    ══════════════════════════════════════════════════════════════════════════════ */
 
-function loadConfig() {
-  return parseYaml(readFileSync(CONFIG_PATH, "utf8"), "config.yml");
+function loadConfig(root = ROOT) {
+  return parseYaml(readFileSync(trackerPaths(root).config, "utf8"), "config.yml");
 }
 
 function listMd(dir) {
@@ -305,17 +311,29 @@ function listMd(dir) {
     .map((f) => join(dir, f));
 }
 
-function loadIssues() {
+function listIssueFiles(dir) {
+  if (!existsSync(dir)) return [];
+  return readdirSync(dir)
+    .filter((f) => /^[A-Za-z]+-\d+\.md$/.test(f))
+    .map((f) => join(dir, f));
+}
+
+function loadIssues(root = ROOT) {
+  const dir = trackerPaths(root);
   const issues = [];
   const errors = [];
-  for (const path of listMd(DIR.issues)) {
+  const files = [
+    ...listIssueFiles(dir.issues).map((path) => ({ path, file: `issues/${basename(path)}` })),
+    ...listIssueFiles(dir.archive).map((path) => ({ path, file: `archive/${basename(path)}` })),
+  ];
+  for (const { path, file } of files) {
     try {
       const { meta, body } = parseDoc(path);
       const tasks = tasksOf(body);
       issues.push({
         ...meta,
         body,
-        file: `issues/${basename(path)}`,
+        file,
         tasks_total: tasks.length,
         tasks_done: tasks.filter((t) => t.checked).length,
       });
@@ -327,8 +345,8 @@ function loadIssues() {
   return { issues, errors };
 }
 
-function loadProjects() {
-  return listMd(DIR.projects).map((path) => {
+function loadProjects(root = ROOT) {
+  return listMd(trackerPaths(root).projects).map((path) => {
     const { meta, body } = parseDoc(path);
     return {
       ...meta,
@@ -344,14 +362,103 @@ function idNum(id) {
   return m ? parseInt(m[1], 10) : 0;
 }
 
-function issuePath(id) {
-  return join(DIR.issues, `${id}.md`);
+function issuePath(id, root = ROOT) {
+  const dir = trackerPaths(root);
+  const inIssues = join(dir.issues, `${id}.md`);
+  const inArchive = join(dir.archive, `${id}.md`);
+  if (existsSync(inArchive) && !existsSync(inIssues)) return inArchive;
+  return inIssues;
 }
 
-function loadState() {
-  const config = loadConfig();
-  const { issues, errors } = loadIssues();
-  return { config, issues, projects: loadProjects(), errors, generatedAt: nowIso() };
+function loadState(root = ROOT) {
+  const config = loadConfig(root);
+  const { issues, errors } = loadIssues(root);
+  return { config, issues, projects: loadProjects(root), errors, generatedAt: nowIso() };
+}
+
+function sectionBody(body, heading) {
+  const lines = String(body ?? "").split("\n");
+  const start = lines.findIndex((line) => line.trim() === `## ${heading}`);
+  if (start === -1) return null;
+  let end = lines.length;
+  for (let i = start + 1; i < lines.length; i++) {
+    if (/^##\s/.test(lines[i])) {
+      end = i;
+      break;
+    }
+  }
+  return lines.slice(start + 1, end).join("\n");
+}
+
+function isPlaceholder(text) {
+  const t = String(text ?? "")
+    .replace(/[_*`]/g, "")
+    .replace(/\s+/g, " ")
+    .trim()
+    .toLowerCase();
+  return t === "" || t === "none yet." || t === "none yet" || t === "none.";
+}
+
+/** Problems that forbid `status: done`. */
+function completionProblems(issue) {
+  const problems = [];
+  const ac = sectionBody(issue.body, "Acceptance Criteria");
+  if (ac == null) {
+    problems.push("status is `done` but ## Acceptance Criteria is missing");
+  } else {
+    const tasks = tasksOf(ac);
+    if (!tasks.length) {
+      problems.push("status is `done` but Acceptance Criteria has no checkboxes");
+    } else if (tasks.some((t) => !t.checked)) {
+      problems.push("status is `done` but Acceptance Criteria still has open checkboxes");
+    }
+  }
+  const ev = sectionBody(issue.body, "Review Evidence");
+  if (ev == null || isPlaceholder(ev)) {
+    problems.push("status is `done` but Review Evidence is empty");
+  }
+  const cl = sectionBody(issue.body, "Completion Checklist");
+  if (cl) {
+    for (const name of ["Acceptance criteria checked", "Required verification commands recorded"]) {
+      const task = tasksOf(cl).find((t) => t.text.toLowerCase() === name.toLowerCase());
+      if (task && !task.checked) {
+        problems.push(`status is \`done\` but Completion Checklist item "${name}" is open`);
+      }
+    }
+  }
+  return problems;
+}
+
+function mutateList(id, field, fn, root = ROOT) {
+  const path = issuePath(id, root);
+  if (!existsSync(path)) return;
+  const { meta, body } = parseDoc(path);
+  const before = meta[field] ?? [];
+  const after = fn([...before]);
+  if (JSON.stringify(before) === JSON.stringify(after)) return;
+  meta[field] = after;
+  meta.timestamp = nowIso();
+  writeFileSync(path, serializeDoc(meta, body));
+}
+
+function syncBlocksMirror(dependantId, previous, next, root = ROOT) {
+  const prev = new Set(previous ?? []);
+  const curr = new Set(next ?? []);
+  for (const blocker of prev) {
+    if (!curr.has(blocker)) {
+      mutateList(blocker, "blocks", (arr) => arr.filter((x) => x !== dependantId), root);
+    }
+  }
+  for (const blocker of curr) {
+    if (!prev.has(blocker)) {
+      mutateList(
+        blocker,
+        "blocks",
+        (arr) => (arr.includes(dependantId) ? arr : [...arr, dependantId]),
+        root,
+      );
+    }
+  }
 }
 
 /* ══════════════════════════════════════════════════════════════════════════════
@@ -379,10 +486,11 @@ const WRITABLE = new Set([
   "pr",
 ]);
 
-function patchIssue(id, patch) {
-  const path = issuePath(id);
+function patchIssue(id, patch, root = ROOT) {
+  const path = issuePath(id, root);
   if (!existsSync(path)) throw new Error(`${id} not found`);
   const { meta, body } = parseDoc(path);
+  const previousBlockedBy = meta.blocked_by ?? [];
   const changes = [];
   for (const [k, v] of Object.entries(patch)) {
     if (!WRITABLE.has(k)) throw new Error(`field \`${k}\` is not writable via the API`);
@@ -393,13 +501,20 @@ function patchIssue(id, patch) {
     changes.push({ field: k, from: before, to: after });
   }
   if (!changes.length) return { id, changes: [] };
+  if (changes.some((c) => c.field === "status") && meta.status === "done") {
+    const missing = completionProblems({ ...meta, body });
+    if (missing.length) throw new Error(`${id}: ${missing[0]}`);
+  }
   meta.timestamp = nowIso();
   writeFileSync(path, serializeDoc(meta, body));
+  if (changes.some((c) => c.field === "blocked_by")) {
+    syncBlocksMirror(id, previousBlockedBy, meta.blocked_by ?? [], root);
+  }
   return { id, changes };
 }
 
-function toggleTask(id, index, checked) {
-  const path = issuePath(id);
+function toggleTask(id, index, checked, root = ROOT) {
+  const path = issuePath(id, root);
   const { meta, body } = parseDoc(path);
   const lines = body.split("\n");
   const tasks = tasksOf(body);
@@ -414,8 +529,8 @@ function toggleTask(id, index, checked) {
   return { id, index, checked };
 }
 
-function appendActivity(id, text, author = "human") {
-  const path = issuePath(id);
+function appendActivity(id, text, author = "human", root = ROOT) {
+  const path = issuePath(id, root);
   const { meta, body } = parseDoc(path);
   const entry = `- **${today()}** · \`${author}\` — ${text}`;
   let next;
@@ -436,8 +551,9 @@ function nextId(config, issues) {
   return `${key}-${String(max + 1).padStart(width, "0")}`;
 }
 
-function createIssue(fields = {}) {
-  const { config, issues } = loadState();
+function createIssue(fields = {}, root = ROOT) {
+  const { config, issues } = loadState(root);
+  const dir = trackerPaths(root);
   const id = nextId(config, issues);
   const meta = {
     type: "Issue",
@@ -451,6 +567,7 @@ function createIssue(fields = {}) {
     project: fields.project ?? null,
     milestone: fields.milestone ?? null,
     cycle: fields.cycle ?? null,
+    rank: fields.rank ?? null,
     tags: fields.tags ?? [],
     parent: fields.parent ?? null,
     blocked_by: fields.blocked_by ?? [],
@@ -465,13 +582,16 @@ function createIssue(fields = {}) {
   };
   let body = fields.body;
   if (!body) {
-    const tpl = join(DIR.templates, `${fields.template ?? "feature"}.md`);
+    const tpl = join(dir.templates, `${fields.template ?? "feature"}.md`);
     body = existsSync(tpl)
       ? parseDoc(tpl).body
       : "## Context\n\n_Why this exists._\n\n## Tasks\n\n- [ ] \n\n## Verify\n\n- [ ] \n";
   }
-  if (!existsSync(DIR.issues)) mkdirSync(DIR.issues, { recursive: true });
-  writeFileSync(issuePath(id), serializeDoc(meta, body));
+  if (!existsSync(dir.issues)) mkdirSync(dir.issues, { recursive: true });
+  writeFileSync(join(dir.issues, `${id}.md`), serializeDoc(meta, body));
+  if ((meta.blocked_by ?? []).length) {
+    syncBlocksMirror(id, [], meta.blocked_by, root);
+  }
   return { id, file: `issues/${id}.md` };
 }
 
@@ -479,8 +599,8 @@ function createIssue(fields = {}) {
    5. Lint — conformance + referential integrity
    ══════════════════════════════════════════════════════════════════════════════ */
 
-function lint() {
-  const { config, issues, projects, errors } = loadState();
+function lint(root = ROOT) {
+  const { config, issues, projects, errors } = loadState(root);
   const problems = errors.map((e) => ({ level: "error", msg: e }));
   const err = (id, msg) => problems.push({ level: "error", msg: `${id}: ${msg}` });
   const warn = (id, msg) => problems.push({ level: "warn", msg: `${id}: ${msg}` });
@@ -504,8 +624,11 @@ function lint() {
     // OKF 0.1 conformance: every non-reserved doc needs a parseable, non-empty `type`.
     if (!i.type) err(id, "missing OKF `type` (must be `Issue`)");
     if (!i.id) err(id, "missing `id`");
-    if (i.id && `issues/${i.id}.md` !== i.file)
-      err(id, `filename must match id (expected issues/${i.id}.md, got ${i.file})`);
+    if (i.id && `issues/${i.id}.md` !== i.file && `archive/${i.id}.md` !== i.file)
+      err(
+        id,
+        `filename must match id (expected issues/${i.id}.md or archive/${i.id}.md, got ${i.file})`,
+      );
     if (i.id && seen.has(i.id)) err(id, "duplicate id");
     seen.add(i.id);
     if (!i.title) err(id, "missing `title`");
@@ -556,12 +679,15 @@ function lint() {
     if (i.status === "ready") {
       const open = (i.blocked_by ?? []).filter((b) => {
         const other = issues.find((x) => x.id === b);
-        return other && !["done", "canceled", "duplicate"].includes(other.status);
+        return other && !TERMINAL.has(other.status);
       });
       if (open.length) err(id, `ready issues cannot have open blockers (${open.join(", ")})`);
     }
     if (i.status === "duplicate" && !(i.relates ?? []).length) {
       err(id, "status is `duplicate` but `relates` is empty — name the survivor");
+    }
+    if (i.status === "done") {
+      for (const msg of completionProblems(i)) err(id, msg);
     }
     if (i.cycle && i.status === "triage") {
       warn(
@@ -578,18 +704,24 @@ function lint() {
     for (const b of i.blocks ?? []) {
       const other = byId.get(b);
       if (other && !(other.blocked_by ?? []).includes(i.id)) {
-        warn(i.id, `blocks \`${b}\`, but ${b}.blocked_by does not list ${i.id} (asymmetric edge)`);
+        err(i.id, `blocks \`${b}\`, but ${b}.blocked_by does not list ${i.id} (asymmetric edge)`);
       }
     }
     for (const b of i.blocked_by ?? []) {
       const other = byId.get(b);
       if (other && !(other.blocks ?? []).includes(i.id)) {
-        warn(i.id, `blocked_by \`${b}\`, but ${b}.blocks does not list ${i.id} (asymmetric edge)`);
+        err(i.id, `blocked_by \`${b}\`, but ${b}.blocks does not list ${i.id} (asymmetric edge)`);
       }
     }
   }
 
-  // A dependency cycle means nothing can ever start.
+  detectCycles(issues, byId, (i) => i?.blocked_by ?? [], "dependency cycle", problems);
+  detectCycles(issues, byId, (i) => (i?.parent ? [i.parent] : []), "parent cycle", problems);
+
+  return { problems, counts: { issues: issues.length, projects: projects.length } };
+}
+
+function detectCycles(issues, byId, edges, label, problems) {
   const WHITE = 0,
     GRAY = 1,
     BLACK = 2;
@@ -599,12 +731,12 @@ function lint() {
   const visit = (id) => {
     color.set(id, GRAY);
     stack.push(id);
-    for (const dep of byId.get(id)?.blocked_by ?? []) {
+    for (const dep of edges(byId.get(id))) {
       if (!byId.has(dep)) continue;
       if (color.get(dep) === GRAY) {
         const loop = stack.slice(stack.indexOf(dep)).concat(dep).join(" → ");
         if (!reported.has(loop)) {
-          problems.push({ level: "error", msg: `dependency cycle: ${loop}` });
+          problems.push({ level: "error", msg: `${label}: ${loop}` });
           reported.add(loop);
         }
       } else if (color.get(dep) === WHITE) visit(dep);
@@ -613,8 +745,22 @@ function lint() {
     color.set(id, BLACK);
   };
   for (const i of issues) if (color.get(i.id) === WHITE) visit(i.id);
+}
 
-  return { problems, counts: { issues: issues.length, projects: projects.length } };
+function selectNext(issues, config, { all = false } = {}) {
+  const byId = new Map(issues.map((i) => [i.id, i]));
+  const statuses = all ? ["todo", "ready", "backlog", "triage"] : ["ready"];
+  return issues
+    .filter((i) => statuses.includes(i.status))
+    .filter((i) => (i.blocked_by ?? []).every((b) => TERMINAL.has(byId.get(b)?.status)))
+    .sort((a, b) => {
+      const ra = a.rank == null ? 1e9 : Number(a.rank);
+      const rb = b.rank == null ? 1e9 : Number(b.rank);
+      if (ra !== rb) return ra - rb;
+      const pa = (config.priorities ?? []).find((p) => p.id === a.priority)?.sort ?? 9;
+      const pb = (config.priorities ?? []).find((p) => p.id === b.priority)?.sort ?? 9;
+      return pa - pb || idNum(a.id) - idNum(b.id);
+    });
 }
 
 /* ══════════════════════════════════════════════════════════════════════════════
@@ -677,6 +823,7 @@ const MIME = {
 };
 
 function serve(port = 4322) {
+  const dir = trackerPaths(ROOT);
   const clients = new Set();
 
   const server = createServer(async (req, res) => {
@@ -732,7 +879,7 @@ function serve(port = 4322) {
       // ── Static ──
       let file = url.pathname === "/" ? "index.html" : url.pathname.slice(1);
       if (file.includes("..")) return send(400, { error: "bad path" });
-      const path = join(DIR.board, file);
+      const path = join(dir.board, file);
       if (existsSync(path)) {
         return send(200, readFileSync(path), MIME[extname(path)] ?? "text/plain");
       }
@@ -750,8 +897,9 @@ function serve(port = 4322) {
       for (const c of clients) c.write(`event: changed\ndata: ${Date.now()}\n\n`);
     }, 120);
   };
-  for (const d of [DIR.issues, DIR.projects, DIR.board]) if (existsSync(d)) watch(d, onChange);
-  watch(CONFIG_PATH, onChange);
+  for (const d of [dir.issues, dir.archive, dir.projects, dir.board])
+    if (existsSync(d)) watch(d, onChange);
+  watch(dir.config, onChange);
 
   server.listen(port, () => {
     const { issues } = loadState();
@@ -763,11 +911,12 @@ function serve(port = 4322) {
 }
 
 /** A single self-contained .html with the data inlined — opens from file://, no server. */
-function exportStatic(out = join(ROOT, "board.html")) {
-  const state = loadState();
-  const html = readFileSync(join(DIR.board, "index.html"), "utf8");
-  const css = readFileSync(join(DIR.board, "board.css"), "utf8");
-  const js = readFileSync(join(DIR.board, "board.js"), "utf8");
+function exportStatic(out = join(ROOT, "board.html"), root = ROOT) {
+  const dir = trackerPaths(root);
+  const state = loadState(root);
+  const html = readFileSync(join(dir.board, "index.html"), "utf8");
+  const css = readFileSync(join(dir.board, "board.css"), "utf8");
+  const js = readFileSync(join(dir.board, "board.js"), "utf8");
   const inlined = html
     .replace('<link rel="stylesheet" href="board.css" />', `<style>\n${css}\n</style>`)
     .replace(
@@ -796,7 +945,8 @@ const HELP = `
     done <ID>               Shorthand for \`move <ID> done\`.
     show <ID>               Print an issue.
     list [k=v]...           Filter issues. e.g. list cycle=stage-0 status=todo
-    next                    What is unblocked and schedulable right now.
+    next [--all]            What is unblocked and ready right now. --all includes
+                            unblocked triage/backlog/todo.
     lint                    Validate every file against config.yml. Exit 1 on error.
     index                   Regenerate index.md (the OKF catalog).
     stats                   Counts by status, cycle, project.
@@ -854,20 +1004,37 @@ function main() {
 
     case "set": {
       const [id, ...rest] = args;
-      const r = patchIssue(id, parseKV(rest));
-      if (!r.changes.length) return console.log(`  · ${id} unchanged`);
-      for (const c of r.changes)
-        console.log(`  ✓ ${id} ${c.field}: ${JSON.stringify(c.from)} → ${JSON.stringify(c.to)}`);
+      try {
+        const r = patchIssue(id, parseKV(rest));
+        if (!r.changes.length) return console.log(`  · ${id} unchanged`);
+        for (const c of r.changes)
+          console.log(`  ✓ ${id} ${c.field}: ${JSON.stringify(c.from)} → ${JSON.stringify(c.to)}`);
+      } catch (e) {
+        console.error(`  ✗ ${e.message}`);
+        process.exit(1);
+      }
       return;
     }
 
     case "move":
-      patchIssue(args[0], { status: args[1] });
-      return console.log(`  ✓ ${args[0]} → ${args[1]}`);
+      try {
+        patchIssue(args[0], { status: args[1] });
+        console.log(`  ✓ ${args[0]} → ${args[1]}`);
+      } catch (e) {
+        console.error(`  ✗ ${e.message}`);
+        process.exit(1);
+      }
+      return;
 
     case "done":
-      patchIssue(args[0], { status: "done" });
-      return console.log(`  ✓ ${args[0]} → done`);
+      try {
+        patchIssue(args[0], { status: "done" });
+        console.log(`  ✓ ${args[0]} → done`);
+      } catch (e) {
+        console.error(`  ✗ ${e.message}`);
+        process.exit(1);
+      }
+      return;
 
     case "show": {
       const path = issuePath(args[0]);
@@ -892,23 +1059,11 @@ function main() {
     }
 
     case "next": {
-      // Unblocked = every blocker is done. This is the whole point of the dependency graph:
-      // it answers "what can I actually start?" without a human re-reading the roadmap.
+      const all = args.includes("--all");
       const { config, issues } = loadState();
-      const byId = new Map(issues.map((i) => [i.id, i]));
-      const ready = issues
-        .filter((i) => ["todo", "ready", "backlog", "triage"].includes(i.status))
-        .filter((i) => (i.blocked_by ?? []).every((b) => byId.get(b)?.status === "done"))
-        .sort((a, b) => {
-          // rank (explicit pick order) → priority → id. Matches board sortCards.
-          const ra = a.rank == null ? 1e9 : Number(a.rank);
-          const rb = b.rank == null ? 1e9 : Number(b.rank);
-          if (ra !== rb) return ra - rb;
-          const pa = (config.priorities ?? []).find((p) => p.id === a.priority)?.sort ?? 9;
-          const pb = (config.priorities ?? []).find((p) => p.id === b.priority)?.sort ?? 9;
-          return pa - pb || idNum(a.id) - idNum(b.id);
-        });
-      console.log(`\n  Unblocked and schedulable — ${ready.length} issue(s)\n`);
+      const ready = selectNext(issues, config, { all });
+      const title = all ? "Unblocked and schedulable" : "Unblocked and ready";
+      console.log(`\n  ${title} — ${ready.length} issue(s)\n`);
       ready.slice(0, 25).forEach((i) => console.log(fmtIssue(i, config)));
       return console.log();
     }
@@ -967,6 +1122,10 @@ export {
   createIssue,
   lint,
   tasksOf,
+  selectNext,
+  completionProblems,
+  exportStatic,
+  ROOT,
 };
 
 if (process.argv[1] && import.meta.url === pathToFileURL(process.argv[1]).href) main();
