@@ -1,5 +1,6 @@
 # Agent Note: Flutter iOS and Android shell
 
+ID: ADR-0006
 Status: proposed
 
 ## Problem
@@ -29,9 +30,21 @@ One codebase covers both stores without a second native team.
 - **Share TypeScript business rules into Dart:** rejected; the Worker remains
   authoritative and Flutter maps DTOs locally.
 
+## Impact
+
+- **Security:** the mobile client is not authorization. Tokens and secrets
+  stay out of the binary.
+- **Operations:** one Flutter codebase for iOS and Android; native product
+  flavors stay Stage 8.
+- **Data:** none in Stage 1. Persistence stays on D1 via the API.
+
 ## Affected components
 
 `apps/mobile`.
+
+## Approvers
+
+Human architectural reviewer. Not self-approved.
 
 ## Related records
 

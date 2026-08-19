@@ -7,6 +7,22 @@ reader would otherwise have to reverse-engineer.
 
 ---
 
+## 2026-08-20 — SY-0012 ADR path note is ADR-0009 after staging merge
+
+Staging already assigned ADR-0006 to the Flutter shell, ADR-0007 to
+toolchain pins, and ADR-0008 to quality conventions. The SY-0012 path
+and ID convention note is therefore ADR-0009. IDs are never reused.
+
+## 2026-08-19 — SY-0012 records the docs/decision system without promoting ADRs
+
+The documentation map (`docs/README.md`) is the named SY-0012 outcome:
+hierarchy, owners, generated ADR index, postmortem template, and runbook
+name placeholders. Agent Notes keep lifecycle/class/date-slug paths and
+gain an `ID: ADR-NNNN` field. Foundation §18.2's `proposed/ADR-NNNN-slug.md`
+layout is recorded as proposed ADR-0009, not implemented. Stack ADRs
+0001–0005 stay proposed. SY-0009 was not `done` when this work started;
+a human named the issue.
+
 ## 2026-08-20 — Quality conventions stay Prettier/ESLint/tsc, no git hooks
 
 SY-0011 names format, lint, Dart/TS strictness, import boundaries, Conventional

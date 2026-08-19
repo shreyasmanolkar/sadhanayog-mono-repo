@@ -1,5 +1,6 @@
 # Agent Note: Pinned workspace toolchain
 
+ID: ADR-0007
 Status: proposed
 
 ## Problem
@@ -29,10 +30,21 @@ Turborepo, Nx, FVM, or extra lockfiles.
 - **Task orchestrator (Turborepo/Nx):** rejected; three apps do not need a
   task graph yet (foundation §5.3).
 
+## Impact
+
+- **Security:** pin drift is a supply-chain risk. The checker compares files
+  and present binaries; it does not fetch unpinned latest tools.
+- **Operations:** `pnpm toolchain:check` is part of `pnpm verify`.
+- **Data:** none.
+
 ## Affected components
 
 `tools/ci/tool-pins.json`, `tools/ci/check-tool-pins.mjs`, `mise.toml`,
 root `package.json`, `apps/api/package.json`, `.github/workflows/ci.yml`.
+
+## Approvers
+
+Human architectural reviewer. Not self-approved.
 
 ## Related records
 

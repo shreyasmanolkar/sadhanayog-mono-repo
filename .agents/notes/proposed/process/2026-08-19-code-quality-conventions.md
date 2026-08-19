@@ -1,5 +1,6 @@
 # Agent Note: Code quality conventions
 
+ID: ADR-0008
 Status: proposed
 
 ## Problem
@@ -48,10 +49,22 @@ asks us to omit until a tool has a documented need. A zero-dependency
   sharp libvips binary (`LGPL-3.0-or-later`) is a named exception, not a
   general LGPL allow.
 
+## Impact
+
+- **Security:** license allowlist rejects copyleft by default. Boundary
+  scans keep `packages/db` out of the web client.
+- **Operations:** `pnpm lint`, `pnpm licenses:check`, and `pnpm quality:test`
+  are part of `pnpm verify`. No git hooks.
+- **Data:** none.
+
 ## Affected components
 
 `packages/config`, root ESLint/Prettier, `apps/mobile/analysis_options.yaml`,
 `tools/ci/check-*.mjs`, `docs/development/style.md`, `pnpm verify`.
+
+## Approvers
+
+Human architectural reviewer. Not self-approved.
 
 ## Related records
 
