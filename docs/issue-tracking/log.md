@@ -79,6 +79,14 @@ when `rg` was missing. Those three defects are repaired on the SY-0008
 branch so the Stage 1 smoke can be true; they are not a rewrite of child
 ownership.
 
+## 2026-08-19 — SY-0013 reconciles tracker executable with its contract
+
+`track next` now returns only `ready` issues (use `--all` for unblocked triage/backlog/todo).
+Writes that set `blocked_by` mirror `blocks` on the peer. Asymmetry is a lint error.
+`done` requires checked acceptance criteria and review evidence; the CLI refuses the
+transition without them. Isolated fixtures cover cycles, invalid states, and that
+evidence rule. `archive/` is a valid home for `SY-NNNN.md` without deleting the id.
+
 ## 2026-08-19 — SY-0002 inventories deploy topology from executables, not stale Worker docs
 
 The Command Center revision ships three descriptions of custom-domain deploy:

@@ -44,3 +44,11 @@ Human architectural reviewer. Not self-approved.
 
 - **Supersedes:** None — first record
 - **Superseded by:** None — still proposed
+
+## Current repository state
+
+The executable and seeded graph live under `docs/issue-tracking` (`track.mjs`,
+`config.yml`, templates, board, 152 roadmap issues). Canonical CLI path is
+`docs/issue-tracking/track.mjs`; `tools/tracker/track.mjs` is a wrapper.
+Isolated fixtures are `tools/tracker/track.test.mjs`. This note stays
+**proposed** until a human architectural reviewer moves it.

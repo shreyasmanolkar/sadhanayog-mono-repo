@@ -22,14 +22,15 @@ Program: [Stage 1 — Repository and engineering foundation](README.md)
 | `pnpm commits:check` | Conventional Commit header (message or range) |
 | `pnpm tracker` | Tracker CLI (help if no args) |
 | `pnpm tracker:lint` | Issue DAG and schema |
-| `pnpm tracker:next` | Unblocked Ready/Todo issues |
+| `pnpm tracker:next` | Unblocked `ready` issues |
+| `pnpm tracker:next -- --all` | Unblocked ready plus unblocked triage/backlog/todo |
+| `pnpm tracker:test` | Isolated tracker fixtures (cycles, invalid states, completion evidence) |
 | `pnpm tracker:board` | Linear-style board at http://localhost:4322 |
 | `pnpm tracker:show SY-NNNN` | Print one issue |
 | `pnpm tracker:move SY-NNNN <status>` | Change issue status |
 | `pnpm tracker:index` | Regenerate `docs/issue-tracking/index.md` |
 | `pnpm tracker:stats` | Counts by status, cycle, project |
 | `pnpm tracker:export` | Self-contained `board.html` |
-| `pnpm tracker:test` | Tracker CLI smoke test |
 | `pnpm db:generate` | Drizzle SQL generation (review before commit) |
 | `pnpm db:migrate:local` | Apply reviewed SQL to local D1 |
 | `cd apps/mobile && flutter test` | Mobile unit/widget tests |
