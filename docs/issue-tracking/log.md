@@ -7,6 +7,15 @@ reader would otherwise have to reverse-engineer.
 
 ---
 
+## 2026-08-19 — SY-0002 inventories deploy topology from executables, not stale Worker docs
+
+The Command Center revision ships three descriptions of custom-domain deploy:
+`worker.js` (static `ASSETS` + `POST /sync`), `CLOUDFLARE_WORKER.md` (HtmlService
+reverse proxy), and `Code.gs` comments that still assume the Worker serves
+Google's wrapper. SY-0002 treats the executable Worker as observed behaviour
+and lists the markdown drift instead of repairing it. Generator `--check` STALE
+is recorded, not fixed. Cloudflare Access stays “not observed”.
+
 ## 2026-08-19 — Tracker `next` smoke test must not freeze SY-0001 as Ready
 
 `tools/tracker/track.test.mjs` matched `SY-0001` in `track next`. That is live
