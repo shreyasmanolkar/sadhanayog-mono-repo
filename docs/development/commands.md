@@ -2,7 +2,8 @@
 
 Status: living  
 Owner: engineering  
-Last-reviewed: 2026-08-19
+Last-reviewed: 2026-08-19  
+Program: [Stage 1 — Repository and engineering foundation](README.md)
 
 | Command | Meaning |
 |---|---|
