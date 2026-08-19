@@ -34,3 +34,6 @@ Foundation §18.2 names files `proposed/ADR-NNNN-slug.md`. This tree uses
 class/date-slug paths plus an `ID:` field. See
 [ADR-0009](proposed/process/2026-08-19-decision-record-paths.md). That note
 is not authority until a human implements it.
+
+Validate: `pnpm docs:lint` and `pnpm decisions:index`. Transitions use
+`.agents/skills/record-decision`.
