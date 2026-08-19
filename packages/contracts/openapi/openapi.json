@@ -164,5 +164,7 @@
         }
       }
     }
-  }
+  },
+  "x-generated-from": "packages/contracts/src/openapi.ts",
+  "x-generated-by": "packages/contracts/scripts/write-openapi.mjs"
 }

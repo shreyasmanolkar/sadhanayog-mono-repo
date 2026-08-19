@@ -12,7 +12,7 @@ skeleton, governance, agent system, and CI foundation reviewable. It is
 not a signed architecture approval and it does not close child work
 packages [SY-0009](../issue-tracking/issues/SY-0009.md)–[SY-0017](../issue-tracking/issues/SY-0017.md).
 Operational docs: [setup.md](setup.md), [commands.md](commands.md),
-[toolchain.md](toolchain.md).
+[toolchain.md](toolchain.md), [style.md](style.md).
 
 The engineering foundation document itself remains **Proposed foundation
 for human approval**. Proposed Agent Notes are not authority.
@@ -62,7 +62,7 @@ owe their own notes, evidence, and human gate to `done`.
 | [../operations/troubleshooting/README.md](../operations/troubleshooting/README.md) | SY-0017 | Thin placeholder |
 | `tools/ci/tool-pins.json`, `mise.toml`, root `package.json`, `pnpm-lock.yaml`, `pnpm-workspace.yaml` | [SY-0009](../issue-tracking/issues/SY-0009.md) | Canonical pins in `tool-pins.json`. Dart/Wrangler are not mise pins; Wrangler is the `apps/api` package pin `4.124.0`. Dart ships with Flutter 3.35.4 (Dart 3.9.2). `pnpm toolchain:check` fails on drift. |
 | `apps/{api,web,mobile}`, `packages/{config,contracts,db}`, `content/teaching-archive` | [SY-0010](../issue-tracking/issues/SY-0010.md) | Compiling shells. Health only. No product tables or routes. |
-| `eslint.config.js`, `prettier.config.js`, `apps/mobile/analysis_options.yaml`, `tools/ci/check-boundaries.mjs`, `tools/ci/check-generated.mjs` | [SY-0011](../issue-tracking/issues/SY-0011.md) | Present. No Conventional Commits hook, Dependabot/Renovate, or `LICENSE` file. |
+| [style.md](style.md), `packages/config/{eslint,typescript,vitest}`, `tools/ci/check-{boundaries,commits,licenses,generated}.mjs` | [SY-0011](../issue-tracking/issues/SY-0011.md) | Named SY-0011 outcome. Conventional Commits checker has no git hook (by design). Dependabot/Renovate and a `LICENSE` file remain out of scope. |
 | `docs/**` READMEs, `.agents/notes`, `docs/postmortems/template.md`, `tools/ci/lint-docs.mjs`, `tools/ci/lint-decisions.mjs` | [SY-0012](../issue-tracking/issues/SY-0012.md) | Present. Note lifecycle dirs other than `proposed/` are empty; no note template file. |
 | `docs/issue-tracking/**`, `tools/tracker/**` | [SY-0013](../issue-tracking/issues/SY-0013.md) | Present. 152 seeded issues. Smoke test only; no invalid-state fixture suite. |
 | Root/scoped `AGENTS.md`, `.agents/skills/*/SKILL.md` | [SY-0014](../issue-tracking/issues/SY-0014.md) | Present. No skill trigger-test harness. |
@@ -82,7 +82,7 @@ just to match the drawing.
 | `apps/api/src/{app,http,middleware,modules,observability}` | Present. No `auth/` (Stage 5). Tests live at `apps/api/test/health.test.ts`, not `test/{contract,integration,security}/`. |
 | `apps/web/src/{app,styles,test}` | Present. No `components/`, `features/`, `routes/`, or `e2e/` yet. |
 | `apps/mobile/lib/{app,core}` plus `android/` `ios/` | Present. No `features/`, `l10n/`, or `integration_test/` yet. |
-| `packages/config/typescript` | Present. ESLint/Vitest config lives at the repo root, not under `packages/config/{eslint,vitest}`. |
+| `packages/config/{eslint,typescript,vitest}` | Present. Shared ESLint and Node Vitest config live here (SY-0011). Root `eslint.config.js` re-exports. |
 | `packages/db/{src,migrations,test}` | Present. No `fixtures/` (Stage 3). Schema is `schema_migrations` only. |
 | `packages/contracts/{src,openapi,test}` | Present. Committed OpenAPI 3.1. No generated Dart client yet (Stage 4). |
 | `content/teaching-archive/manifest.json` | Present. `content/`, `schema/`, `test/` wait for Stage 11. |
@@ -100,7 +100,7 @@ records the criteria and defers unsatisfied rows.
 |---|---|---|
 | New contributor/agent can clone and bootstrap | `pnpm bootstrap` (`tools/ci/bootstrap.sh`) documented in [setup.md](setup.md) | Clean-machine evidence on Linux and one mobile build host: SY-0017. Flutter SDK is pinned; a host without `flutter` on `PATH` skips mobile bootstrap. |
 | Run the three empty apps locally | `pnpm dev` starts API `:8787` + web `:5173`. Flutter: `cd apps/mobile && flutter run` | SY-0010 owns the shells; SY-0017 owns bootstrap friction. No identity provider, so apps are empty shells. |
-| Run `pnpm verify` | Root script runs tracker lint/test, docs/decision lint, secret scan, import boundaries, eslint/prettier, typecheck, unit tests, web/api build, OpenAPI drift | Child packages still own their tests. |
+| Run `pnpm verify` | Root script runs tracker lint/test, toolchain pins, docs/decision lint, secret scan, import boundaries, licenses, quality-checker tests, eslint/prettier, typecheck, unit tests, web/api build, OpenAPI drift | Child packages still own their tests. |
 | Create/validate an issue and an ADR | `pnpm tracker` + `node tools/ci/lint-decisions.mjs`. Skills: `work-issue`, `record-decision` | Invalid-state tracker fixtures: SY-0013. Skill trigger tests: SY-0014. |
 | Understand protected operations from documentation | Root [AGENTS.md](../../AGENTS.md), [CODEOWNERS](../../.github/CODEOWNERS), this program, [record-decision](../../.agents/skills/record-decision/SKILL.md) | Human reviewers for protected paths remain an unsigned decision. |
 | CI green from a clean checkout | Workflow `.github/workflows/ci.yml` runs `pnpm verify` and `flutter analyze`/`flutter test` with `permissions: contents: read` | See [Open contradictions](#open-contradictions). Human confirmation after this branch is on GitHub Actions. No iOS/Android *build* smoke in CI (analyze/test only). |
@@ -122,10 +122,10 @@ architectural reviewer moves them.
 | Approve the engineering foundation as authority | Architecture reviewer | Any work that treats §5–20 as approved | Unsigned. Document status is still Proposed. |
 | CI host | Engineering + security | SY-0016 close | Unsigned. GitHub Actions is what the scaffold uses. |
 | Exact tool versions (Node, pnpm, Flutter/Dart, Wrangler, Java) | Engineering | SY-0009 close | Draft pins in [`tools/ci/tool-pins.json`](../../tools/ci/tool-pins.json). Proposed note [2026-08-19-toolchain-pins.md](../../.agents/notes/proposed/process/2026-08-19-toolchain-pins.md) (ADR-0007). Not signed. |
-| Package licenses | Product / legal | First public or third-party distribution; also Dependabot/license policy | Unsigned. No `LICENSE` file. |
+| Package licenses | Product / legal | First public or third-party distribution; also Dependabot/license policy | Unsigned. SY-0011 proposes `tools/ci/license-allowlist.json` (ADR-0008). No `LICENSE` file. |
 | Whether a shared development (non-local) environment is needed | Product + engineering | Staging/production promotion (foundation §14) | Unsigned. Local + CI only. |
 | Protected-path reviewers beyond the current CODEOWNERS placeholder | Engineering lead | Merge of auth, schema, contracts, R2, production config, CI permissions, mobile signing, security docs, decision records | Unsigned. `.github/CODEOWNERS` currently names `@shreyas` on `*` and on the protected paths. |
-| Record stack selections as **implemented** ADRs after scaffolds prove viable | Architecture reviewer | Before Stage 2 treats them as given | Seven notes remain `proposed/` (Worker monolith, Vite SPA, REST/OpenAPI, D1/Drizzle, Markdown tracker, Flutter shell, toolchain pins). |
+| Record stack selections as **implemented** ADRs after scaffolds prove viable | Architecture reviewer | Before Stage 2 treats them as given | Eight notes remain `proposed/` (Worker monolith, Vite SPA, REST/OpenAPI, D1/Drizzle, Markdown tracker, Flutter shell, toolchain pins, code quality conventions). |
 
 ## Commands, generated files, dependencies, environment, authority
 
@@ -137,8 +137,8 @@ fixes the nouns.
 | Setup | [setup.md](setup.md) | `mise install` then `pnpm bootstrap`. Copy names from [`.env.example`](../../.env.example); values go in ignored `apps/api/.dev.vars`. |
 | Commands | [commands.md](commands.md) | `pnpm verify`, `pnpm dev`, tracker CLIs, `db:*` stubs, Flutter from `apps/mobile`. |
 | Troubleshooting | [../operations/troubleshooting/README.md](../operations/troubleshooting/README.md) | Tracker, Wrangler assets, missing Flutter, health ready 503. |
-| Generated files | `packages/contracts/openapi/openapi.json` is committed. `apps/web/src/routeTree.gen.ts` is gitignored. Dart client is not generated yet. | Drift: `pnpm generated:check`. Do not commit `.dev.vars`, D1/R2 state, or signing files ([`.gitignore`](../../.gitignore)). |
-| Dependencies | One pnpm lockfile; Flutter `pubspec.lock`. `workspace:` links for internal packages. | No Turborepo/Nx. No automatic merge of runtime/auth/db/mobile/major updates. License policy is unsigned. |
+| Generated files | `packages/contracts/openapi/openapi.json` is committed and labelled (`x-generated-from` / `x-generated-by`). `apps/web/src/routeTree.gen.ts` is gitignored. Dart client is not generated yet. Policy: [style.md](style.md). | Drift: `pnpm generated:check`. Do not commit `.dev.vars`, D1/R2 state, or signing files ([`.gitignore`](../../.gitignore)). |
+| Dependencies | One pnpm lockfile; Flutter `pubspec.lock`. `workspace:` links for internal packages. License allowlist: [style.md](style.md). | No Turborepo/Nx. No automatic merge of runtime/auth/db/mobile/major updates. SPDX allowlist is proposed, not signed. |
 | Environment matrix | Local (mise + Wrangler local D1 placeholder) and GitHub Actions. | No shared development, staging, or production resources in this stage. |
 | Agent authority | Root [AGENTS.md](../../AGENTS.md), scoped `AGENTS.md` files, this file, [CODEOWNERS](../../.github/CODEOWNERS) | Proposed notes are not authority. Production, secrets, migrations, and protected paths need a human. Backend remains authorization. |
 

@@ -29,22 +29,20 @@
     "toolchain:check": "node tools/ci/check-tool-pins.mjs",
     "docs:lint": "node tools/ci/lint-docs.mjs && node tools/ci/lint-decisions.mjs",
     "boundaries": "node tools/ci/check-boundaries.mjs",
+    "licenses:check": "node tools/ci/check-licenses.mjs",
+    "commits:check": "node tools/ci/check-commits.mjs",
+    "quality:test": "node tools/ci/check-boundaries.test.mjs && node tools/ci/check-commits.test.mjs && node tools/ci/check-licenses.test.mjs",
     "secrets:scan": "node tools/ci/check-secrets.mjs",
     "generated:check": "node tools/ci/check-generated.mjs",
-    "verify": "pnpm tracker:lint && pnpm tracker:test && pnpm toolchain:check && pnpm docs:lint && pnpm secrets:scan && pnpm boundaries && pnpm lint && pnpm typecheck && pnpm test && pnpm build && pnpm generated:check",
+    "verify": "pnpm tracker:lint && pnpm tracker:test && pnpm toolchain:check && pnpm docs:lint && pnpm secrets:scan && pnpm boundaries && pnpm licenses:check && pnpm quality:test && pnpm lint && pnpm typecheck && pnpm test && pnpm build && pnpm generated:check",
     "db:generate": "pnpm --filter @sadhanayog/db generate",
     "db:migrate:local": "pnpm --filter @sadhanayog/api db:migrate:local",
     "db:verify": "pnpm --filter @sadhanayog/db test"
   },
   "devDependencies": {
-    "@eslint/js": "9.34.0",
     "eslint": "9.34.0",
-    "eslint-plugin-react-hooks": "5.2.0",
-    "eslint-plugin-react-refresh": "0.4.20",
-    "globals": "16.3.0",
     "prettier": "3.6.2",
-    "typescript": "5.9.2",
-    "typescript-eslint": "8.42.0"
+    "typescript": "5.9.2"
   },
   "pnpm": {
     "onlyBuiltDependencies": [

@@ -29,3 +29,7 @@ pnpm verify
 
 Flutter analyze/test run only when `flutter` is on `PATH`. CI installs the
 SDK via `subosito/flutter-action`.
+
+Install the recommended VS Code extensions in
+[`.vscode/extensions.json`](../../.vscode/extensions.json) so Prettier, ESLint,
+EditorConfig, and Dart format-on-save match [style.md](style.md).

@@ -10,7 +10,13 @@ Program: [Stage 1 — Repository and engineering foundation](README.md)
 | `pnpm bootstrap` | Install JS deps, check toolchain pins, Flutter pub get if SDK present |
 | `pnpm toolchain:check` | Fail if mise, engines, CI, or present binaries drift from `tools/ci/tool-pins.json` |
 | `pnpm dev` | API (8787) + web (5173) |
-| `pnpm verify` | Tracker, pins, docs, secrets, boundaries, lint, types, tests, build, generated drift |
+| `pnpm verify` | Tracker, pins, docs, secrets, boundaries, licenses, quality tests, lint, types, tests, build, generated drift |
+| `pnpm lint` | ESLint plus Prettier check |
+| `pnpm format` | Prettier write |
+| `pnpm boundaries` | Import and package.json boundary scan |
+| `pnpm licenses:check` | Allowlisted dependency licenses |
+| `pnpm quality:test` | Fixture tests for quality checkers |
+| `pnpm commits:check` | Conventional Commit header (message or range) |
 | `pnpm tracker` | Tracker CLI (help if no args) |
 | `pnpm tracker:lint` | Issue DAG and schema |
 | `pnpm tracker:next` | Unblocked Ready/Todo issues |

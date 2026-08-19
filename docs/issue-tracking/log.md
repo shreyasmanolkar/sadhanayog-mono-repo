@@ -7,6 +7,15 @@ reader would otherwise have to reverse-engineer.
 
 ---
 
+## 2026-08-20 — Quality conventions stay Prettier/ESLint/tsc, no git hooks
+
+SY-0011 names format, lint, Dart/TS strictness, import boundaries, Conventional
+Commits, generated-file labels, and a license allowlist. A second formatter
+(Biome), type-aware ESLint, and Husky were rejected as duplicate machinery.
+GPL/AGPL stay forbidden; the optional sharp libvips binary is a named LGPL
+exception, not a general copyleft allow. Staging already used ADR-0006 for
+the Flutter shell, so this note is ADR-0008.
+
 ## 2026-08-19 — SY-0009 records toolchain pins without claiming empty apps
 
 Stage 1 was bulk-scaffolded before this issue had a named outcome. SY-0009

@@ -37,7 +37,8 @@ are created with `flutter create` on a machine that has the SDK.
 | `apps/mobile` | Flutter iOS/Android shell. |
 | `packages/contracts` | Zod wire schemas and committed OpenAPI 3.1. |
 | `packages/db` | Drizzle SQLite/D1 schema. No product tables yet. |
-| `packages/config` | Shared TypeScript config. |
+| `packages/config` | Shared TypeScript, ESLint, and Vitest config. |
+| `docs/development/style.md` | Format, lint, boundaries, commits, generated files, licenses. |
 | `content/teaching-archive` | Versioned learning content (empty until Stage 11). |
 | `docs/issue-tracking` | In-repo issue tracker and board. |
 | `docs/` | Architecture, product, operations, issues. |
