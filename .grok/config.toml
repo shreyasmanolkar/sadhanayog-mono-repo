@@ -1,0 +1,25 @@
+# Grok projection of the project MCP inventory in .codex/config.toml.
+# Same servers, URLs, and Playwright pin. Grok does not read Codex TOML.
+# Credentials stay in environment variables. See docs/development/mcp.md.
+
+[mcp_servers.context7]
+url = "https://mcp.context7.com/mcp"
+enabled = true
+
+[mcp_servers.cloudflare_docs]
+url = "https://docs.mcp.cloudflare.com/mcp"
+enabled = true
+
+[mcp_servers.playwright]
+command = "npx"
+args = [
+  "-y",
+  "@playwright/mcp@0.0.79",
+  "--headless",
+  "--isolated",
+  "--allowed-origins=http://127.0.0.1:5173;http://localhost:5173;http://127.0.0.1:8787;http://localhost:8787",
+  "--output-dir=/tmp/sadhanayog-playwright-mcp",
+]
+enabled = false
+startup_timeout_sec = 60
+tool_timeout_sec = 60
