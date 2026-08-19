@@ -87,6 +87,13 @@ Writes that set `blocked_by` mirror `blocks` on the peer. Asymmetry is a lint er
 transition without them. Isolated fixtures cover cycles, invalid states, and that
 evidence rule. `archive/` is a valid home for `SY-NNNN.md` without deleting the id.
 
+## 2026-08-19 — SY-0014 validates skills in-repo instead of adding skills-ref
+
+Foundation §18.3 wants `quick_validate` and trigger tests. Installing
+`skills-ref` would be a new package, which Stage 1 says needs a human.
+The harness is Node in `tools/ci`, same pattern as docs/decision lint, and
+classifies prompts from the `Use when` clause of each skill description.
+
 ## 2026-08-19 — SY-0002 inventories deploy topology from executables, not stale Worker docs
 
 The Command Center revision ships three descriptions of custom-domain deploy:
