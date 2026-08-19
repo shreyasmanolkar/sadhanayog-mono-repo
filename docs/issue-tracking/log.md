@@ -7,6 +7,15 @@ reader would otherwise have to reverse-engineer.
 
 ---
 
+## 2026-08-19 — SY-0010 empty shells keep later composition out of Stage 1
+
+The compiling Worker/web/Flutter/db/contracts packages already existed on
+`staging`. SY-0010 fills the Stage 1 gaps without taking Stage 4/8/9 work:
+readiness stays unprotected, native product flavors stay SY-0064, file-based
+TanStack routes stay SY-0072. Dart-define `AppConfig` is the flavors/config
+shell named by the Stage 1 expected changes. Proposed ADR-0006 records the
+Flutter client; it is not authority.
+
 ## 2026-08-19 — Stage 1 epic records the scaffold unsigned and does not close children
 
 SY-0008 is the Stage 1 program, not a signed architecture approval and not

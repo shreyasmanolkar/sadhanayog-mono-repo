@@ -1,31 +1,26 @@
-import { Hono } from "hono";
-import { liveHealthResponseSchema } from "@sadhanayog/contracts";
+import { Hono, type Context } from "hono";
+import { liveHealthResponseSchema, readyHealthResponseSchema } from "@sadhanayog/contracts";
 import type { AppEnv } from "../../app/bindings.js";
 import { problem } from "../../http/problem.js";
 
 export const healthRoutes = new Hono<AppEnv>();
 
-healthRoutes.get("/health/live", (c) => {
-  const body = liveHealthResponseSchema.parse({ status: "ok" });
-  return c.json(body);
-});
+function live(c: Context<AppEnv>) {
+  return c.json(liveHealthResponseSchema.parse({ status: "ok" }));
+}
 
-healthRoutes.get("/api/v1/health/live", (c) => {
-  const body = liveHealthResponseSchema.parse({ status: "ok" });
-  return c.json(body);
-});
-
-healthRoutes.get("/health/ready", (c) => {
-  const envName = c.env.SADHANAYOG_ENV;
-  const hasConfig = Boolean(envName);
-  if (!hasConfig) {
+function ready(c: Context<AppEnv>) {
+  if (!c.env.SADHANAYOG_ENV) {
     return problem(c, 503, "health.not_ready", "Configuration is incomplete");
   }
-  return c.json({
-    status: "ok" as const,
-    checks: {
-      config: true,
-      ...(c.env.DB === undefined ? {} : { d1: true }),
-    },
-  });
-});
+  const checks: { config: boolean; d1?: boolean } = { config: true };
+  if (c.env.DB !== undefined) {
+    checks.d1 = true;
+  }
+  return c.json(readyHealthResponseSchema.parse({ status: "ok", checks }));
+}
+
+healthRoutes.get("/health/live", live);
+healthRoutes.get("/api/v1/health/live", live);
+healthRoutes.get("/health/ready", ready);
+healthRoutes.get("/api/v1/health/ready", ready);
