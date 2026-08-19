@@ -7,6 +7,16 @@ reader would otherwise have to reverse-engineer.
 
 ---
 
+## 2026-08-19 — SY-0012 records the docs/decision system without promoting ADRs
+
+The documentation map (`docs/README.md`) is the named SY-0012 outcome:
+hierarchy, owners, generated ADR index, postmortem template, and runbook
+name placeholders. Agent Notes keep lifecycle/class/date-slug paths and
+gain an `ID: ADR-NNNN` field. Foundation §18.2's `proposed/ADR-NNNN-slug.md`
+layout is recorded as proposed ADR-0006, not implemented. Stack ADRs
+0001–0005 stay proposed. SY-0009 was not `done` when this work started;
+a human named the issue.
+
 ## 2026-08-19 — SY-0002 inventories deploy topology from executables, not stale Worker docs
 
 The Command Center revision ships three descriptions of custom-domain deploy:

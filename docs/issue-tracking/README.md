@@ -1,5 +1,9 @@
 # Sadhana Yog Track
 
+Status: living  
+Owner: engineering  
+Last-reviewed: 2026-08-19
+
 A Linear-style issue tracker that lives in the repo. **The markdown files are the database.**
 
 ```bash
