@@ -6,7 +6,8 @@ the behavioral baseline, not the target product.
 - Do not modify the legacy repositories.
 - Cite revision, path, and observation method on every claim.
 - Separate **observed** behavior from **approved** preserve/change/remove
-  intent. Only SY-0007 plus a product owner may approve intent.
+  intent. [source-of-truth.md](source-of-truth.md) is the unsigned
+  register. Only a product owner may fill its signature block.
 - Never put raw browser/Sheets exports, names, contacts, health notes,
   invoice identifiers, keys, or live URLs in Git or prompts. Follow
   [sanitized-fixture-policy.md](sanitized-fixture-policy.md).

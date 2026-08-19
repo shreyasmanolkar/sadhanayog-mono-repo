@@ -8,8 +8,10 @@ Sources: [engineering foundation](../architecture/engineering-foundation.md) §2
 [implementation roadmap](../roadmap/implementation-roadmap.md) Stage 0
 
 This file is the named Stage 0 outcome. It makes discovery executable and
-reviewable. It is not a signed behavioral baseline. The signed baseline is
-the child inventories plus [SY-0007](../issue-tracking/issues/SY-0007.md).
+reviewable. It is not a signed behavioral baseline. The unsigned register
+is [source-of-truth.md](source-of-truth.md)
+([SY-0007](../issue-tracking/issues/SY-0007.md)). The signed baseline is
+that file after a product owner fills the signature block.
 
 ## Purpose
 
@@ -82,7 +84,7 @@ policy, and the scoped instructions. Child issues own the inventories.
 | `docs/discovery/legacy-data.md` | [SY-0004](../issue-tracking/issues/SY-0004.md) | Draft evidence, reviewable; human gate to `done` |
 | [teaching-archive.md](teaching-archive.md) | [SY-0005](../issue-tracking/issues/SY-0005.md) | Draft evidence, reviewable; human gate to `done` |
 | [a11y-security-baseline.md](a11y-security-baseline.md) | [SY-0006](../issue-tracking/issues/SY-0006.md) | Draft evidence, reviewable; human gate to `done` |
-| `docs/discovery/source-of-truth.md` | [SY-0007](../issue-tracking/issues/SY-0007.md) | Not written — blocked by SY-0003–SY-0006 |
+| [source-of-truth.md](source-of-truth.md) | [SY-0007](../issue-tracking/issues/SY-0007.md) | Draft **unsigned** register, reviewable; signature, interviews, and representative exports still missing |
 
 Do not create empty inventory stubs. A missing file means the child has
 not produced evidence.
@@ -99,8 +101,8 @@ the criteria and defers the unsatisfied rows.
 | Teaching Archive content IDs, five areas, journey/rituals/reviews/benchmarks, privacy wording, no-media invariant inventoried | Satisfied as draft evidence in [teaching-archive.md](teaching-archive.md) | Human acceptance of SY-0005 (issue remains `in_review` / not `done`) |
 | External dependencies and deployment assumptions inventoried | Satisfied as draft evidence in [repository-baseline.md](repository-baseline.md) | Human acceptance of SY-0002 (issue remains `in_review` / not `done`) |
 | Security and accessibility debt inventoried | Satisfied as draft evidence in [a11y-security-baseline.md](a11y-security-baseline.md) | Human acceptance of SY-0006 (issue remains `in_review` / not `done`) |
-| Product owner signs preserve/change/defer matrix and data-source precedence | Deferred | SY-0007 (human) |
-| Sanitized fixtures can exercise critical rules | Format, starter vectors, SY-0004 rule vectors, and SY-0005 journey/ritual/filename vectors | Representative exports and sign-off: SY-0007 |
+| Product owner signs preserve/change/defer matrix and data-source precedence | Unsigned register exists in [source-of-truth.md](source-of-truth.md) | Human signature, interviews, and representative exports |
+| Sanitized fixtures can exercise critical rules | Format, starter vectors, SY-0004 rule vectors, and SY-0005 journey/ritual/filename vectors | Representative exports and vector approval: [source-of-truth.md](source-of-truth.md) |
 | No legacy file changed | Satisfied 2026-08-19 | Keep for every child |
 
 This epic therefore **does not close Stage 0**. It closes only the
@@ -111,9 +113,12 @@ program, policy, unsigned decision register, and generator-check record.
 Recorded here so implementation of later stages cannot proceed by
 inference. **None of these are decided by this epic.**
 
+Canonical unsigned register: [source-of-truth.md](source-of-truth.md).
+Child inventories keep local copies for traceability.
+
 | Decision | Owner | Due before | Status |
 |---|---|---|---|
-| Approve the behavioral baseline (preserve / change / remove / defer per workflow) | Product owner | SY-0007 close; blocks Stage 2 | Unsigned |
+| Approve the behavioral baseline (preserve / change / remove / defer per workflow) | Product owner | SY-0007 close; blocks Stage 2 | Unsigned — matrix drafted |
 | Browser `localStorage` vs Google Sheets precedence when they diverge | Product owner | SY-0007; migration tooling ([SY-0088](../issue-tracking/issues/SY-0088.md)) | Unsigned |
 | Whether health notes are necessary, and their retention | Product / privacy owner | Production data import (foundation §30) | Unsigned |
 | Which legacy integrations are real versus demonstrative (Maps, Meet, Zoom, Teams, WhatsApp, mail/SMS, payment page, Apps Script sync) | Product owner | SY-0007 | Unsigned |
@@ -158,8 +163,10 @@ Not executed in this epic.
   [sanitized-fixture-policy.md](sanitized-fixture-policy.md). Command
   Center rule vectors are in [legacy-data.md](legacy-data.md)
   (SY-0004). Teaching Archive rule vectors are in
-  [teaching-archive.md](teaching-archive.md) (SY-0005). Sign-off
-  remains SY-0007.
+  [teaching-archive.md](teaching-archive.md) (SY-0005). The
+  unsigned approval index is
+  [source-of-truth.md](source-of-truth.md); the signature is still
+  missing.
 
 ## Open contradictions
 
@@ -218,3 +225,8 @@ are `done`. SY-0003, SY-0004, and SY-0005 started while SY-0002 was
 `in_review` because a human named each issue after the SY-0002 named
 outcome had landed. Those process contradictions are recorded on the
 child issues; they are not a rewrite of this rule for later children.
+
+SY-0007 also started at human request while SY-0005/SY-0006 had **no**
+named outcome on this branch. After merging `staging`, those
+inventories exist and the unsigned register cites them. It still does
+not invent dispositions or fill the signature block.

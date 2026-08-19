@@ -20,8 +20,9 @@ localStorage / Access / shared-key findings, CSP and DOM sinks,
 privacy data classes, keyboard / focus / semantics / responsive
 findings, and the observed absence of tests. It is not a signed
 preserve/change/remove matrix, not a legal conclusion, and not a
-compliance claim. Sign-off is
-[SY-0007](../issue-tracking/issues/SY-0007.md). Identity/permission
+compliance claim. The unsigned register is
+[source-of-truth.md](source-of-truth.md)
+([SY-0007](../issue-tracking/issues/SY-0007.md)). Identity/permission
 modelling is [SY-0020](../issue-tracking/issues/SY-0020.md). Threat
 model refresh is [SY-0109](../issue-tracking/issues/SY-0109.md).
 Teaching Archive content IDs remain
@@ -718,7 +719,7 @@ Conflicts are defects. They are listed, not resolved.
 | Every page, shortcut, empty/loading/error, responsive behaviour | SY-0003 |
 | `sadhanayog.v1` collections, encodings, derived sessions, outbox | SY-0004 |
 | Archive content IDs, journey/rituals, filename rules, no-media catalogue | [teaching-archive.md](teaching-archive.md) (SY-0005) |
-| Preserve/change/remove and source-of-truth sign-off | SY-0007 |
+| Preserve/change/remove and source-of-truth sign-off | SY-0007 ([source-of-truth.md](source-of-truth.md), unsigned) |
 | Identity/permission model | SY-0020 |
 | OIDC provider | SY-0042 |
 | Document / malware policy | SY-0050 |

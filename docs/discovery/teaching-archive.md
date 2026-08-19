@@ -14,7 +14,9 @@ This file is the named SY-0005 outcome. It catalogues content IDs,
 the five navigation areas, journey phases, rituals, class reviews,
 benchmarks, the `teaching-archive.v1` shape, privacy wording, and
 the no-media invariant. It is not a signed preserve/change/remove
-matrix. Sign-off is [SY-0007](../issue-tracking/issues/SY-0007.md).
+matrix. The unsigned register is
+[source-of-truth.md](source-of-truth.md)
+([SY-0007](../issue-tracking/issues/SY-0007.md)).
 Command Center pages are [feature-inventory.md](feature-inventory.md).
 Command Center collections and arithmetic are
 [legacy-data.md](legacy-data.md). Threat/accessibility debt is
