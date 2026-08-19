@@ -145,6 +145,11 @@ invoice number floor, pull-replace, membership expiry) live in
 [legacy-data.md](legacy-data.md). Journey-day, returns, ritual due
 windows, filename, and import-replace vectors live in
 [teaching-archive.md](teaching-archive.md).
+Security and accessibility vectors (text-node hyperscript, viz
+tooltip escape, backup credential strip, Worker-attached key, Help
+focus trap, Archive sheet trap, Archive CSP absence, privacy wording
+versus control) live in
+[a11y-security-baseline.md](a11y-security-baseline.md).
 
 ## Checksums
 

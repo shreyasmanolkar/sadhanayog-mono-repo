@@ -20,7 +20,8 @@ a signed preserve/change/remove matrix. Sign-off is
 and content are [teaching-archive.md](teaching-archive.md)
 ([SY-0005](../issue-tracking/issues/SY-0005.md)).
 Threat/accessibility debt is
-[SY-0006](../issue-tracking/issues/SY-0006.md).
+[a11y-security-baseline.md](a11y-security-baseline.md)
+([SY-0006](../issue-tracking/issues/SY-0006.md)).
 
 ## Purpose
 
@@ -871,8 +872,10 @@ Command Center still has no `package.json` and no test files.
 | No legacy file changed | Satisfied 2026-08-19 |
 
 Render/DOM/accessibility inspection was not repeated; SY-0003
-already walked workflows, and SY-0006 owns the quality baseline.
-Calculation probes above substitute for a live Sheet.
+already walked workflows, and
+[a11y-security-baseline.md](a11y-security-baseline.md) owns the
+quality baseline. Calculation probes above substitute for a live
+Sheet.
 
 ## Security and redaction
 

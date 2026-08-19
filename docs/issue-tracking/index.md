@@ -14,7 +14,7 @@ Implementation-roadmap Stage 0. Discovery and baseline.
 * [SY-0003 — Command Center feature/workflow inventory](./issues/SY-0003.md) - In Review · Stage 0 · Discovery and baseline · Stage 0
 * [SY-0004 — Legacy data and rule inventory](./issues/SY-0004.md) - In Review · Stage 0 · Discovery and baseline · Stage 0
 * [SY-0005 — Teaching Archive inventory](./issues/SY-0005.md) - In Review · Stage 0 · Discovery and baseline · Stage 0
-* [SY-0006 — Quality/security/accessibility baseline](./issues/SY-0006.md) - Backlog · Stage 0 · Discovery and baseline · Stage 0
+* [SY-0006 — Quality/security/accessibility baseline](./issues/SY-0006.md) - In Review · Stage 0 · Discovery and baseline · Stage 0
 * [SY-0007 — Preservation and source-of-truth sign-off](./issues/SY-0007.md) - In Review · Stage 0 · Discovery and baseline · Stage 0
 
 ## Stage 1 — Repository and engineering foundation — 0/10
