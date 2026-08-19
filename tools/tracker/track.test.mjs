@@ -12,7 +12,8 @@ assert.match(lint, /\d+ issues/);
 assert.match(lint, /0 error\(s\)/);
 
 const next = execFileSync("node", [track, "next"], { encoding: "utf8", cwd: ROOT });
-assert.match(next, /SY-0001/);
+assert.match(next, /Unblocked and schedulable/);
+assert.match(next, /\d+ issue\(s\)/);
 
 const show = execFileSync("node", [track, "show", "SY-0002"], { encoding: "utf8", cwd: ROOT });
 assert.match(show, /Repository and deployment baseline/);
