@@ -14,8 +14,36 @@ owns the workspace directories, lockfiles, and version pins — not compiling
 Worker/web/Flutter shells (SY-0010) or CI jobs (SY-0016). Canonical versions
 live in `tools/ci/tool-pins.json`. Dart stays a Flutter-bundled pin so a
 second mise Dart cannot shadow the SDK. Wrangler stays an npm pin.
-Unsigned: license SPDX, shared staging, Java 25 vs Android JDK 17, Windows
-hosts, and human approval of the foundation document.
+Proposed as ADR-0007 because staging already assigned ADR-0006 to the
+Flutter shell (SY-0010). Unsigned: license SPDX, shared staging, Java 25
+vs Android JDK 17, Windows hosts, and human approval of the foundation
+document.
+
+## 2026-08-19 — SY-0010 empty shells keep later composition out of Stage 1
+
+The compiling Worker/web/Flutter/db/contracts packages already existed on
+`staging`. SY-0010 fills the Stage 1 gaps without taking Stage 4/8/9 work:
+readiness stays unprotected, native product flavors stay SY-0064, file-based
+TanStack routes stay SY-0072. Dart-define `AppConfig` is the flavors/config
+shell named by the Stage 1 expected changes. Proposed ADR-0006 records the
+Flutter client; it is not authority.
+
+## 2026-08-19 — Stage 1 epic records the scaffold unsigned and does not close children
+
+SY-0008 is the Stage 1 program, not a signed architecture approval and not
+the child work packages. CI host, tool versions, licenses, shared
+development, CODEOWNERS reviewers, and moving stack ADRs to `implemented/`
+stay unsigned. Children SY-0009–SY-0017 still own their artifacts. The
+epic started while SY-0002 was `in_review` because a human named it after
+the SY-0002 named outcome had landed.
+
+Clean-checkout GitHub Actions was red: contracts/db DTS required
+`@types/node` (declared by `packages/config/typescript/node.json` but not
+installed), and `flutter analyze` treated `prefer_const_constructors` in
+`apps/mobile/test/result_test.dart` as failure. The secret scanner no-oped
+when `rg` was missing. Those three defects are repaired on the SY-0008
+branch so the Stage 1 smoke can be true; they are not a rewrite of child
+ownership.
 
 ## 2026-08-19 — SY-0002 inventories deploy topology from executables, not stale Worker docs
 

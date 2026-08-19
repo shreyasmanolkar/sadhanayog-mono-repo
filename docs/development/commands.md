@@ -2,7 +2,8 @@
 
 Status: living  
 Owner: engineering  
-Last-reviewed: 2026-08-19
+Last-reviewed: 2026-08-19  
+Program: [Stage 1 — Repository and engineering foundation](README.md)
 
 | Command | Meaning |
 |---|---|
@@ -23,6 +24,7 @@ Last-reviewed: 2026-08-19
 | `pnpm db:generate` | Drizzle SQL generation (review before commit) |
 | `pnpm db:migrate:local` | Apply reviewed SQL to local D1 |
 | `cd apps/mobile && flutter test` | Mobile unit/widget tests |
+| `cd apps/mobile && flutter run --dart-define=SADHANAYOG_ENV=dev --dart-define=SADHANAYOG_API_ORIGIN=http://127.0.0.1:8787` | Mobile shell against local API |
 
 Generated OpenAPI is committed. After changing contracts:
 
