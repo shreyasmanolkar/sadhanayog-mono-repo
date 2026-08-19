@@ -22,7 +22,7 @@ Implementation-roadmap Stage 0. Discovery and baseline.
 Implementation-roadmap Stage 1. Repository and engineering foundation.
 
 * [SY-0008 — Stage 1 — Repository and engineering foundation](./issues/SY-0008.md) - In Review · Stage 1 · Repository and engineering foundation · Stage 1
-* [SY-0009 — Workspace/toolchain scaffold](./issues/SY-0009.md) - In Review · Stage 1 · Repository and engineering foundation · Stage 1
+* [SY-0009 — Workspace/toolchain scaffold](./issues/SY-0009.md) - In Progress · Stage 1 · Repository and engineering foundation · Stage 1
 * [SY-0010 — Empty application/package scaffolds](./issues/SY-0010.md) - In Review · Stage 1 · Repository and engineering foundation · Stage 1
 * [SY-0011 — Code quality conventions](./issues/SY-0011.md) - In Review · Stage 1 · Repository and engineering foundation · Stage 1
 * [SY-0012 — Documentation and decision system](./issues/SY-0012.md) - In Review · Stage 1 · Repository and engineering foundation · Stage 1

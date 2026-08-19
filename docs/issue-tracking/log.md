@@ -7,6 +7,16 @@ reader would otherwise have to reverse-engineer.
 
 ---
 
+## 2026-08-19 — SY-0009 records toolchain pins without claiming empty apps
+
+Stage 1 was bulk-scaffolded before this issue had a named outcome. SY-0009
+owns the workspace directories, lockfiles, and version pins — not compiling
+Worker/web/Flutter shells (SY-0010) or CI jobs (SY-0016). Canonical versions
+live in `tools/ci/tool-pins.json`. Dart stays a Flutter-bundled pin so a
+second mise Dart cannot shadow the SDK. Wrangler stays an npm pin.
+Unsigned: license SPDX, shared staging, Java 25 vs Android JDK 17, Windows
+hosts, and human approval of the foundation document.
+
 ## 2026-08-19 — SY-0002 inventories deploy topology from executables, not stale Worker docs
 
 The Command Center revision ships three descriptions of custom-domain deploy:
