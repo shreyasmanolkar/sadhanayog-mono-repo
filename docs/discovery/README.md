@@ -77,7 +77,7 @@ policy, and the scoped instructions. Child issues own the inventories.
 | [README.md](README.md) (this program) | SY-0001 | Draft, reviewable |
 | [AGENTS.md](AGENTS.md) | SY-0001 | Draft |
 | [sanitized-fixture-policy.md](sanitized-fixture-policy.md) | SY-0001 | Draft, reviewable |
-| [repository-baseline.md](repository-baseline.md) | [SY-0002](../issue-tracking/issues/SY-0002.md) | Draft evidence, issue `in_review` |
+| [repository-baseline.md](repository-baseline.md) | [SY-0002](../issue-tracking/issues/SY-0002.md) | Draft evidence, reviewable; human gate to `done` |
 | `docs/discovery/feature-inventory.md` | [SY-0003](../issue-tracking/issues/SY-0003.md) | Not written — blocked by SY-0002 |
 | `docs/discovery/legacy-data.md` | [SY-0004](../issue-tracking/issues/SY-0004.md) | Not written — blocked by SY-0002 |
 | `docs/discovery/teaching-archive.md` | [SY-0005](../issue-tracking/issues/SY-0005.md) | Not written — blocked by SY-0002 |
@@ -97,7 +97,7 @@ the criteria and defers the unsatisfied rows.
 | All Command Center pages, workflows, empty/loading/error, shortcuts, responsive behavior, and deep links inventoried | Deferred | SY-0003 |
 | Collections, encodings, calculation modules, derived sessions, outbox, last-write-wins inventoried | Deferred | SY-0004 |
 | Teaching Archive content IDs, five areas, journey/rituals/reviews/benchmarks, privacy wording, no-media invariant inventoried | Deferred | SY-0005 |
-| External dependencies and deployment assumptions inventoried | Partial: SY-0002 draft | Human acceptance of SY-0002 |
+| External dependencies and deployment assumptions inventoried | Satisfied as draft evidence in [repository-baseline.md](repository-baseline.md) | Human acceptance of SY-0002 (issue remains `in_review` / not `done`) |
 | Security and accessibility debt inventoried | Deferred | SY-0006 |
 | Product owner signs preserve/change/defer matrix and data-source precedence | Deferred | SY-0007 (human) |
 | Sanitized fixtures can exercise critical rules | Format and starter vectors only | SY-0004 / SY-0007 |
@@ -135,8 +135,9 @@ Results recorded; **nothing was fixed**.
 | Worker static copy | `cmp index.html public/index.html` | **identical** |
 | Teaching Archive generators | None exist in `c6732f59cf66af9a238caaccc185104afa534d7f` | Not applicable |
 
-Foundation §2 already notes the stale Apps Script HTML. SY-0002 captured
-the same drift. Fixing it is out of Stage 0 scope.
+Foundation §2 already notes the stale Apps Script HTML. SY-0002 re-ran
+the same checks and recorded additional Worker/Apps Script documentation
+drift. Fixing either is out of Stage 0 scope.
 
 Command Center has no `package.json` and no test files. Teaching Archive
 has no build and no tests. Those absences are observations, not defects
@@ -196,9 +197,9 @@ in place to hide a bad observation.
 ## Child execution order
 
 ```text
-SY-0002 (in_review) ─┬─ SY-0003 ─┐
-                     ├─ SY-0004 ─┼─ SY-0006 ─ SY-0007 (human sign-off)
-                     └─ SY-0005 ─┘
+SY-0002 (inventory landed; human gate) ─┬─ SY-0003 ─┐
+                                        ├─ SY-0004 ─┼─ SY-0006 ─ SY-0007 (human sign-off)
+                                        └─ SY-0005 ─┘
 ```
 
 An agent may start a child only when that child’s `blocked_by` issues
