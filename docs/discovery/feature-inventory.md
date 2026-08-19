@@ -67,7 +67,9 @@ modified.
 |---|---|---|
 | Command Center | `/home/shreyas/Work/sadhanayog/sadhana-yog-command-center` | `c724be0e116582b5c73d324d00a81ac23eb0bbf2` |
 
-Teaching Archive is out of this issue; it is [SY-0005](../issue-tracking/issues/SY-0005.md).
+Teaching Archive is out of this issue; it is
+[teaching-archive.md](teaching-archive.md)
+([SY-0005](../issue-tracking/issues/SY-0005.md)).
 
 Inspection machine: Chromium `/usr/bin/chromium`, Node `v24.11.1`. The
 Command Center has no `package.json` and does not pin a browser.
