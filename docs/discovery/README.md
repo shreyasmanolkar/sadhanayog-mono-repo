@@ -8,8 +8,10 @@ Sources: [engineering foundation](../architecture/engineering-foundation.md) §2
 [implementation roadmap](../roadmap/implementation-roadmap.md) Stage 0
 
 This file is the named Stage 0 outcome. It makes discovery executable and
-reviewable. It is not a signed behavioral baseline. The signed baseline is
-the child inventories plus [SY-0007](../issue-tracking/issues/SY-0007.md).
+reviewable. It is not a signed behavioral baseline. The unsigned register
+is [source-of-truth.md](source-of-truth.md)
+([SY-0007](../issue-tracking/issues/SY-0007.md)). The signed baseline is
+that file after a product owner fills the signature block.
 
 ## Purpose
 
@@ -24,9 +26,9 @@ redesign workflows.
 |---|---|
 | Files/docs | `docs/discovery/*` only |
 | Database | None. |
-| API | None. Current `POST /sync` is noted in [repository-baseline.md](repository-baseline.md); column/rule mapping is [SY-0004](../issue-tracking/issues/SY-0004.md). |
+| API | None. Current `POST /sync` is noted in [repository-baseline.md](repository-baseline.md); column/rule mapping is [legacy-data.md](legacy-data.md). |
 | Flutter | None. |
-| Web | None. Screenshots and navigation maps are [SY-0003](../issue-tracking/issues/SY-0003.md) and [SY-0006](../issue-tracking/issues/SY-0006.md). |
+| Web | None. Command Center navigation maps are [feature-inventory.md](feature-inventory.md). Teaching Archive workflow walk is [teaching-archive.md](teaching-archive.md). Quality/a11y catalogue is [a11y-security-baseline.md](a11y-security-baseline.md). |
 | Infrastructure | None. Current Worker / Apps Script / DNS notes are [SY-0002](../issue-tracking/issues/SY-0002.md). |
 
 No production resource, secret value, or real-user export enters this
@@ -77,12 +79,12 @@ policy, and the scoped instructions. Child issues own the inventories.
 | [README.md](README.md) (this program) | SY-0001 | Draft, reviewable |
 | [AGENTS.md](AGENTS.md) | SY-0001 | Draft |
 | [sanitized-fixture-policy.md](sanitized-fixture-policy.md) | SY-0001 | Draft, reviewable |
-| [repository-baseline.md](repository-baseline.md) | [SY-0002](../issue-tracking/issues/SY-0002.md) | Draft evidence, issue `in_review` |
-| `docs/discovery/feature-inventory.md` | [SY-0003](../issue-tracking/issues/SY-0003.md) | Not written — blocked by SY-0002 |
-| `docs/discovery/legacy-data.md` | [SY-0004](../issue-tracking/issues/SY-0004.md) | Not written — blocked by SY-0002 |
-| `docs/discovery/teaching-archive.md` | [SY-0005](../issue-tracking/issues/SY-0005.md) | Not written — blocked by SY-0002 |
-| `docs/discovery/a11y-security-baseline.md` | [SY-0006](../issue-tracking/issues/SY-0006.md) | Not written — blocked by SY-0003–SY-0005 |
-| `docs/discovery/source-of-truth.md` | [SY-0007](../issue-tracking/issues/SY-0007.md) | Not written — blocked by SY-0003–SY-0006 |
+| [repository-baseline.md](repository-baseline.md) | [SY-0002](../issue-tracking/issues/SY-0002.md) | Draft evidence, reviewable; human gate to `done` |
+| [feature-inventory.md](feature-inventory.md) | [SY-0003](../issue-tracking/issues/SY-0003.md) | Draft evidence, reviewable; human gate to `done` |
+| `docs/discovery/legacy-data.md` | [SY-0004](../issue-tracking/issues/SY-0004.md) | Draft evidence, reviewable; human gate to `done` |
+| [teaching-archive.md](teaching-archive.md) | [SY-0005](../issue-tracking/issues/SY-0005.md) | Draft evidence, reviewable; human gate to `done` |
+| [a11y-security-baseline.md](a11y-security-baseline.md) | [SY-0006](../issue-tracking/issues/SY-0006.md) | Draft evidence, reviewable; human gate to `done` |
+| [source-of-truth.md](source-of-truth.md) | [SY-0007](../issue-tracking/issues/SY-0007.md) | Draft **unsigned** register, reviewable; signature, interviews, and representative exports still missing |
 
 Do not create empty inventory stubs. A missing file means the child has
 not produced evidence.
@@ -94,13 +96,13 @@ the criteria and defers the unsatisfied rows.
 
 | Stage 0 exit criterion | This epic | Remainder |
 |---|---|---|
-| All Command Center pages, workflows, empty/loading/error, shortcuts, responsive behavior, and deep links inventoried | Deferred | SY-0003 |
-| Collections, encodings, calculation modules, derived sessions, outbox, last-write-wins inventoried | Deferred | SY-0004 |
-| Teaching Archive content IDs, five areas, journey/rituals/reviews/benchmarks, privacy wording, no-media invariant inventoried | Deferred | SY-0005 |
-| External dependencies and deployment assumptions inventoried | Partial: SY-0002 draft | Human acceptance of SY-0002 |
-| Security and accessibility debt inventoried | Deferred | SY-0006 |
-| Product owner signs preserve/change/defer matrix and data-source precedence | Deferred | SY-0007 (human) |
-| Sanitized fixtures can exercise critical rules | Format and starter vectors only | SY-0004 / SY-0007 |
+| All Command Center pages, workflows, empty/loading/error, shortcuts, responsive behavior, and deep links inventoried | Satisfied as draft evidence in [feature-inventory.md](feature-inventory.md) | Human acceptance of SY-0003 (issue remains `in_review` / not `done`) |
+| Collections, encodings, calculation modules, derived sessions, outbox, last-write-wins inventoried | Satisfied as draft evidence in [legacy-data.md](legacy-data.md) | Human acceptance of SY-0004 (issue remains `in_review` / not `done`) |
+| Teaching Archive content IDs, five areas, journey/rituals/reviews/benchmarks, privacy wording, no-media invariant inventoried | Satisfied as draft evidence in [teaching-archive.md](teaching-archive.md) | Human acceptance of SY-0005 (issue remains `in_review` / not `done`) |
+| External dependencies and deployment assumptions inventoried | Satisfied as draft evidence in [repository-baseline.md](repository-baseline.md) | Human acceptance of SY-0002 (issue remains `in_review` / not `done`) |
+| Security and accessibility debt inventoried | Satisfied as draft evidence in [a11y-security-baseline.md](a11y-security-baseline.md) | Human acceptance of SY-0006 (issue remains `in_review` / not `done`) |
+| Product owner signs preserve/change/defer matrix and data-source precedence | Unsigned register exists in [source-of-truth.md](source-of-truth.md) | Human signature, interviews, and representative exports |
+| Sanitized fixtures can exercise critical rules | Format, starter vectors, SY-0004 rule vectors, and SY-0005 journey/ritual/filename vectors | Representative exports and vector approval: [source-of-truth.md](source-of-truth.md) |
 | No legacy file changed | Satisfied 2026-08-19 | Keep for every child |
 
 This epic therefore **does not close Stage 0**. It closes only the
@@ -111,9 +113,12 @@ program, policy, unsigned decision register, and generator-check record.
 Recorded here so implementation of later stages cannot proceed by
 inference. **None of these are decided by this epic.**
 
+Canonical unsigned register: [source-of-truth.md](source-of-truth.md).
+Child inventories keep local copies for traceability.
+
 | Decision | Owner | Due before | Status |
 |---|---|---|---|
-| Approve the behavioral baseline (preserve / change / remove / defer per workflow) | Product owner | SY-0007 close; blocks Stage 2 | Unsigned |
+| Approve the behavioral baseline (preserve / change / remove / defer per workflow) | Product owner | SY-0007 close; blocks Stage 2 | Unsigned — matrix drafted |
 | Browser `localStorage` vs Google Sheets precedence when they diverge | Product owner | SY-0007; migration tooling ([SY-0088](../issue-tracking/issues/SY-0088.md)) | Unsigned |
 | Whether health notes are necessary, and their retention | Product / privacy owner | Production data import (foundation §30) | Unsigned |
 | Which legacy integrations are real versus demonstrative (Maps, Meet, Zoom, Teams, WhatsApp, mail/SMS, payment page, Apps Script sync) | Product owner | SY-0007 | Unsigned |
@@ -135,8 +140,9 @@ Results recorded; **nothing was fixed**.
 | Worker static copy | `cmp index.html public/index.html` | **identical** |
 | Teaching Archive generators | None exist in `c6732f59cf66af9a238caaccc185104afa534d7f` | Not applicable |
 
-Foundation §2 already notes the stale Apps Script HTML. SY-0002 captured
-the same drift. Fixing it is out of Stage 0 scope.
+Foundation §2 already notes the stale Apps Script HTML. SY-0002 re-ran
+the same checks and recorded additional Worker/Apps Script documentation
+drift. Fixing either is out of Stage 0 scope.
 
 Command Center has no `package.json` and no test files. Teaching Archive
 has no build and no tests. Those absences are observations, not defects
@@ -147,11 +153,20 @@ to repair here.
 Not executed in this epic.
 
 - Desktop/mobile workflow rendering, keyboard walkthrough, and
-  DOM/accessibility inspection are [SY-0003](../issue-tracking/issues/SY-0003.md)
-  and [SY-0006](../issue-tracking/issues/SY-0006.md).
+  page-level DOM/accessibility inspection for Command Center are
+  recorded in [feature-inventory.md](feature-inventory.md) (SY-0003).
+  Teaching Archive workflow walk is in
+  [teaching-archive.md](teaching-archive.md) (SY-0005). The
+  security/a11y debt catalogue is
+  [a11y-security-baseline.md](a11y-security-baseline.md) (SY-0006).
 - Sanitized characterization vectors begin in
-  [sanitized-fixture-policy.md](sanitized-fixture-policy.md). Full rule
-  vectors wait for SY-0004 and sign-off in SY-0007.
+  [sanitized-fixture-policy.md](sanitized-fixture-policy.md). Command
+  Center rule vectors are in [legacy-data.md](legacy-data.md)
+  (SY-0004). Teaching Archive rule vectors are in
+  [teaching-archive.md](teaching-archive.md) (SY-0005). The
+  unsigned approval index is
+  [source-of-truth.md](source-of-truth.md); the signature is still
+  missing.
 
 ## Open contradictions
 
@@ -165,8 +180,10 @@ Conflicts are defects. They are listed, not resolved.
 2. **Business page versus navigation.** Command Center `index.html`
    defines `SY.Pages.business` at line 10584 and registers it in `PAGES()`
    at line 16491. The sidebar `NAV` at lines 16424–16442 has no `business`
-   item. Settings also has a `business` section (line 12822). How a user
-   reaches the Business page is SY-0003, not a preserve/remove decision.
+   item. Settings also has a `business` section (line 12822). SY-0003
+   confirmed the page opens from `#/business` and from search “Go to”;
+   it is still absent from sidebar and phone tabs. Preserve/remove is
+   SY-0007.
 3. **Leads versus Enquiries.** `NAV` labels the `leads` page “Enquiries”
    (`index.html:16432`). Foundation §2 says “Leads.” Terminology waits
    for Stage 2 ([SY-0019](../issue-tracking/issues/SY-0019.md)).
@@ -184,8 +201,10 @@ This epic did not open a browser profile, did not read `localStorage`,
 and did not fetch Sheets. Hostname `dash.omsadhanayog.com` is already
 published in Worker config and in SY-0002; no secret values were read.
 
-Threat and accessibility findings are SY-0006 (`security_impact: high`).
-This epic (`security_impact: low`) only sets handling rules.
+Threat and accessibility findings are
+[a11y-security-baseline.md](a11y-security-baseline.md) (SY-0006,
+`security_impact: high`). This epic (`security_impact: low`) only
+sets handling rules.
 
 ## Rollback
 
@@ -196,10 +215,18 @@ in place to hide a bad observation.
 ## Child execution order
 
 ```text
-SY-0002 (in_review) ─┬─ SY-0003 ─┐
-                     ├─ SY-0004 ─┼─ SY-0006 ─ SY-0007 (human sign-off)
-                     └─ SY-0005 ─┘
+SY-0002 (inventory landed; human gate) ─┬─ SY-0003 ─┐
+                                        ├─ SY-0004 ─┼─ SY-0006 ─ SY-0007 (human sign-off)
+                                        └─ SY-0005 ─┘
 ```
 
 An agent may start a child only when that child’s `blocked_by` issues
-are `done`. Do not start SY-0003–SY-0007 from this epic.
+are `done`. SY-0003, SY-0004, and SY-0005 started while SY-0002 was
+`in_review` because a human named each issue after the SY-0002 named
+outcome had landed. Those process contradictions are recorded on the
+child issues; they are not a rewrite of this rule for later children.
+
+SY-0007 also started at human request while SY-0005/SY-0006 had **no**
+named outcome on this branch. After merging `staging`, those
+inventories exist and the unsigned register cites them. It still does
+not invent dispositions or fill the signature block.
