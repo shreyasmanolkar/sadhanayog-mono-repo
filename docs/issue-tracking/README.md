@@ -23,6 +23,7 @@ because there is only one copy.
 | [`SPEC.md`](./SPEC.md) | The format. An OKF 0.1 profile — frontmatter schema and invariants |
 | [`AGENTS.md`](./AGENTS.md) | How an agent operates the tracker |
 | [`config.yml`](./config.yml) | The schema: states, priorities, labels, cycles, people. **Hand-owned** |
+| [`stage-0-1-review-guide.md`](./stage-0-1-review-guide.md) | Concise human testing and closure handoff for the Stage 0 and Stage 1 issues currently in review |
 
 `index.md` is the generated OKF catalog (`pnpm tracker:index`). `log.md` is the decision log.
 
