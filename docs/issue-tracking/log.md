@@ -14,6 +14,14 @@ therefore ADR-0011. License allowlist stays SY-0011. SY-0016 owns the
 four-job workflow, SHA pins, in-process secret scan, and `ci:policy`.
 Flutter `build bundle` is the Stage 1 smoke. Playwright, APK/IPA, path
 filters, production environments, and branch protection stay deferred.
+## 2026-08-20 — SY-0015 MCP inventory is docs-only and stays proposed
+
+Foundation §19 names `.codex/config.toml` as the project MCP file.
+Context7 and Cloudflare **docs** are enabled; Playwright is pinned and
+disabled; GitHub/logs/D1 stay scripts (`gh`, Wrangler), not MCP. A
+`.grok/config.toml` projection exists because Grok does not load Codex
+TOML. ADR-0010 records that inventory and stays **proposed**. SY-0009
+and SY-0014 were `in_review`, not `done`, when a human named this issue.
 
 ## 2026-08-20 — Stage 1 board cards get unique descriptions
 
