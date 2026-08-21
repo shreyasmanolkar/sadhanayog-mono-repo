@@ -29,6 +29,6 @@ engineering foundation remains Proposed. This project tracks execution;
 | [SY-0012](../issues/SY-0012.md) | Docs / ADRs | In review — PR #13 |
 | [SY-0013](../issues/SY-0013.md) | Tracker | In review — PR #15 |
 | [SY-0014](../issues/SY-0014.md) | Agents / skills | In review — PR #14 |
-| [SY-0015](../issues/SY-0015.md) | MCP | In review; no PR on `staging` yet |
+| [SY-0015](../issues/SY-0015.md) | MCP | In review — named outcome `docs/development/mcp.md`; no dedicated PR on `staging` yet |
 | [SY-0016](../issues/SY-0016.md) | CI | In review — PR #16 |
 | [SY-0017](../issues/SY-0017.md) | Bootstrap | In review — PR #17 |
